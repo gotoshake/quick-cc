@@ -18,5 +18,5 @@ GAME_SFX = {
     levelCompleted = "sfx/LevelWinSound.mp3",
 }
 
-GAME_TEXTURE_DATA_FILENAME  = "AllSprites.plist"
-GAME_TEXTURE_IMAGE_FILENAME = "AllSprites.png"
+GAME_TEXTURE_DATA_FILENAME  = "zhaoyun.plist"
+GAME_TEXTURE_IMAGE_FILENAME = "zhaoyun.png"

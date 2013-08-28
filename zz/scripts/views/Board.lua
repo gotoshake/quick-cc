@@ -9,7 +9,6 @@ end)
 
 local NODE_PADDING   = 100
 local NODE_ZORDER    = 0
-
 local COIN_ZORDER    = 1000
 
 function Board:ctor(levelData)
@@ -48,33 +47,18 @@ function Board:ctor(levelData)
     self:addChild(self.batch)
 
     self.grid = clone(levelData.grid)
-    self.rows = levelData.rows
-    self.cols = levelData.cols
+    self.rows = 0
+    self.cols = 0
     self.coins = {}
-    self.flipAnimationCount = 0
 
-    local offsetX = -math.floor(NODE_PADDING * self.cols / 2) - NODE_PADDING / 2
-    local offsetY = -math.floor(NODE_PADDING * self.rows / 2) - NODE_PADDING / 2
-    -- create board, place all coins
-    for row = 1, self.rows do
-        local y = row * NODE_PADDING + offsetY
-        for col = 1, self.cols do
-            local x = col * NODE_PADDING + offsetX
-            local nodeSprite = display.newSprite("#BoardNode.png", x, y)
-            self.batch:addChild(nodeSprite, NODE_ZORDER)
-
-            local node = self.grid[row][col]
-            if node ~= Levels.NODE_IS_EMPTY then
-                local coin = Coin.new(node)
-                coin:setPosition(x, y)
-                coin.row = row
-                coin.col = col
-                self.grid[row][col] = coin
-                self.coins[#self.coins + 1] = coin
-                self.batch:addChild(coin, COIN_ZORDER)
-            end
-        end
-    end
+    local coin = Coin.new(1)
+    coin:setPosition(0, 0)
+    coin.row = row
+    coin.col = col
+    --self.grid[row][col] = coin
+    --self.coins[#self.coins + 1] = coin
+    self.batch:addChild(coin, COIN_ZORDER)
+          
 
     self:addTouchEventListener(handler(self, self.onTouch))
     self:setNodeEventEnabled(true)

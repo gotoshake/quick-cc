@@ -1,40 +1,44 @@
-
 local Levels = import("..data.Levels")
+local RoleDatas = import("..data.RoleDatas")
 
-local Coin = class("Coin", function(nodeType)
-    local index = 1
-    if nodeType == Levels.NODE_IS_BLACK then
-        index = 8
-    end
-    local sprite = display.newSprite(string.format("#Coin%04d.png", index))
-    sprite.isWhite = index == 1
+local Coin = class("Coin", function(roleIndex)   
+    local RoleData = RoleDatas.get(roleIndex)
+    local sprite = display.newSprite("#" .. RoleData.name .. "_" .. RoleData.actionNames[1] .. "_01.png")    
     return sprite
 end)
 
-function Coin:flip(onComplete)
-    local frames = display.newFrames("Coin%04d.png", 1, 8, not self.isWhite)
-    local animation = display.newAnimation(frames, 0.3 / 8)
-    self:playAnimationOnce(animation, false, onComplete)
+function Coin:ctor(roleIndex)
+    self.animations = {}
+    local frames
 
-    self:runAction(transition.sequence({
-        CCScaleTo:create(0.15, 1.5),
-        CCScaleTo:create(0.1, 1.0),
-        CCCallFunc:create(function()
-            local actions = {}
-            local scale = 1.1
-            local time = 0.04
-            for i = 1, 5 do
-                actions[#actions + 1] = CCScaleTo:create(time, scale, 1.0)
-                actions[#actions + 1] = CCScaleTo:create(time, 1.0, scale)
-                scale = scale * 0.95
-                time = time * 0.8
-            end
-            actions[#actions + 1] = CCScaleTo:create(0, 1.0, 1.0)
-            self:runAction(transition.sequence(actions))
-        end)
-    }))
+    local RoleData = RoleDatas.get(roleIndex)
+    for  k, actionName in ipairs(RoleData.actionNames) do        
+        frames = display.newFrames(RoleData.name .. "_" .. RoleData.actionNames[k] .."_%02d.png", 1, RoleData.actionNums[k])
+        self.animations[actionName] = display.newAnimation(frames, 0.2)
 
-    self.isWhite = not self.isWhite
+        if  string.find(actionName, "left") then
+            frames = display.newFrames(RoleData.name .. "_" .. RoleData.actionNames[k] .."_%02d.png", 1, RoleData.actionNums[k], true)
+            self.animations[string.gsub(actionName, "left", "right")] = display.newAnimation(frames, 0.2)
+        end    
+    end
+
+    self:playAnimationForever(self.animations["moveright"])  
+end
+
+function Coin:moveLeft()
+    self:playAnimationForever(self.animations["moveleft"]) 
+end
+
+function Coin:moveRight()
+    self:playAnimationForever(self.animations["moveright"]) 
+end
+
+function Coin:moveUp()
+    self:playAnimationForever(self.animations["moveup"]) 
+end
+
+function Coin:moveDown()
+    self:playAnimationForever(self.animations["movedown"]) 
 end
 
 return Coin
