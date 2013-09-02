@@ -3,7 +3,7 @@ local RoleDatas = import("..data.RoleDatas")
 
 local Coin = class("Coin", function(roleIndex)   
     local RoleData = RoleDatas.get(roleIndex)
-    local sprite = display.newSprite("#" .. RoleData.name .. "_" .. RoleData.actionNames[1] .. "_01.png")    
+    local sprite = display.newSprite("#" .. RoleData.name .. "_" .. RoleData.actionNames[1] .. "_01.png")       
     return sprite
 end)
 
@@ -12,6 +12,10 @@ function Coin:ctor(roleIndex)
     local frames
 
     local RoleData = RoleDatas.get(roleIndex)
+
+    self:setAnchorPoint(ccp(0, 0))
+    self:setPosition(RoleData.pos.x, RoleData.pos.y) 
+
     for  k, actionName in ipairs(RoleData.actionNames) do        
         frames = display.newFrames(RoleData.name .. "_" .. RoleData.actionNames[k] .."_%02d.png", 1, RoleData.actionNums[k])
         self.animations[actionName] = display.newAnimation(frames, 0.2)
@@ -22,7 +26,7 @@ function Coin:ctor(roleIndex)
         end    
     end
 
-    self:playAnimationForever(self.animations["moveright"])  
+    self:playAnimationForever(self.animations["moveleft"]) 
 end
 
 function Coin:moveLeft()

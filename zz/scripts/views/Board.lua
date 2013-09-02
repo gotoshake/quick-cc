@@ -14,12 +14,21 @@ local COIN_ZORDER    = 1000
 function Board:ctor(levelData)
     EventProtocol.extend(self)
 
+    self.label = ui.newBMFontLabel({
+        text  = string.format("Level: %s", tostring(levelIndex)),
+        font  = "UIFont.fnt",
+        x     = display.left + 10,
+        y     = display.top - 30,
+        align = ui.TEXT_ALIGN_LEFT,
+    })
+    self:addChild(self.label)
+
     --tmxMap
     self.map = CCTMXTiledMap:create("orthogonal-test4.tmx")
     self:addChild(self.map, 0, 10000)
 
     local  s1 = self.map:getContentSize()
-    print("ContentSize: %f, %f", s1.width,s1.height)
+    --printf("ContentSize: %f, %f", s1.width,s1.height)
 
     local  pChildrenArray = self.map:getChildren()
     local  child          = nil
@@ -37,31 +46,34 @@ function Board:ctor(levelData)
     end
 
     self.map:setAnchorPoint(ccp(0, 0))
+    self.map:setPosition(ccp(100, 50))
 
-    local layer  = self.map:layerNamed("Layer 0")
+    local layer  = self.map:layerNamed("tree")
     local s      = layer:getLayerSize()
 
 
     self.batch = display.newBatchNode(GAME_TEXTURE_IMAGE_FILENAME)
-    self.batch:setPosition(display.cx, display.cy)
-    self:addChild(self.batch)
+    --self.batch:setPosition(display.cx, display.cy)
+    printf("setPosition: %f, %f", display.cx, display.cy)
+    self.map:addChild(self.batch)
 
     self.grid = clone(levelData.grid)
     self.rows = 0
     self.cols = 0
     self.coins = {}
 
-    local coin = Coin.new(1)
-    coin:setPosition(0, 0)
-    coin.row = row
-    coin.col = col
-    --self.grid[row][col] = coin
-    --self.coins[#self.coins + 1] = coin
+    local coin = Coin.new(1) 
     self.batch:addChild(coin, COIN_ZORDER)
-          
+    coin.mapLayer = this       
 
     self:addTouchEventListener(handler(self, self.onTouch))
     self:setNodeEventEnabled(true)
+end
+
+function Board:screenToTilePos(x, y)
+    local mapx, mapy = self.map:getPosition()
+    local ts = self.map:getTileSize()
+    return (x-mapx)/ts.width, (y-mapy)/ts.height
 end
 
 function Board:checkLevelCompleted()
@@ -82,44 +94,32 @@ function Board:getCoin(row, col)
     end
 end
 
-function Board:flipCoin(coin, includeNeighbour)
-    if not coin or coin == Levels.NODE_IS_EMPTY then return end
+function Board:onTouchBegan(x, y)
+    local tilex,tiley = self:screenToTilePos(x, y)    
+    self.label:setString(string.format("onTouchBegan %d %d -> %d %d", x, y, tilex, tiley))
+end
 
-    self.flipAnimationCount = self.flipAnimationCount + 1
-    coin:flip(function()
-        self.flipAnimationCount = self.flipAnimationCount - 1
-        self.batch:reorderChild(coin, COIN_ZORDER)
-        if self.flipAnimationCount == 0 then
-            self:checkLevelCompleted()
-        end
-    end)
-    if includeNeighbour then
-        audio.playEffect(GAME_SFX.flipCoin)
-        self.batch:reorderChild(coin, COIN_ZORDER + 1)
-        self:performWithDelay(function()
-            self:flipCoin(self:getCoin(coin.row - 1, coin.col))
-            self:flipCoin(self:getCoin(coin.row + 1, coin.col))
-            self:flipCoin(self:getCoin(coin.row, coin.col - 1))
-            self:flipCoin(self:getCoin(coin.row, coin.col + 1))
-        end, 0.25)
-    end
+function Board:onTouchMoved(x, y)
+    echoInfo("onTouchMoved %d %d", x, y)    
+end
+
+function Board:onTouchEnded(x, y)   
+    echoInfo("onTouchEnded %d %d", x, y)
+end
+
+function Board:onTouchCancelled(x, y)
+    echoInfo("onTouchCancelled %d %d", x, y)
 end
 
 function Board:onTouch(event, x, y)
-    if event ~= "began" or self.flipAnimationCount > 0 then return end
-
-    local padding = NODE_PADDING / 2
-    for _, coin in ipairs(self.coins) do
-        local cx, cy = coin:getPosition()
-        cx = cx + display.cx
-        cy = cy + display.cy
-        if x >= cx - padding
-            and x <= cx + padding
-            and y >= cy - padding
-            and y <= cy + padding then
-            self:flipCoin(coin, true)
-            break
-        end
+    if event == "began" then
+        self:onTouchBegan(x, y)
+    elseif event == "moved" then
+        self:onTouchMoved(x, y)
+    elseif event == "ended" then
+        self:onTouchEnded(x, y)
+    else -- cancelled
+        self:onTouchCancelled(x, y)
     end
 end
 

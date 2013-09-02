@@ -7,16 +7,6 @@ local PlayLevelScene = class("PlayLevelScene", function()
 end)
 
 function PlayLevelScene:ctor(levelIndex)    
-
-    local label = ui.newBMFontLabel({
-        text  = string.format("Level: %s", tostring(levelIndex)),
-        font  = "UIFont.fnt",
-        x     = display.left + 10,
-        y     = display.top - 30,
-        align = ui.TEXT_ALIGN_LEFT,
-    })
-    self:addChild(label)
-
     self.board = Board.new(Levels.get(levelIndex))
     self.board:addEventListener("LEVEL_COMPLETED", handler(self, self.onLevelCompleted))
     self:addChild(self.board)

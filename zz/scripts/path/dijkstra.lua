@@ -67,11 +67,7 @@ function dijkstra (graph, mapWidth, mapHeight, startx, starty, ability)
 	for n = 0, #alls-1 do
 		local u = extract_min(opens, paths)
 		table.insert(closes, u)
-
-		local neighbour = {}
-		local x = u%mapWidth
-		local y = (u-x)/mapWidth
-
+		
 		for k, v in pairs({u-1, u+1, u-mapWidth, u+mapWidth}) do
 			if alls[v] and graph[v] > 0 and paths[v] > paths[u] + graph[v] then -- relax
 				paths[v] = paths[u] + graph[v]
