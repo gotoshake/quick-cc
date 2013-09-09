@@ -2,7 +2,7 @@ function BFS(graph, mapWidth, mapHeight, startx, starty, ability)
 	local visited = {}
 	local queue = {}
 	local n = 0
-	visited[starty*mapWidth + startx] = true
+	visited[starty*mapWidth + startx] = 1
 	queue = {starty*mapWidth + startx}
 
 	while #queue ~= 0 and n < ability do
@@ -15,22 +15,22 @@ function BFS(graph, mapWidth, mapHeight, startx, starty, ability)
 
 			if x-1>=0 and not visited[u-1] then
 				table.insert(queue, u-1)
-				visited[u-1] = true
+				visited[u-1] = 1
 			end
 
 			if x+1<mapWidth and not visited[u+1] then
 				table.insert(queue, u+1)
-				visited[u+1] = true
+				visited[u+1] = 1
 			end
 
 			if y-1>=0 and not visited[u-mapWidth] then
 				table.insert(queue, u-mapWidth)
-				visited[u-mapWidth] = true
+				visited[u-mapWidth] = 1
 			end
 
 			if y+1<mapHeight and not visited[u+mapWidth]then
 				table.insert(queue, u+mapWidth)
-				visited[u+mapWidth] = true
+				visited[u+mapWidth] = 1
 			end
 		end
 	end
@@ -55,15 +55,14 @@ function dijkstra (graph, mapWidth, mapHeight, startx, starty, ability)
 	local paths = {}
 	local previous = {}
 	local closes = {}
-	local opens = {}
 
 	local alls = BFS(graph, mapWidth, mapHeight, startx, starty, ability)
 	for k,v in pairs(alls) do paths[k] = math.huge end
 
-	opens = alls
+	local opens = alls
 	paths[starty*mapWidth+startx] = 0
 
-	while #opens ~= 0 do
+	while next(opens) ~= nil do
 		local u = extract_min(opens, paths)
 		table.insert(closes, u)
 
@@ -88,14 +87,14 @@ function path (p, start)
 end
 
 G = {}
-local mapWidth = 8
-local mapHeight = 8
+local mapWidth = 5
+local mapHeight = 5
 for v = 0, mapWidth*mapHeight-1 do
 	G[v] = {}
 	G[v].weight = 1
 end
 
-paths,previous = dijkstra(G, mapWidth, mapHeight, 2, 1, 3)
+paths,previous = dijkstra(G, mapWidth, mapHeight, 2, 2, 2)
 for i,j in pairs(paths) do
 	print(i, j, table.concat(path(previous, i), ' -> '))
 end
