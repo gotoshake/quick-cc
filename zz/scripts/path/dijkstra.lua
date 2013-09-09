@@ -1,4 +1,3 @@
--- test graph: if G[u][v] == 0, there is no edge between u and v
 function BFS(graph, mapWidth, mapHeight, startx, starty, ability)
 	local visited = {}
 	local queue = {}
@@ -64,13 +63,13 @@ function dijkstra (graph, mapWidth, mapHeight, startx, starty, ability)
 	opens = alls
 	paths[starty*mapWidth+startx] = 0
 
-	for n = 0, #alls-1 do
+	while #opens ~= 0 do
 		local u = extract_min(opens, paths)
 		table.insert(closes, u)
-		
+
 		for k, v in pairs({u-1, u+1, u-mapWidth, u+mapWidth}) do
-			if alls[v] and graph[v] > 0 and paths[v] > paths[u] + graph[v] then -- relax
-				paths[v] = paths[u] + graph[v]
+			if alls[v] and graph[v].weight ~=math.huge and paths[v] > paths[u] + graph[v].weight then -- relax
+				paths[v] = paths[u] + graph[v].weight
 				previous[v] = u
 			end
 		end
@@ -89,11 +88,14 @@ function path (p, start)
 end
 
 G = {}
-local mapWidth = 4
-local mapHeight = 4
-for v = 0, mapWidth*mapHeight-1 do G[v] = 1 end
+local mapWidth = 8
+local mapHeight = 8
+for v = 0, mapWidth*mapHeight-1 do
+	G[v] = {}
+	G[v].weight = 1
+end
 
-paths,previous = dijkstra(G, mapWidth, mapHeight, 2, 1, 2)
+paths,previous = dijkstra(G, mapWidth, mapHeight, 2, 1, 3)
 for i,j in pairs(paths) do
 	print(i, j, table.concat(path(previous, i), ' -> '))
 end

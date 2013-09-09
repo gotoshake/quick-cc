@@ -34,6 +34,10 @@ function game.enterChooseLevelScene()
 end
 
 function game.playLevel(levelIndex)
-    local PlayLevelScene = require("scenes.PlayLevelScene")
-    display.replaceScene(PlayLevelScene.new(levelIndex), "fade", 0.6, display.COLOR_WHITE)
+    game.PlayLevelScene = require("scenes.PlayLevelScene").new(levelIndex)
+    display.replaceScene(game.PlayLevelScene, "fade", 0.6, display.COLOR_WHITE)
+end
+
+function game.getTileMap()
+	return game.PlayLevelScene.board.map
 end

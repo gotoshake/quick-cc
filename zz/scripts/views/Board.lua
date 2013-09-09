@@ -1,6 +1,7 @@
 
 local Levels = require("data.Levels")
 local Coin   = require("views.Coin")
+import("..path.dijkstra")
 local EventProtocol = require("framework.api.EventProtocol")
 
 local Board = class("Board", function()
@@ -14,21 +15,15 @@ local COIN_ZORDER    = 1000
 function Board:ctor(levelData)
     EventProtocol.extend(self)
 
-    self.label = ui.newBMFontLabel({
-        text  = string.format("Level: %s", tostring(levelIndex)),
-        font  = "UIFont.fnt",
-        x     = display.left + 10,
+    self.label = ui.newTTFLabel({        
+        x     = display.left + 100,
         y     = display.top - 30,
-        align = ui.TEXT_ALIGN_LEFT,
     })
     self:addChild(self.label)
 
     --tmxMap
     self.map = CCTMXTiledMap:create("orthogonal-test4.tmx")
-    self:addChild(self.map, 0, 10000)
-
-    local  s1 = self.map:getContentSize()
-    --printf("ContentSize: %f, %f", s1.width,s1.height)
+    self:addChild(self.map, 0, 10000)    
 
     local  pChildrenArray = self.map:getChildren()
     local  child          = nil
@@ -45,26 +40,45 @@ function Board:ctor(levelData)
         child:getTexture():setAntiAliasTexParameters()
     end
 
-    self.map:setAnchorPoint(ccp(0, 0))
-    self.map:setPosition(ccp(100, 50))
+    --self.map:setAnchorPoint(ccp(0, 0))
+    --self.map:setPosition(ccp(0, 0))
 
-    local layer  = self.map:layerNamed("tree")
-    local s      = layer:getLayerSize()
-
-
+    self.layerFloor			= self.map:layerNamed("floor")
+    self.layerTree			= self.map:layerNamed("tree")
+    
     self.batch = display.newBatchNode(GAME_TEXTURE_IMAGE_FILENAME)
     --self.batch:setPosition(display.cx, display.cy)
     printf("setPosition: %f, %f", display.cx, display.cy)
-    self.map:addChild(self.batch)
-
-    self.grid = clone(levelData.grid)
-    self.rows = 0
-    self.cols = 0
+    self.map:addChild(self.batch)    
+    
+    self.graph = {}    
+    local  s1 = self.layerFloor:getLayerSize()
+    self.tileColor = self.layerFloor:tileAt(ccp(0, 0)):getColor()  
+    
+    for j=0, s1.height-1 do    	
+    	for i=0, s1.width-1 do    	    	
+    		self.graph[j*s1.width + i] = {}    	
+    		if  self.layerFloor:tileAt(ccp(i, j)) then 
+				self.graph[j*s1.width + i].weight = 1						
+			end
+			
+			if  self.layerTree:tileAt(ccp(i, j)) then 
+				self.graph[j*s1.width + i].weight = 1						
+			end    	
+    	end    	
+    end
+    
     self.coins = {}
-
+    
     local coin = Coin.new(1) 
     self.batch:addChild(coin, COIN_ZORDER)
-    coin.mapLayer = this       
+    self.coins[1] =  coin
+
+    local tilex, tiley = coin:getTilePos()    
+    self.graph[tiley*s1.width + tilex].object = 1 
+
+    self.maskLayer = display.newLayer()
+    self:addChild(self.maskLayer)
 
     self:addTouchEventListener(handler(self, self.onTouch))
     self:setNodeEventEnabled(true)
@@ -73,7 +87,19 @@ end
 function Board:screenToTilePos(x, y)
     local mapx, mapy = self.map:getPosition()
     local ts = self.map:getTileSize()
-    return (x-mapx)/ts.width, (y-mapy)/ts.height
+    return math.floor((x-mapx)/ts.width), math.floor((y-mapy)/ts.height)
+end
+
+function Board:setTileColor(x, y, color)	
+	local tile = self.layerFloor:tileAt(ccp(x,  self.layerFloor:getLayerSize().height- 1-y))
+	--local tile = self.layerFloor:tileAt(ccp(x,  y))
+	if tile then     
+		--tile:setColor(color)
+        local maskTile = CCSprite:create("mask.png")
+        maskTile:setAnchorPoint(ccp(0, 0))
+        maskTile:setPosition(tile:getPosition())
+        self.maskLayer:addChild(maskTile, 0, 24400)
+	end
 end
 
 function Board:checkLevelCompleted()
@@ -96,7 +122,36 @@ end
 
 function Board:onTouchBegan(x, y)
     local tilex,tiley = self:screenToTilePos(x, y)    
-    self.label:setString(string.format("onTouchBegan %d %d -> %d %d", x, y, tilex, tiley))
+    self.label:setString(string.format("%d %d -> %d %d", x, y, tilex, tiley))
+    
+    local s1 = self.layerFloor:getLayerSize() 
+
+    self.maskLayer:removeAllChildrenWithCleanup()   
+
+    if self.paths then
+        for i,j in pairs(paths) do
+		  local x = i%s1.width
+		  local y = (i-x)/s1.width		  
+        end
+	end
+	
+    self.paths = {}
+    self.previous = {}
+    paths,previous = dijkstra(self.graph , s1.width, s1.height, tilex, tiley, 2)
+    
+    echoInfo("------------")
+    for i,j in pairs(paths) do
+    	local x = i%s1.width
+		local y = (i-x)/s1.width
+		print(x, y, j, table.concat(path(previous, i), ' -> '))
+	end
+    
+    for i,j in pairs(paths) do
+		local x = i%s1.width
+		local y = (i-x)/s1.width
+		self:setTileColor(x, y, ccc3(111, 111, 111))
+	end
+	
 end
 
 function Board:onTouchMoved(x, y)

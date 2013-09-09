@@ -7,6 +7,11 @@ local Coin = class("Coin", function(roleIndex)
     return sprite
 end)
 
+function Coin:tilePosToRealPos(tilex, tiley)
+    local s = self:getContentSize()
+    return ccp(tilex* s.width, tiley* s.height)
+end
+
 function Coin:ctor(roleIndex)
     self.animations = {}
     local frames
@@ -14,7 +19,8 @@ function Coin:ctor(roleIndex)
     local RoleData = RoleDatas.get(roleIndex)
 
     self:setAnchorPoint(ccp(0, 0))
-    self:setPosition(RoleData.pos.x, RoleData.pos.y) 
+    local spriteSize = self:getContentSize()
+    self:setPosition(ccp(RoleData.pos.x *spriteSize.width, RoleData.pos.y * spriteSize.height))
 
     for  k, actionName in ipairs(RoleData.actionNames) do        
         frames = display.newFrames(RoleData.name .. "_" .. RoleData.actionNames[k] .."_%02d.png", 1, RoleData.actionNums[k])
@@ -27,6 +33,12 @@ function Coin:ctor(roleIndex)
     end
 
     self:playAnimationForever(self.animations["moveleft"]) 
+end
+
+function Coin:getTilePos()
+    local s = self:getContentSize()
+    local x, y = self:getPosition()
+    return math.floor(x/s.width), math.floor(y/s.height)
 end
 
 function Coin:moveLeft()
