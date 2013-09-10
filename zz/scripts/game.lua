@@ -38,6 +38,6 @@ function game.playLevel(levelIndex)
     display.replaceScene(game.PlayLevelScene, "fade", 0.6, display.COLOR_WHITE)
 end
 
-function game.getTileMap()
-	return game.PlayLevelScene.board.map
+function game.getBoard()
+	return game.PlayLevelScene.board
 end

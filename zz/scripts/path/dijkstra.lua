@@ -13,22 +13,22 @@ function BFS(graph, mapWidth, mapHeight, startx, starty, ability)
 			local x = u%mapWidth
 			local y = (u-x)/mapWidth
 
-			if x-1>=0 and not visited[u-1] then
+			if x-1>=0 and not visited[u-1] and graph[u-1].weight ~=math.huge then
 				table.insert(queue, u-1)
 				visited[u-1] = 1
 			end
 
-			if x+1<mapWidth and not visited[u+1] then
+			if x+1<mapWidth and not visited[u+1] and graph[u+1].weight ~=math.huge then
 				table.insert(queue, u+1)
 				visited[u+1] = 1
 			end
 
-			if y-1>=0 and not visited[u-mapWidth] then
+			if y-1>=0 and not visited[u-mapWidth]  and graph[u-mapWidth].weight ~=math.huge then
 				table.insert(queue, u-mapWidth)
 				visited[u-mapWidth] = 1
 			end
 
-			if y+1<mapHeight and not visited[u+mapWidth]then
+			if y+1<mapHeight and not visited[u+mapWidth] and graph[u+mapWidth].weight ~=math.huge then
 				table.insert(queue, u+mapWidth)
 				visited[u+mapWidth] = 1
 			end

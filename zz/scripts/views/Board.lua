@@ -44,6 +44,8 @@ function Board:ctor(levelData)
     --self.map:setPosition(ccp(0, 0))
 
     self.layerFloor			= self.map:layerNamed("floor")
+    self.layerFloorSize		= self.layerFloor:getLayerSize()
+    
     self.layerTree			= self.map:layerNamed("tree")
     
     self.batch = display.newBatchNode(GAME_TEXTURE_IMAGE_FILENAME)
@@ -58,12 +60,12 @@ function Board:ctor(levelData)
     for j=0, s1.height-1 do    	
     	for i=0, s1.width-1 do    	    	
     		self.graph[j*s1.width + i] = {}    	
-    		if  self.layerFloor:tileAt(ccp(i, j)) then 
+    		if  self.layerFloor:tileAt(ccp(i, s1.height-1-j)) then 
 				self.graph[j*s1.width + i].weight = 1						
 			end
 			
-			if  self.layerTree:tileAt(ccp(i, j)) then 
-				self.graph[j*s1.width + i].weight = 1						
+			if  self.layerTree:tileAt(ccp(i, s1.height-1-j)) then 
+				self.graph[j*s1.width + i].weight = math.huge						
 			end    	
     	end    	
     end
@@ -72,6 +74,7 @@ function Board:ctor(levelData)
     
     local coin = Coin.new(1) 
     self.batch:addChild(coin, COIN_ZORDER)
+    coin.board = self
     self.coins[1] =  coin
 
     local tilex, tiley = coin:getTilePos()    
@@ -92,13 +95,11 @@ end
 
 function Board:setTileColor(x, y, color)	
 	local tile = self.layerFloor:tileAt(ccp(x,  self.layerFloor:getLayerSize().height- 1-y))
-	--local tile = self.layerFloor:tileAt(ccp(x,  y))
-	if tile then     
-		--tile:setColor(color)
+	if tile then		
         local maskTile = CCSprite:create("mask.png")
         maskTile:setAnchorPoint(ccp(0, 0))
         maskTile:setPosition(tile:getPosition())
-        self.maskLayer:addChild(maskTile, 0, 24400)
+        self.maskLayer:addChild(maskTile, 0, 1)
 	end
 end
 
@@ -122,36 +123,36 @@ end
 
 function Board:onTouchBegan(x, y)
     local tilex,tiley = self:screenToTilePos(x, y)    
-    self.label:setString(string.format("%d %d -> %d %d", x, y, tilex, tiley))
+    self.label:setString(string.format("%d %d -> %d %d", x, y, tilex, tiley))    
+    self.maskLayer:removeAllChildrenWithCleanup()    
     
-    local s1 = self.layerFloor:getLayerSize() 
+    local s1 = self.layerFloor:getLayerSize()
+    
 
-    self.maskLayer:removeAllChildrenWithCleanup()   
+    if self.graph[tiley*s1.width+tilex] and self.graph[tiley*s1.width+tilex].object == 1  then
+        self.coins[1].selected = 1
+        self.paths, self.previous = dijkstra(self.graph , s1.width, s1.height, tilex, tiley, 5) 
 
-    if self.paths then
-        for i,j in pairs(paths) do
+        --echoInfo("------------")
+        for i,j in pairs(self.paths) do
+		  --print(i, j, table.concat(path(self.previous, i), ' -> '))
+	    end
+    
+        for i,j in pairs(self.paths) do
 		  local x = i%s1.width
-		  local y = (i-x)/s1.width		  
+		  local y = (i-x)/s1.width
+		  self:setTileColor(x, y, ccc3(111, 111, 111))
         end
+        
+        return
 	end
 	
-    self.paths = {}
-    self.previous = {}
-    paths,previous = dijkstra(self.graph , s1.width, s1.height, tilex, tiley, 2)
-    
-    echoInfo("------------")
-    for i,j in pairs(paths) do
-    	local x = i%s1.width
-		local y = (i-x)/s1.width
-		print(x, y, j, table.concat(path(previous, i), ' -> '))
-	end
-    
-    for i,j in pairs(paths) do
-		local x = i%s1.width
-		local y = (i-x)/s1.width
-		self:setTileColor(x, y, ccc3(111, 111, 111))
-	end
-	
+	if self.coins[1].selected and self.paths[tiley*s1.width+tilex] then        
+        local coinPath = path(self.previous, tiley*s1.width+tilex)        
+        self.coins[1].selected = nil
+        self.coins[1]:moveTo(coinPath)
+        self.graph[tiley*s1.width + tilex].object = 1 
+    end
 end
 
 function Board:onTouchMoved(x, y)

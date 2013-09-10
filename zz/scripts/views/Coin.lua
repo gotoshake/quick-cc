@@ -12,10 +12,7 @@ function Coin:tilePosToRealPos(tilex, tiley)
     return ccp(tilex* s.width, tiley* s.height)
 end
 
-function Coin:ctor(roleIndex)
-    self.animations = {}
-    local frames
-
+function Coin:ctor(roleIndex)    
     local RoleData = RoleDatas.get(roleIndex)
 
     self:setAnchorPoint(ccp(0, 0))
@@ -23,16 +20,9 @@ function Coin:ctor(roleIndex)
     self:setPosition(ccp(RoleData.pos.x *spriteSize.width, RoleData.pos.y * spriteSize.height))
 
     for  k, actionName in ipairs(RoleData.actionNames) do        
-        frames = display.newFrames(RoleData.name .. "_" .. RoleData.actionNames[k] .."_%02d.png", 1, RoleData.actionNums[k])
-        self.animations[actionName] = display.newAnimation(frames, 0.2)
-
-        if  string.find(actionName, "left") then
-            frames = display.newFrames(RoleData.name .. "_" .. RoleData.actionNames[k] .."_%02d.png", 1, RoleData.actionNums[k], true)
-            self.animations[string.gsub(actionName, "left", "right")] = display.newAnimation(frames, 0.2)
-        end    
-    end
-
-    self:playAnimationForever(self.animations["moveleft"]) 
+        local frames = display.newFrames(RoleData.name .. "_" .. RoleData.actionNames[k] .."_%02d.png", 1, RoleData.actionNums[k])
+        display.setAnimationCache(actionName, display.newAnimation(frames, 0.15) )           
+    end    
 end
 
 function Coin:getTilePos()
@@ -41,20 +31,53 @@ function Coin:getTilePos()
     return math.floor(x/s.width), math.floor(y/s.height)
 end
 
-function Coin:moveLeft()
-    self:playAnimationForever(self.animations["moveleft"]) 
+function Coin:moveByStep()    
+    local currentTile = self.path[self.currentStep]
+    local nextTile = self.path[self.currentStep+1]
+
+    if nextTile then
+        local spriteSize = self:getContentSize()
+        local x, y = self:getPosition()
+        local layerSize = self.board.layerFloorSize
+         
+
+        if nextTile == currentTile- 1 then 
+        	x = x-spriteSize.width
+            local moveleft = CCSequence:createWithTwoActions(
+                CCFlipX:create(false), 
+                CCAnimate:create(display.getAnimationCache("moveleft")))
+                self:runAction(moveleft)  
+        elseif nextTile == currentTile+ 1 then
+        	x = x+spriteSize.width
+            local moveright = CCSequence:createWithTwoActions(
+                CCFlipX:create(true), 
+                CCAnimate:create(display.getAnimationCache("moveleft")))
+            self:runAction(moveright)             
+        elseif nextTile == currentTile- layerSize.width then
+        	y = y-spriteSize.height
+            self:playAnimationOnce(display.getAnimationCache("movedown")) 
+        elseif nextTile == currentTile+ layerSize.width then
+        	y = y+spriteSize.height
+            self:playAnimationOnce(display.getAnimationCache("moveup"))        	
+        end        
+
+        self.board.graph[currentTile].object = 0
+        self.board.graph[nextTile].object = 1
+        
+        self.currentStep = self.currentStep+1
+
+        local action = CCSequence:createWithTwoActions(
+                CCMoveTo:create(0.3, ccp(x, y)),
+                CCCallFuncN:create(Coin.moveByStep))
+        self:runAction(action)
+    end
 end
 
-function Coin:moveRight()
-    self:playAnimationForever(self.animations["moveright"]) 
-end
-
-function Coin:moveUp()
-    self:playAnimationForever(self.animations["moveup"]) 
-end
-
-function Coin:moveDown()
-    self:playAnimationForever(self.animations["movedown"]) 
+function Coin:moveTo(path)    
+    print(table.concat(path, ' -> '))
+    self.path = path
+    self.currentStep = 1
+    self:moveByStep()
 end
 
 return Coin
