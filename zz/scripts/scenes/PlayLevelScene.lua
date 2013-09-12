@@ -6,10 +6,18 @@ local PlayLevelScene = class("PlayLevelScene", function()
     return display.newScene("PlayLevelScene")
 end)
 
-function PlayLevelScene:ctor(levelIndex)    
+function PlayLevelScene:ctor(levelIndex) 
+    -- create board   
     self.board = Board.new(Levels.get(levelIndex))
     self.board:addEventListener("LEVEL_COMPLETED", handler(self, self.onLevelCompleted))
     self:addChild(self.board)
+
+    -- crete ui
+    -- create levels list
+    local rect = CCRect(display.left, display.bottom + 180, display.width, display.height - 280)
+    self.levelsList = require("views.LevelsList").new(rect)
+    self.levelsList:addEventListener("onTapLevelIcon", handler(self, self.onTapLevelIcon))
+    self:addChild(self.levelsList)
 
     -- create menu
     local backButton = ui.newTTFLabelMenuItem({
@@ -38,7 +46,13 @@ function PlayLevelScene:onLevelCompleted()
     transition.moveTo(dialog, {time = 0.7, y = display.top - dialog:getContentSize().height / 2 - 40, easing = "BOUNCEOUT"})
 end
 
+function PlayLevelScene:onTapLevelIcon(event)
+    audio.playSound(GAME_SFX.tapButton)
+    game.playLevel(event.levelIndex)
+end
+
 function PlayLevelScene:onEnter()
+    self.levelsList:setTouchEnabled(true)
 end
 
 return PlayLevelScene

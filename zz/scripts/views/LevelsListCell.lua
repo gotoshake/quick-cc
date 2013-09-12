@@ -6,7 +6,7 @@ function LevelsListCell:ctor(size, beginLevelIndex, endLevelIndex, rows, cols)
     local rowHeight = math.floor((display.height - 340) / rows)
     local colWidth = math.floor(display.width * 0.9 / cols)
 
-    local batch = display.newBatchNode(GAME_TEXTURE_IMAGE_FILENAME)
+    local batch = display.newBatchNode("AllSprites.png")
     self:addChild(batch)
     self.pageIndex = pageIndex
     self.buttons = {}

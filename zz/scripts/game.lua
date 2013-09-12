@@ -8,6 +8,7 @@ game = {}
 function game.startup()
     CCFileUtils:sharedFileUtils():addSearchPath("res/")
     display.addSpriteFramesWithFile(GAME_TEXTURE_DATA_FILENAME, GAME_TEXTURE_IMAGE_FILENAME)
+    display.addSpriteFramesWithFile("AllSprites.plist", "AllSprites.png")
 
     -- preload all sounds
     for k, v in pairs(GAME_SFX) do
