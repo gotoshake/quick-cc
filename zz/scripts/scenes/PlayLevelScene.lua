@@ -10,7 +10,7 @@ function PlayLevelScene:ctor(levelIndex)
     -- create board   
     self.board = Board.new(Levels.get(levelIndex))
     self.board:addEventListener("LEVEL_COMPLETED", handler(self, self.onLevelCompleted))
-    self:addChild(self.board)
+    --self:addChild(self.board)
 
     -- crete ui
     -- create levels list

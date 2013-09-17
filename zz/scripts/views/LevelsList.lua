@@ -7,10 +7,10 @@ local LevelsList = class("LevelsList", PageControl)
 LevelsList.INDICATOR_MARGIN = 46
 
 function LevelsList:ctor(rect)
-    LevelsList.super.ctor(self, rect, PageControl.DIRECTION_HORIZONTAL)
+    LevelsList.super.ctor(self, rect, PageControl.DIRECTION_VERTICAL)
 
     -- add cells
-    local rows, cols = 4, 4
+    local rows, cols = 4, 1
     if display.height > 1000 then rows = rows + 1 end
 
     local Levels = require("data.Levels")
