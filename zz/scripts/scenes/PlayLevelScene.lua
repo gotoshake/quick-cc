@@ -10,14 +10,13 @@ function PlayLevelScene:ctor(levelIndex)
     -- create board   
     self.board = Board.new(Levels.get(levelIndex))
     self.board:addEventListener("LEVEL_COMPLETED", handler(self, self.onLevelCompleted))
-    --self:addChild(self.board)
+    self:addChild(self.board)
 
-    -- crete ui
     -- create levels list
     local rect = CCRect(display.left, display.bottom + 180, display.width, display.height - 280)
     self.levelsList = require("views.LevelsList").new(rect)
     self.levelsList:addEventListener("onTapLevelIcon", handler(self, self.onTapLevelIcon))
-    self:addChild(self.levelsList)
+    --self:addChild(self.levelsList)
 
     -- create menu
     local backButton = ui.newTTFLabelMenuItem({

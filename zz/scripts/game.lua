@@ -38,7 +38,3 @@ function game.playLevel(levelIndex)
     game.PlayLevelScene = require("scenes.PlayLevelScene").new(levelIndex)
     display.replaceScene(game.PlayLevelScene, "fade", 0.6, display.COLOR_WHITE)
 end
-
-function game.getBoard()
-	return game.PlayLevelScene.board
-end

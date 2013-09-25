@@ -7,6 +7,13 @@ _RoleDatas[1] = {
     actionNums = {2, 2, 2}
 }
 
+_RoleDatas[2] = {
+	name = "zhaoyun",
+	pos = {x=3, y=0},    
+    actionNames = {"movedown", "moveup", "moveleft"},
+    actionNums = {2, 2, 2}
+}
+
 local RoleDatas = {}
 
 function RoleDatas.numRoles()

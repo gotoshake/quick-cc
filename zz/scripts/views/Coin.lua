@@ -1,7 +1,7 @@
 local Levels = import("..data.Levels")
 local RoleDatas = import("..data.RoleDatas")
 
-local Coin = class("Coin", function(roleIndex)   
+local Coin = class("Coin", function(roleIndex, map)   
     local RoleData = RoleDatas.get(roleIndex)
     local sprite = display.newSprite("#" .. RoleData.name .. "_" .. RoleData.actionNames[1] .. "_01.png")       
     return sprite
@@ -12,12 +12,15 @@ function Coin:tilePosToRealPos(tilex, tiley)
     return ccp(tilex* s.width, tiley* s.height)
 end
 
-function Coin:ctor(roleIndex)    
-    local RoleData = RoleDatas.get(roleIndex)
+function Coin:ctor(roleIndex, map)
+    self.roleIndex  = roleIndex
+    self.map        = map    
+    local RoleData  = RoleDatas.get(roleIndex)   
 
     self:setAnchorPoint(ccp(0, 0))
     local spriteSize = self:getContentSize()
     self:setPosition(ccp(RoleData.pos.x *spriteSize.width, RoleData.pos.y * spriteSize.height))
+    self.map:setTileObject(RoleData.pos.x+ RoleData.pos.y*self.map.layerSize.width, self.roleIndex)  
 
     for  k, actionName in ipairs(RoleData.actionNames) do        
         local frames = display.newFrames(RoleData.name .. "_" .. RoleData.actionNames[k] .."_%02d.png", 1, RoleData.actionNums[k])
@@ -38,8 +41,7 @@ function Coin:moveByStep()
     if nextTile then
         local spriteSize = self:getContentSize()
         local x, y = self:getPosition()
-        local layerSize = self.board.layerFloorSize
-         
+        local layerSize = self.map.layerSize
 
         if nextTile == currentTile- 1 then 
         	x = x-spriteSize.width
@@ -59,10 +61,7 @@ function Coin:moveByStep()
         elseif nextTile == currentTile+ layerSize.width then
         	y = y+spriteSize.height
             self:playAnimationOnce(display.getAnimationCache("moveup"))        	
-        end        
-
-        self.board.graph[currentTile].object = 0
-        self.board.graph[nextTile].object = 1
+        end 
         
         self.currentStep = self.currentStep+1
 
@@ -78,6 +77,9 @@ function Coin:moveTo(path)
     self.path = path
     self.currentStep = 1
     self:moveByStep()
+
+    self.map:setTileObject(self.path[1], 0)
+    self.map:setTileObject(self.path[#self.path], self.roleIndex)
 end
 
 return Coin
