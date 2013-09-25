@@ -11,10 +11,6 @@ local Board = class("Board", function()
     return display.newLayer()
 end)
 
-local NODE_PADDING   = 100
-local NODE_ZORDER    = 0
-local COIN_ZORDER    = 1000
-
 function Board:ctor(levelData)
     EventProtocol.extend(self)
 
@@ -26,13 +22,13 @@ function Board:ctor(levelData)
 
     --ui
     self.actionMenu = ActionMenu.new()
-    self:addChild(self.actionMenu)
+    self:addChild(self.actionMenu, 1)
     
     --tmxMap
     self.map = Map.new(1) 
-    --self:addChild(self.map, 0, 10000)     
+    self:addChild(self.map, 0)     
 
-    --self:addTouchEventListener(handler(self, self.onTouch))
+    self:addTouchEventListener(handler(self, self.onTouch))
     self:setNodeEventEnabled(true)
 end
 
