@@ -6,7 +6,7 @@ local ActionMenu = class("ActionMenu", function()
 end)
 
 function ActionMenu:ctor()
-    self:setPosition(ccp(display.width/2, display.height/2))
+    self:setPosition(ccp(display.width-128, 0))
 	-- create menu
     self.attack = ui.newTTFLabelMenuItem({
         text = "attack",        
@@ -14,7 +14,7 @@ function ActionMenu:ctor()
         x = 0,
         y = 0,       
         align = ui.TEXT_ALIGN_CENTER,
-        listener = function()   
+        listener = function()             
         end,
     })
 
@@ -24,7 +24,7 @@ function ActionMenu:ctor()
         x = 0,
         y = 32,  
         align = ui.TEXT_ALIGN_CENTER,
-        listener = function()            
+        listener = function()                   
         end,
     })
 
@@ -33,6 +33,14 @@ function ActionMenu:ctor()
 
     self.menu = ui.newMenu({self.attack, self.standby})
     self:addChild(self.menu)
+end
+
+function ActionMenu:show()
+    self:setVisible(true)
+end
+
+function ActionMenu:show()
+    self:setVisible(true)    
 end
 
 return ActionMenu

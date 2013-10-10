@@ -1,10 +1,11 @@
 local Levels = import("..data.Levels")
 local RoleDatas = import("..data.RoleDatas")
 
-local Coin = class("Coin", function(roleIndex, map)   
-    local RoleData = RoleDatas.get(roleIndex)
-    local sprite = display.newSprite("#" .. RoleData.name .. "_" .. RoleData.actionNames[1] .. "_01.png")       
-    return sprite
+local Coin = class("Coin", function(roleIndex)   
+    --local RoleData = RoleDatas.get(roleIndex)
+    --local sprite = display.newSprite("#" .. RoleData.name .. "_" .. RoleData.actionNames[1] .. "_01.png")     
+    --return sprite
+    return display.newNode()
 end)
 
 function Coin:tilePosToRealPos(tilex, tiley)
@@ -12,10 +13,11 @@ function Coin:tilePosToRealPos(tilex, tiley)
     return ccp(tilex* s.width, tiley* s.height)
 end
 
-function Coin:ctor(roleIndex, map)
+function Coin:ctor(roleIndex)
     self.roleIndex  = roleIndex
-    self.map        = map    
-    local RoleData  = RoleDatas.get(roleIndex)   
+    self.map        = game.getMap()    
+    local RoleData  = RoleDatas.get(roleIndex)
+
 
     self:setAnchorPoint(ccp(0, 0))
     local spriteSize = self:getContentSize()
@@ -32,6 +34,9 @@ function Coin:getTilePos()
     local s = self:getContentSize()
     local x, y = self:getPosition()
     return math.floor(x/s.width), math.floor(y/s.height)
+end
+
+function Coin:moveOver()
 end
 
 function Coin:moveByStep()    
@@ -69,6 +74,9 @@ function Coin:moveByStep()
                 CCMoveTo:create(0.3, ccp(x, y)),
                 CCCallFuncN:create(Coin.moveByStep))
         self:runAction(action)
+
+    else
+        self:moveOver()
     end
 end
 

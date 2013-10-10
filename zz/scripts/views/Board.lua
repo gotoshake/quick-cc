@@ -2,6 +2,7 @@
 local Levels = require("data.Levels")
 local Coin   = require("views.Coin")
 local Map    = require("views.Map")
+local RoleDatas = import("..data.RoleDatas")
 local ActionMenu    = require("views.ActionMenu")
 import("..path.dijkstra")
 
@@ -13,21 +14,6 @@ end)
 
 function Board:ctor(levelData)
     EventProtocol.extend(self)
-
-    self.label = ui.newTTFLabel({        
-        x     = display.left + 100,
-        y     = display.top - 30,
-    })
-    self:addChild(self.label)
-
-    --ui
-    self.actionMenu = ActionMenu.new()
-    self:addChild(self.actionMenu, 1)
-    
-    --tmxMap
-    self.map = Map.new(1) 
-    self:addChild(self.map, 0)     
-
     self:addTouchEventListener(handler(self, self.onTouch))
     self:setNodeEventEnabled(true)
 end
@@ -52,12 +38,6 @@ function Board:checkLevelCompleted()
     end
 end
 
-function Board:getCoin(row, col)
-    if self.grid[row] then
-        return self.grid[row][col]
-    end
-end
-
 function Board:onTouchBegan(x, y)
     local tilex,tiley = self:screenToTilePos(x, y)    
     self.label:setString(string.format("%d %d -> %d %d", x, y, tilex, tiley)) 
@@ -77,6 +57,7 @@ function Board:onTouchCancelled(x, y)
 end
 
 function Board:onTouch(event, x, y)
+    echoInfo("onTouch %s %d %d", event, x, y)
     if event == "began" then
         self:onTouchBegan(x, y)
     elseif event == "moved" then
@@ -89,7 +70,37 @@ function Board:onTouch(event, x, y)
 end
 
 function Board:onEnter()
+    self.label = ui.newTTFLabel({        
+        x     = display.left + 100,
+        y     = display.top - 30,
+    })
+    self:addChild(self.label)
+
+    --ui
+    self.actionMenu = ActionMenu.new()
+    self:addChild(self.actionMenu, 1)
+    
+    --tmxMap
+    self.map = Map.new(1) 
+    self:addChild(self.map, 0)
     self:setTouchEnabled(true)
+
+    --role
+    self.batch = display.newBatchNode(GAME_TEXTURE_IMAGE_FILENAME)
+    --self.batch:setPosition(display.cx, display.cy)
+    printf("setPosition: %f, %f", display.cx, display.cy)
+    self:addChild(self.batch)   
+
+    self.coins = {}
+    for i=1, RoleDatas.numRoles() do    
+        local coin = Coin.new(i) 
+        self:addChild(coin, 1000)  
+        self.coins[i] =  coin
+    end
+
+    --mask    
+    self.maskLayer = display.newSprite()
+    self:addChild(self.maskLayer, 10)
 end
 
 function Board:onExit()

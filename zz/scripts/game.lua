@@ -6,9 +6,9 @@ require("framework.init")
 game = {}
 
 function game.startup()
-    CCFileUtils:sharedFileUtils():addSearchPath("res/")
+    CCFileUtils:sharedFileUtils():addSearchPath("res/")    
+    --display.addSpriteFramesWithFile("AllSprites.plist", "AllSprites.png")    
     display.addSpriteFramesWithFile(GAME_TEXTURE_DATA_FILENAME, GAME_TEXTURE_IMAGE_FILENAME)
-    display.addSpriteFramesWithFile("AllSprites.plist", "AllSprites.png")
 
     -- preload all sounds
     for k, v in pairs(GAME_SFX) do
@@ -38,3 +38,21 @@ function game.playLevel(levelIndex)
     game.PlayLevelScene = require("scenes.PlayLevelScene").new(levelIndex)
     display.replaceScene(game.PlayLevelScene, "fade", 0.6, display.COLOR_WHITE)
 end
+
+function game.getCoin(row)    
+    return game.PlayLevelScene.board.coins[row]    
+end
+
+function game.getMap()
+    return game.PlayLevelScene.board.map
+end
+
+function game.getMask()
+    return game.PlayLevelScene.board.maskLayer
+end
+
+function game.getActionMenu()
+    return game.PlayLevelScene.board.actionMenu
+end
+
+

@@ -1,6 +1,3 @@
-local Coin   = require("views.Coin")
-local RoleDatas = import("..data.RoleDatas")
-
 local Map = class("Map", function(mapIndex)   
     local map = CCTMXTiledMap:create("orthogonal-test4.tmx")     
     return map
@@ -30,11 +27,6 @@ function Map:ctor(mapIndex)
     
     self.layerTree          = self:layerNamed("tree")
     
-    self.batch = display.newBatchNode(GAME_TEXTURE_IMAGE_FILENAME)
-    --self.batch:setPosition(display.cx, display.cy)
-    printf("setPosition: %f, %f", display.cx, display.cy)
-    self:addChild(self.batch)    
-    
     self.graph = {}    
     local  s1 = self.layerFloor:getLayerSize()
     self.tileColor = self.layerFloor:tileAt(ccp(0, 0)):getColor()  
@@ -51,18 +43,7 @@ function Map:ctor(mapIndex)
                 self.graph[j*s1.width + i].weight = math.huge                       
             end     
         end     
-    end
-
-    self.coins = {}
-    for i=1, RoleDatas.numRoles() do    
-        local coin = Coin.new(i, self) 
-        self.batch:addChild(coin, 1000)  
-        self.coins[i] =  coin
-    end
- 
-    
-    self.maskLayer = display.newSprite()
-    self:addChild(self.maskLayer, 10)
+    end    
 end
 
 function Map:setTileColor(tilex, tiley, color)    
@@ -71,7 +52,7 @@ function Map:setTileColor(tilex, tiley, color)
         local maskTile = CCSprite:create("mask.png")
         maskTile:setAnchorPoint(ccp(0, 0))
         maskTile:setPosition(tile:getPosition())
-        self.maskLayer:addChild(maskTile, 1)
+        game.getMask():addChild(maskTile, 1)
     end
 end
 
@@ -84,7 +65,7 @@ function Map:onTileTouched(tilex, tiley)
         return
     end
 
-    self.maskLayer:removeAllChildrenWithCleanup() 
+    game.getMask():removeAllChildrenWithCleanup() 
     
     local s1 = self.layerFloor:getLayerSize()
     local tileObject = self.graph[tiley*s1.width+tilex].object
@@ -110,7 +91,7 @@ function Map:onTileTouched(tilex, tiley)
     if self.selected then        
         if self.paths[tiley*s1.width+tilex] and tileObject == 0 then        
             local coinPath = path(self.previous, tiley*s1.width+tilex)
-            self.coins[self.selected]:moveTo(coinPath)
+            game.getCoin(self.selected):moveTo(coinPath)
         end 
         self.selected = nil      
     end

@@ -13,9 +13,9 @@ function PlayLevelScene:ctor(levelIndex)
     self:addChild(self.board)
 
     -- create levels list
-    local rect = CCRect(display.left, display.bottom + 180, display.width, display.height - 280)
-    self.levelsList = require("views.LevelsList").new(rect)
-    self.levelsList:addEventListener("onTapLevelIcon", handler(self, self.onTapLevelIcon))
+    --local rect = CCRect(display.left, display.bottom + 180, display.width, display.height - 280)
+    --self.levelsList = require("views.LevelsList").new(rect)
+    --self.levelsList:addEventListener("onTapLevelIcon", handler(self, self.onTapLevelIcon))
     --self:addChild(self.levelsList)
 
     -- create menu
