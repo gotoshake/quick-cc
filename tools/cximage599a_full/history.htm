@@ -1,0 +1,823 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<html>
+<head>
+<title>History</title>
+<meta name="GENERATOR" content="Microsoft FrontPage 3.0">
+</head>
+<body stylesrc="indexipl.htm" bgcolor="#ffffff">
+<h2>CxImage History</h2>
+<hr>
+<h3></h3>
+<h3>Version 5.99a, 08 - Feb - 2004</h3>
+<b>Bugfixes</b> 
+<ul>
+  <li> fixed bug in AlphaCopy, AlphaSet, SelectionCopy &lt;Tacho&gt; 
+</ul>
+<b>Changes and major additions</b> 
+<ul>
+  <li> ---
+  </ul>
+<b>Project - Libraries - Demo application</b> 
+<ul>
+  <li>Demo: fixed save/restore window position and options</li>
+</ul>
+<hr>
+<h3></h3>
+<h3>Version 5.99, 31 - Jan - 2004</h3>
+<b>Bugfixes</b> 
+<ul>
+  <li> fixed linking problems when CXIMAGE_SUPPORT_ENCODE is 0 &lt;Schuberth&gt; 
+    &lt;Squidge&gt; 
+  <li>fixed missing in parentheses in CreateFromMatrix and CreateFromArray &lt;sihun&gt; 
+    &lt;H.C.Anderson&gt; 
+  <li>fixed incorrect decoding for 4-bit RLE Windows bitmaps &lt;chupeev&gt; 
+  <li>Removed unreachable code in Resample &lt;Lucian Ioan&gt; 
+  <li>CxImagePNG::Encode : removed useless call to iter.GetRow &lt;Chieh An Lu&gt; 
+  <li>fixed color comparison using long integers (if rgbReserved is not 0) in 
+    CxImagePNG and CxImageICO &lt;James Dickson&gt; 
+  <li>CxExifInfo now reads the exif data also in a second directory &lt;Richard 
+    Collins&gt; 
+  <li>Dither now preserves DPI information 
+  <li> fixed PNG decoder for interlaced images with transparent layer 
+  <li>fixed GIF decoder bug for animated images with local color table. 
+  <li>fixed problem in Draw() with indexed images, when 2 indexes hold the same 
+    color and 1 is transparent. 
+  <li>fixed memory overrun in Crop() for 8 and 24 bpp images. &lt;DT&gt; 
+  <li>fixed BMP decoder when loading 8 bit resources with less than 256 colors 
+    &lt;DT&gt; 
+  <li>CxImageTIF now handles TIFFTAG_RESOLUTIONUNIT &lt;Trifon&gt; 
+  <li>Fix for decoding 8 bpp tifs with alpha layer &lt;Nick Holgate&gt; 
+  <li>fixed error in mymngerror() &lt;Arkadiy Olovyannikov&gt; 
+  <li>fixed TIFFTAG_PREDICTOR, saving 1 and 4 bpp images with LZW compression 
+    &lt;Hermann62&gt;
+</ul>
+<b>Changes and major additions</b> 
+<ul>
+  <li> Renamed DrawText with DrawString 
+  <li>New bGetAlpha parameter for GetPixelColor 
+  <li>CxImageICO now reads also windows cursors (.CUR) 
+  <li>support for UNICODE &lt;Igor Rosenberg&gt; 
+  <li>Renamed Get/SetEncodeOption with Get/SetCodecOption &lt;chupeev&gt; 
+  <li>AlphaCreate also initializes the layer to full opaque. 
+  <li>new functions: DrawStringEx, InitTextInfo, CropRotatedRectangle &lt;VATI&gt;, 
+    MixFrom &lt;Kenneth Ballard&gt;, UnsharpMask &lt;nipper&gt;, Lut 
+  <li>increased default JPEG quality to 90 &lt;VATI&gt; 
+  <li>CxImageTIF::Decode saves original compression in info.dwCodecOption &lt;DPR&gt; 
+  <li>new functions: CxImageTIF::TIFFOpenEx and CxImageTIF::TIFFCloseEx, to handle 
+    directly a TIFF directory. 
+  <li>CxImageJPG::Decode and CxImageJPG::Encode handles more jpeg DECODE_XXX and 
+    ENCODE_XXX methods<br>
+    (through SetCodecOption and SetJpegQuality) &lt;chupeev&gt; 
+  <li>new dwRop parameter for Stretch, allows raster-operation codes. &lt;?&gt; 
+  <li>Faster Filter() for 8bit grayscale images &lt;Thomas M. Boser&gt; 
+  <li>SetEscape(-1) before Decode returns the image width and height only ( for 
+    bmp, jpg, gif, tif ) &lt;ignacio&gt; 
+  <li>new Set/GetJpegScale() before Decode, to open a resized image (for jpeg 
+    only) &lt;ignacio&gt; 
+  <li>new function : CircleTransform for FishEye, Swirle, Cilinder, bathroom effects 
+    &lt;Arkadiy Olovyannikov&gt; 
+  <li>new methos for HistogramStretch: 0 = luminance &lt;dave&gt;, 1 = linked 
+    channels &lt;nipper&gt;, 2 = independent channels &lt;nipper&gt;, and for 
+    grayscale images 
+  <li>faster Light and Gamma &lt;nipper&gt; 
+  <li>CImageIterator new methods: Get/SetCol() to extract a single column. 
+  <li>Better error checking in image initialization functions.
+  <li>CreateFromHANDLE now reads also RLE compressed bitmaps &lt;Michael Gandyra&gt;
+</ul>
+<b>Project - Libraries - Demo application</b> 
+<ul>
+  <li> Updated zlib to 1.2.1.&lt;Tuncer M. Ayaz&gt;</li>
+  <li>Demo: status bar updated after Crop or drag &amp; drop &lt;VATI&gt; </li>
+  <li>demoview.h : new Dpoint2d structure &lt;VATI&gt;</li>
+  <li>demodoc.h : new LEN2D macro &lt;VATI&gt;</li>
+  <li>Demo: save/restore window position &lt;VATI&gt;</li>
+  <li>Demo: new DlgText features &lt;VATI&gt;</li>
+  <li>Demo: new Selection tool options: CTRL+Rclick = move selection, shift+Lclick= 
+    rect selection, Rclick on a rect selection = rotate selection &lt;VATI&gt;</li>
+  <li>Moved tif_xfile.cpp from LibTiff to CxImage directory and workspace</li>
+  <li>Demo2 : Updated FindFormat</li>
+  <li>Demo : new Mix dialog and menus for CircleTransform</li>
+</ul>
+<hr>
+<h3></h3>
+<h3>Version 5.80, 27 - Sep - 2003</h3>
+<b>Bugfixes</b> 
+<ul>
+  <li> Fixed head.biSize initialization: moved from Startup() to Create() &lt;ralphw&gt; 
+  <li>Fixed problem in SetTransColor when rgbReserved is not 0 and in the image 
+    there is an alpha layer. 
+  <li>CxImageBMP::Decode : force rgbReserved=0 in the palette , to avoid problems 
+    with some WinXp bitmaps. &lt;Colin Urquhart&gt; 
+  <li>Fixed warnings for size_t type in iA64 compiler &lt;Frank Sowinski&gt; 
+  <li>GrayScale from 1, 4 and 24 bit images now preserves info and selection layer 
+  <li>CxImageICO::Decode will not create the alpha layer if it's not strictly 
+    necessary;<br>
+    and reads images embedded inside a file &lt;yuandi&gt; 
+  <li>CxImageJPG::Decode : check image allocation before further processing. 
+  <li>Fixed DLL_EXP definition and inlined CxImage destructor for older VC++ compilers 
+    &lt;Wassily Gibin&gt; 
+  <li>Fixed CxFileJas::JasClose() bug with memory files &lt;osamu44&gt; 
+  <li> Added missing casts in floating point functions in CxExifInfo &lt;Branko 
+    Dreven&#154;ek&gt; &lt;Tuncer M. Ayaz&gt; 
+  <li>Fixed memory leak in CreateFromHICON &lt;Sims&gt; 
+  <li>Fixed access violation in CxImageTIF::Decode with some CieLab images &lt;Vitaly 
+    Titov&gt; 
+  <li>Fixed GDI leak in CxImage::DrawText() &lt;Henry P.&gt; 
+  <li>Crop now works also with the alpha layer. &lt;oboolo&gt; 
+  <li>Fixed bias and canvas size in CxImage::Rotate() 
+  <li>CxImageGIF now stores the comment before the image body. 
+  <li>Encode() functions now check both file and image handlers with EncodeSafeCheck() 
+  <li>IncreaseBpp to 24 bit from images with simple transparency, now sets the 
+    correct transparent color. 
+  <li>CxImageBMP::DibReadBitmapInfo accepts non standard headers if the stored 
+    information is valid 
+  <li>CxImage::Decode with CXIMAGE_FORMAT_UNKNOWN, now preserves CxImage::info 
+  <li>Fixed sizeof(BITMAPFILEHEADER) in CxImageBMP, to avoid struct alignment 
+    errors 
+</ul>
+<b>Changes and major additions</b> 
+<ul>
+  <li> New functions Get/SetClrImportant() 
+  <li>Added new clrimportant parameter for DecreaseBpp 
+  <li>Faster Light() for full RGB images 
+  <li>GetPixelIndex returns the index of the top-left pixel when the coordinates 
+    are out of the image and no background color is selected 
+  <li>CxImagePNG::Encode saves info.nBkgndColor (or white) as bKGD color, for 
+    IE 
+  <li>Added &quot;bEditAlpha&quot; parameter to DrawText. 
+  <li>New functions:<br>
+    SelectionAddPixel &lt;Anatoly Ivasyuk&gt;,<br>
+    DrawLine &lt;JDL&gt;,<br>
+    IsTransparent(long x, long y) &lt;Sims&gt;,<br>
+    AlphaGetBits(), Expand(), Thumbnail() &lt;Colin Urquhart&gt; <br>
+    CreateFromMatrix(), CreateFromArray() , replace CreateFromARGB() 
+  <li>CXIMAGE_MAX_MEMORY prevents huge allocations 
+  <li>GetBits() returns the pointer to the first byte in a generic row 
+  <li>New bDetachBuffer parameter in CxMemFile::GetBuffer, to get the buffer for 
+    read only purpose &lt;Wassily Gibin&gt; 
+  <li>Faster (x4!) bicubic interpolation and fixed bias error &lt;Kristian Kratzenstein&gt; 
+  <li>CxImagePNG::Encode saves only the minimum number of palette colors for small 
+    images &lt;Basara&gt; 
+  <li>Added &quot;hpal&quot; parameter to CxImage::CreateFromHBITMAP, for indexed 
+    DCs &lt;Zahi Kapeluto&gt; 
+  <li>CxImageTGA::Decode now reads also images with illegal packets &lt;Colin 
+    Urquhart&gt; 
+</ul>
+<b>Project - Libraries - Demo application</b> 
+<ul>
+  <li> Updated CQuantizer to handle color reduction to less than 16 colors 
+  <li>JAS_IMAGE_INMEMTHRESH increased to avoid jasper temporary file 
+  <li>Updated JBig library: JBIG-KIT 1.5 (2003-06-11) 
+  <li>\jpeg\jmorecfg.h : fixed INT32 redefinition for Borland C++ Builder6 
+</ul>
+<hr>
+<h3></h3>
+<h3>Version 5.71, 25 - Apr - 2003</h3>
+<b>Changes and major additions</b> 
+<ul>
+  <li> new formats: JP2, JPC, PGX, PNM, RAS (through JasPer) 
+  <li>new functions: Set/GetFlags( ), LayerCreate( ), LayerDelete( ), LayerDeleteAll( 
+    ), GetLayer( ), GetParent( ), GetNumLayers( ) 
+</ul>
+<b>Project - Libraries - Demo application</b> 
+<ul>
+  <li> New C library : JasPer 1.700.2 
+</ul>
+<hr>
+<H3>Version 5.70, 19 - Apr - 2003</H3>
+<B>Bugfixes</B> 
+<UL>
+  <LI> fixed&nbsp;RGB2GRAY&nbsp;macro &lt;H. Muelner&gt; &lt;jurgene&gt; 
+  <LI> SelectionAddPolygon and SelectionAddColor&nbsp;compute correctly info.rSelectionBox 
+  <LI>fixed SelectionAddPolygon when the polygon touches the image borders. 
+  <LI> fixed EXIF reader 
+  <LI> fixed CxImageGIF::DecodeExtension</LI>
+  <LI>CxImageTIF::EncodeBody : better error handling, and switch for different 
+    compression tags. </LI>
+  <LI>CImageIterator : fixed friend declaration in ximaiter.h, line 37 &lt;gazzivan&gt;</LI>
+  <LI>fixed DPI default values in CreateFromHANDLE</LI>
+  <LI>CxImageBMP now reads OS2 bitmaps</LI>
+  <LI>fixed cast problem in Histogram functions &lt;Tuncer M. Ayaz&gt;</LI>
+  <LI>fixed&nbsp;memory corruption in RotateLeft( ) RotateRight( ) for 1 bpp images. 
+    &lt;Stroupe David R&gt;</LI>
+</UL>
+<B>Changes and major additions</B> 
+<UL>
+  <LI> New MakeBitmap(hdc) implementation&nbsp;when hdc is 0 &lt;jaslet&gt; 
+  <LI> Light( ) : shifted down the contrast parameter so that the neutral value 
+    is 0. 
+  <LI> New filters: Jitter( ), Skew( )</LI>
+  <LI>Negative( ) moved in BASICTRANSFORMATIONS</LI>
+</UL>
+<B>Project - Libraries - Demo application</B> 
+<UL>
+  <LI> New CxImageCrtDll.dsp project, to build a dll without mfc &lt;Anatoly Ivasyuk&gt; 
+  <LI>fixed bug in Window/Duplicate with no image in the document. &lt;corwinkrisw&gt;</LI>
+  <LI>\jpeg\jdmarker.c line 1091 : skip check for unknown marker, to decode partially 
+    corrupted files.</LI>
+</UL>
+<hr>
+<h3></h3>
+<h3>Version 5.61, 10 - Mar - 2003</h3>
+<b>Bugfixes</b> 
+<ul>
+  <li> fixed SplitXYZ and floating point constants in ximadsp.cpp &lt;???&gt;</li>
+</ul>
+<H3></H3>
+<hr>
+<h3></h3>
+<h3>Version 5.60, 09 - Mar - 2003</h3>
+<b>Bugfixes</b> 
+<ul>
+  <li> CxImagePNG read/save DPI 
+  <li> SelectionAddRect computes correctly info.rSelectionBox &lt;arnold wittenberg&gt;</li>
+</ul>
+<b>Changes and major additions</b> 
+<ul>
+  <li> better RGB2GRAY macro &lt;dave&gt; 
+  <li> new functions: HistogramStretch( ), HistogramEqualize( ), HistogramNormalize( 
+    ), HistogramRoot( ), HistogramLog( ) &lt;dave&gt; 
+  <li> GetPixelColor returns the color of the top-left pixel when the coordinates 
+    are out of the image and no background color is selected 
+  <li> new function: Contour( ) 
+  <li> new bicubic spline interpolation for Resample( ) 
+  <li> Faster GetNearestPixel( ) &lt;RJ&gt;</li>
+</ul>
+<b>Project - Libraries - Demo application</b> 
+<ul>
+  <li> Demo: fixed "move" tool</li>
+</ul>
+<hr>
+<h3>Version 5.55, 17 - Feb - 2003</h3>
+<p><b>Changes and major additions</b> </p>
+<ul>
+  <li> fixed bug in CreateFromARGB &lt;Olivier Ansquer&gt; 
+  <li> CxImageTGA::Decode flips the alpha channel when required &lt;lioucr&gt; 
+  <li> CxImageGIF::DecodeExtension, fixed problem when extension information is 
+    more than 3 bytes. &lt;TomPeakz&gt;</li>
+</ul>
+<b>Project - Libraries - Demo application</b> 
+<ul>
+  <li> jpeg\jdcolor.c, line 384 changed again to permit null conversion if the 
+    output space is undefined OR input and output sapaces are the same&lt;DP&gt;</li>
+</ul>
+<hr>
+<h3>Version 5.53, 27 - Jan - 2003</h3>
+<p><b>Changes and major additions</b> </p>
+<ul>
+  <li> New functions: CreateFromHICON 
+  <li> Replaced SetPaletteIndex with SetPaletteColor and GetRGB with GetPaletteColor</li>
+</ul>
+<b>Project - Libraries - Demo application</b> 
+<ul>
+  <li> Demo : fixed GDI leak in LineDDAProc &lt;jh&gt; 
+  <li> jpeg\jdcolor.c, line 384 changed to permit null conversion if the output 
+    space is undefined (OJPEG) &lt;DP&gt; 
+  <li> tiff\tif_ojpeg.c from line 1374 to line 1407 : avoid sampling factors check 
+    &lt;DP&gt;</li>
+</ul>
+<hr>
+<h3></h3>
+<h3>Version 5.51, 19 - Jan - 2003</h3>
+<b>Bugfixes</b> 
+<ul>
+  <li> fixed GDI leak in CxImage::Draw when pClipRect is not null &lt;Carsten 
+    Leue&gt;</li>
+</ul>
+<b>Project - Libraries - Demo application</b> 
+<ul>
+  <li> Updated LIBPNG to 1.2.5 &lt;Tuncer M. Ayaz&gt; 
+  <li> added jpeg_reset_huff_decode function in jpeg\jdhuff.c for the broadest 
+    possible support for OJPEG files<br>
+    (implemented by Scott Marovich at HP &lt;marovich(at)hpl(dot)hp(dot)com&gt;)<br>
+    jpeg\jdmarker.c : line 204 and 261 allow SOI and SOF duplicate only if cinfo-&gt;global_state 
+    == DSTATE_INHEADER<br>
+    (should be illegal, but OJPEG files have an illegal structure &lt;DP&gt;) 
+  <li> tiff\tif_jpeg.c from line 673 to line 697 : avoid sampling factors check 
+    &lt;DP&gt;</li>
+</ul>
+<hr>
+<h3></h3>
+<h3>Version 5.50, 07 - Jan - 2003</h3>
+<b>Bugfixes</b> 
+<ul>
+  <li> CxImageTIF : added support for tiled images 
+  <li> CxImageTIF : faster decoding with TIFFNumberOfDirectories, instead of looping 
+    &lt;Robert Abram&gt; 
+  <li> CxImageTIF : fixed stripsize check when samplesperpixel is more than 1. 
+  <li> DecreaseBpp( ) and IncreaseBpp( ) preserve info 
+  <li> Tile( ) fixed when the rectangle is not a multiple of the image dimension. 
+    &lt;dock&gt; 
+  <li> Added missing casts in floating point functions &lt;Tuncer M. Ayaz&gt; 
+  <li> CxImageGIF : fixed loop counter saving animated gifs &lt;handong&gt; 
+  <li> CxImageGIF::get_byte : fixed overflow when reading corrupted images. 
+  <li> CxImageGIF::get_num_frames : fixed undefined TabCol structure. 
+  <li> CxImageGIF : a palette without white is accepted. 
+  <li> CxImageGIF : avoid byte order problems with Solaris &lt;candan&gt; 
+  <li> CxImageTGA : Encode now saves the last palette entry. 
+  <li> CxImageICO : Decode reads Bpp from the bitmapinfoheader instead of icondirentry 
+    &lt;CoreyRLucier&gt; 
+  <li> CxImageJBG : fixed Encode crash when copying pixels form cximage to the 
+    decoder buffer.</li>
+</ul>
+<p><b>Changes and major additions</b> </p>
+<ul>
+  <li> Replaced IsAlphaPaletteEnabled with AlphaPaletteIsEnabled, AlphaIsValidPalette 
+    with AlphaPaletteIsValid, GetSelectionBox with SelectionGetBox 
+  <li> New SplitCMYK( ), GetPixelGray( ), AlphaPaletteSplit( ) 
+  <li> Added the bLocalColorMap parameter to CxImageGIF::Encode, for animated 
+    gifs with local palettes 
+  <li> New AlphaSet(CxImage &amp;from): creates the alpha channel from a gray 
+    scale image. 
+  <li> One or more images can be appended directly to a TIF file, using CxImageTIF::Encode(file,true); 
+    or Encode(hFile,pImages,pagecount) &lt;RJ&gt; 
+  <li> Fast RotateLeft( ) and RotateRight( ) for BW images &lt;Robert Abram&gt; 
+  <li> SetPixelColor( ) and GetPixelColor( ) handle alpha in RGBQUAD::rgbReserved. 
+  <li> IncreaseBpp is faster for conversion to 4 and 8 bpp, AlphaPalette converted 
+    to an alpha channel for conversion to 24 bpp. 
+  <li> info.nProgress updated in the dsp and transformation functions &lt;Anatoly 
+    Ivasyuk&gt;. 
+  <li> New info.dwEncodeOption parameter to select the compression scheme for 
+    GIF and TIF. 
+  <li> New CxImageWMF::Decode parameters: nForceWidth,nForceHeight to force the 
+    final dimension of the image. 
+  <li> CxImageJ2K::Encode : new formula for compression rate, so the quality for 
+    j2k and jpg are similar. 
+  <li> Added CXIMAGE_FORMAT_UNKNOWN for automatic image type detection.</li>
+</ul>
+<p><b>Project - Libraries - Demo application</b> </p>
+<ul>
+  <li> Fixed exception in DlgHisto 
+  <li> CQuantize handles palettes with alpha information 
+  <li> better dump of the memory leaks &lt;dave&gt;</li>
+</ul>
+<hr>
+<h3></h3>
+<h3>Version 5.11, 29 - Sep - 2002</h3>
+<b>Bugfixes</b> 
+<ul>
+  <li> ximadefs.h : added pragma pack(1) for BMP structures alignment with Linux 
+    compilers</li>
+</ul>
+<hr>
+<h3>Version 5.10, 23 - Sep - 2002</h3>
+<b>Bugfixes</b> 
+<ul>
+  <li> CxImageGIF : restored lzw algorithm. &lt;Olivier Ansquer&gt; 
+  <li> CxImageTIFF : added support for CIELAB images. 
+  <li> CxImageTGA : fixed problem decoding corrupted files. 
+  <li> CxImageBMP: fixed problem with os2 and 16bit images &lt;Cui Ying Jie&gt;</li>
+</ul>
+<p><b>Changes and major additions</b> </p>
+<ul>
+  <li> New DrawText function. 
+  <li> Added iDst parameter in Resample( ) &lt;CSC&gt; 
+  <li> New SelectionToHRGN( ) and SelectionAddColor( ) &lt;elrod&gt; 
+  <li> Replaced HasAlpha with AlphaIsValid, HasSelection with SelectionIsValid, 
+    HasAlphaPalette with AlphaIsValidPalette 
+  <li> New CreateFromARGB( ) &lt;Olivier Ansquer&gt; 
+  <li> Added DLL_EXP for CxImageTIF and CxImageGIF &lt;Olivier Ansquer&gt;</li>
+</ul>
+<hr>
+<h3></h3>
+<h3>Version 5.00, 23 - Aug - 2002</h3>
+<b>Bugfixes</b> 
+<ul>
+  <li> CxImageTIF::Decode : fixed default orientation. &lt;vho&gt; 
+  <li> CxImageTIF::Encode saves 1bpp always with PHOTOMETRIC_MINISWHITE &lt;abe&gt; 
+  <li> CxImageJPG::Encode : fixed jpg encoder for memory files. 
+  <li> CxImageICO::Encode : fixed problem with 4bpp images with transparency. 
+  <li> CxImagePNG::Encode : fixed problem when info.bColorType was wrong &lt;Kwyshell&gt; 
+  <li> removed info.bColorType and changed GetColorType() implementation. 
+  <li> CxImageBMP::Decode handles TopDown Bitmaps &lt;Flanders&gt;, small bugfix 
+    &lt;CSC&gt; 
+  <li> CxImageTIF::Encode : TIFFSetField(m_tif, TIFFTAG_ROWSPERSTRIP, TIFFDefaultStripSize(m_tif, 
+    -1)); gives better compression &lt;REC&gt; 
+  <li> Load( ) returns the correct info.nNumFrame when info.nFrame&lt;0. 
+  <li> removed bug in tif_xfile.c when encoding memory files. 
+  <li> CxImageBMP::Decode loads correctly OS2 bmps. 
+  <li> bugfix in Resample( ) when (newx==width &amp;&amp; newy==height) 
+  <li> better operator= definition &lt;Anatoly Ivasyuk&gt;</li>
+</ul>
+<b>Changes and major additions</b> 
+<ul>
+  <li> new formats: WBMP, WMF - EMF &lt;vho&gt;, JBIG, JPEG2000. 
+  <li> new full codec for PCX, with support for RGBA images. 
+  <li> new methods: GetVersion, IsTransparent &lt;vho&gt;, ShiftRGB, Median, Gamma, 
+    Noise, Combine, FFT, Repair, AlphaSplit 
+  <li> added r/w support for 8bpp TIFFs with alpha layer. 
+  <li> added support for TrueColor, RLE and uncompressed GIFs. 
+  <li> added CXIMAGEJPG_SUPPORT_EXIF for JPGs. 
+  <li> new switches: CXIMAGE_SUPPORT_DECODE, CXIMAGE_SUPPORT_ENCODE,<br>
+    CXIMAGE_SUPPORT_WINDOWS, CXIMAGE_SUPPORT_WINCE &lt;T.Peck&gt; 
+  <li> SetEscape can abort the codecs loops &lt;vho&gt;. 
+  <li> added ximadefs.h to adjust automatically the switches. 
+  <li> the codecs for ICO, PNG, TGA and TIF work also with CXIMAGE_SUPPORT_ALPHA 
+    = 0 &lt;vho&gt; 
+  <li> added DPI information support for jpeg &lt;Koray Geçici&gt; 
+  <li> new CxFile CxMemFile CxIOFile implementations &lt;CSC&gt; 
+  <li> MakeBitmap( ) creates a real DIB if HDC == 0 &lt;CSC&gt; 
+  <li> Draw( ) added pClipRect parameter. 
+  <li> CxImageTIF::Decode : re-enabled error handler for debugging;</li>
+</ul>
+<b>Project - Libraries - Demo application</b> 
+<ul>
+  <li> Zlib : replaced zlib.rc and zlib.def &lt;Tuncer M. Ayaz&gt;. 
+  <li> Demo: new tools, histogram, palette, replaced xshadebutton with xtargetbutton. 
+  <li> Updated LIBPNG to 1.2.4 
+  <li> LibTIFF::tiff_read.c::ln188: commented to decode strange images, it's not 
+    dangerous. 
+  <li> LibTIFF small changes to compile under linux (tiff_xfile.cpp, tiff_jpeg.c, 
+    tiff_ojpeg.c, tiffiop.h) 
+  <li> LibJPEG : small changes to compile under linux (jmorecfg.h) 
+  <li> Added project for DLL build and console applications.</li>
+</ul>
+<hr>
+<h3></h3>
+<h3>Version 4.10, 01 - Jun - 2002</h3>
+<b>Bugfixes</b> 
+<ul>
+  <li> Fixed PNG error handler. 
+  <li> Fixed TGA decoder for RLE encoded pictures with alpha channel &lt;Ole Lange&gt; 
+    and 15 bit pictures. 
+  <li> Fixed BMP decoder for 32 bit images.</li>
+</ul>
+<b>Changes and major additions</b> 
+<ul>
+  <li> Added Read/Write support for 24 and 32 bit ICONs. 
+  <li> new bAppend parameter in CxImageTIF::Encode() for better multi page TIF 
+    creation. &lt;Abe&gt;</li>
+</ul>
+<b>Project - Libraries - Demo application</b> 
+<ul>
+  <li> Updated zlib to 1.1.4.&lt;Tuncer M. Ayaz&gt; 
+  <li> Added OJPEG_SUPPORT (not for Wang).</li>
+</ul>
+<hr>
+<h3></h3>
+<h3>Version 4.01, 15 - May - 2002</h3>
+<b>Changes and major additions</b> 
+<ul>
+  <li> Added some constructors and Encode()/Decode() methods to work with memory 
+    buffers directly.</li>
+</ul>
+<b>Project - Libraries - Demo application</b> 
+<ul>
+  <li> Changed URL download dialog.</li>
+</ul>
+<h3></h3>
+<hr>
+<h3></h3>
+<h3>Version 4.00, 12 - May - 2002</h3>
+<b>Bugfixes</b> 
+<ul>
+  <li> Fixed JPEG error handler &lt;CSC&gt; 
+  <li> Fixed _tiffSizeProc in tif_c.c to load images with missing stripcount. 
+  <li> Transformations preserve info.dwType perameter &lt;CSC&gt; 
+  <li> Createfromhandle() bugfix for 32bitfield images &lt;JA&gt; 
+  <li> GetPixelColor bugfix when the coordinates are in the outside of the image 
+    &lt;Mpwolski&gt;</li>
+</ul>
+<b>Changes and major additions</b> 
+<ul>
+  <li> New CxFile class to read/write memory files and disk files. 
+  <li> Added support for Read/Write 32bpp TIFFs with apha channel. 
+  <li> New methods : Mix() &lt;Mpwolski&gt;, Destroy(), IsIndexed() 
+  <li> Read/Write support for Multipage TIFF &lt;Abe&gt; 
+  <li> Read/Write support for Animated GIF (gif89a), with comment, loops and disposal 
+    method 
+  <li> Added xOffset and yOffset in CxImage::info 
+  <li> Changed names : ReadFile -&gt; Load ; SaveFile -&gt; Save 
+  <li> LoadResource uses CxFile</li>
+</ul>
+<b>Project - Libraries - Demo application</b> 
+<ul>
+  <li> Updated BCMenu: version 3.03. 
+  <li> LibTiff : enabled alpha (tif_getimage.c;Ln:212), enabled ZIP_SUPPORT 
+  <li> Pane view function with "shift+Lbutton" 
+  <li> Updated LibTiff to 3.5.7 
+  <li> New URL download dialog; WebGrab class by Chris Maunder</li>
+</ul>
+<hr>
+<h3></h3>
+<h3>Version 3.21, 11 - Mar - 2002</h3>
+<b>Bugfixes</b> 
+<ul>
+  <li> Fixed memory leakage in CxImagePNG::Encode() &lt;Rob Cass&gt;. 
+  <li> Fixed CxImageICO::Decode() problem with 16 colors icons &lt;Rogier&gt;.</li>
+</ul>
+<b>Changes and major additions</b> 
+<ul>
+  <li> CxImageICO reads/saves icons with transparent pixels. 
+  <li> CxImageTIF::Decode() now takes care of the orientation tag. 
+  <li> New RotateLeft(), RotateRight(), Rotate180() functions &lt;MKVY&gt;. 
+  <li> Faster Draw() implementation for images with transparency &lt;DJT&gt;.</li>
+</ul>
+<b>Project - Libraries - Demo application</b> 
+<ul>
+  <li> Updated BCMenu: version 3.01. 
+  <li> Replaced CreateThread() with _beginthread() to avoid small memory leaks.</li>
+</ul>
+<hr>
+<h3></h3>
+<h3>Version 3.09, 21 - Feb - 2002</h3>
+<b>Bugfixes</b> 
+<ul>
+  <li> Rotation() and Resample() handle the alpha channel. &lt;MTA&gt; 
+  <li> CxImagePNG: Encode() merges the transparent color with the alpha channel. 
+  <li> Fixed exceptions and leaks in Draw() &lt;RG&gt; 
+  <li> CxImageBMP now reads 32 bpp BITFIELD images. 
+  <li> Decode() correctly loads multipage ICO and TIF files. &lt;REC&gt;</li>
+</ul>
+<hr>
+<h3></h3>
+<h3>Version 3.02, 24 - Jan - 2002</h3>
+<b>Bugfixes</b> 
+<ul>
+  <li> CxImagePNG: fixed allocation bug in Decode() 
+  <li> CxImagePNG: cast error saving 8 bpp images.</li>
+</ul>
+<hr>
+<h3>Version 3.00, 20 - Jan - 2002</h3>
+<b>Bugfixes</b> 
+<ul>
+  <li> fixed HSLtoRGB() conversion &lt;F. Livraghi &gt; 
+  <li> CxImagePNG: fixed deallocation bug in Encode() &lt;Ranger&gt; 
+  <li> CxImagePNG: now reads 2 bpp images. 
+  <li> CxImageBMP: fixed DPI rounding error &lt;DIH&gt; 
+  <li> CreateFromHANDLE now handles the DPI information &lt;Jeff Hu&gt;<br>
+  </li>
+</ul>
+<b>Changes and major additions</b> 
+<ul>
+  <li> New pixel ALPHA channel, overall opacity. (14 dedicated functions) 
+  <li> New Alpha Palette. (5 dedicated functions) 
+  <li> New Region Selection (rectangle, ellipse, polygon - 11 dedicated functions). 
+  <li> New "copypixels", "copyselection", "copyalpha" options for constructor/Copy() 
+  <li> New "errordiffusion" option for DecreasBPP(). 
+  <li> New Draw() implementation with support for alpha channel, alpha palette, 
+    opacity, transparency. 
+  <li> New PCX decoder CxImagePCX 
+  <li> New TGA decoder/encoder CxImageTGA (with alpha channel) 
+  <li> High resolution shrink for Resample() &lt;Henrik Stellmann&gt; 
+  <li> CxImagePNG now reads/saves the transparency information (palette and alpha 
+    channel) <br>
+  </li>
+</ul>
+<b>Project - Libraries - Demo application</b> 
+<ul>
+  <li> Updated PNG library: Libpng version 1.2.1 
+  <li> Free-hand selection with the left mouse button.<br>
+  </li>
+</ul>
+<hr>
+<h3>Version 2.00, 29 - Dec - 2001</h3>
+<b>Bugfixes</b> 
+<ul>
+  <li> fixed deadlock in GIF decoder 
+  <li> PNG decoder reads 16 bit grayscale images. 
+  <li> TIF decoder reads 4 bit grayscale images. 
+  <li> fixed bug in CreateFromHBITMAP() &lt;Wil Stark&gt; 
+  <li> Fixed PNG encoder bug, buffer allocation error with BW images.<br>
+  </li>
+</ul>
+<b>Changes and major additions</b> 
+<ul>
+  <li> MNG decoder handles the background information.<br>
+  <li> TIF encoder now uses COMPRESSION_JPEG for 24 bit images.<br>
+  <li> LoadResource(): added new parameter to work with dlls. &lt;Tuncer M. Ayaz&gt; 
+  <li> LoadResource() now works with network applications. &lt;Tuncer M. Ayaz&gt; 
+  <li> Changed CxImage() constructors, Copy() and Transfer() interface and implementation 
+    &lt;Kirk&gt; 
+  <li> Added CreateFromHANDLE() and CreateFromHBITMAP() in place of the old constructors. 
+  <li> Automatic file format recognition in ReadFile() &lt;Patrick Hoffmann&gt; 
+  <li> Faster Draw() implementation for transparent images. (Thanks to Paul Reynolds 
+    and Ron Gery) 
+  <li> New Get/SetJpegQuality() for JPEG and TIF encoders. 
+  <li> New Get/SetXDPI(), Get/SetYDPI() for BMP and TIF formats. 
+  <li> New Dither() function, with Floyd-Steinberg or Ordered-Dithering BW conversion 
+    (Thanks to Kenny Hoff and Steve McMahon) 
+  <li> New functions : Crop(), SplitRGB(), SplitYUV(), SplitHSL(). 
+  <li> New functions : Colorize(), Light(), Threshold(), Mean(), Filter(), Dilate(), 
+    Erode().<br>
+  </li>
+</ul>
+<b>Project - Libraries - Demo application</b> 
+<ul>
+  <li> Removed bad pixels from "Capture Window" &lt;Qiang&gt;<br>
+  <li> New menus: Blur, Soften, Edge, Sharpen, Emboss, Dilate, Erode, Threshold, 
+    Dither, ...<br>
+  </li>
+</ul>
+<hr>
+<H3>Version 1.25, 28 - Oct - 2001</H3>
+<b>Bugfixes</b> 
+<ul>
+  <li> Added support for 32 bit PNGs and 16 bit TIFs</li>
+</ul>
+<hr>
+<h3>Version 1.23, 15 - Oct - 2001</h3>
+<b>Bugfixes</b> 
+<ul>
+  <li> Fixed PNG reading interlaced and gray scale images. &lt;DP&gt; 
+  <li> Fixed PNG saving 1 &amp; 4 bit images. &lt;DP&gt; 
+  <li> Fixed GIF saving and reading 1 &amp; 4 bit images. &lt;DP&gt; 
+  <li> Added safe checks in CImageIterator::SetRow() &lt;DP&gt; and in CxImagePNG::Decode() 
+    &lt;yeonjun jeong&gt;</li>
+</ul>
+<b>Changes and major additions</b><br>
+<ul>
+  <li> + Basic MNG encoder/decoder. 
+  <li> + Get/SetTransIndex(): on the fly transparency for indexed images (1, 4, 
+    8 bpp) &lt;TRK&gt; 
+  <li> + Get/SetTransColor(): on the fly transparency for RGB images (24 bpp) 
+    &lt;DP&gt; 
+  <li> + GIF encoder saves transparency information &lt;TRK&gt; 
+  <li> + PNG encoder saves transparency information &lt;DP&gt; 
+  <li> + SwapIndex() function for palette operations with transparency &lt;DP&gt; 
+  <li> + Resample() function &lt;Steve McMahon&gt; 
+  <li> + Get/SetEscape() to quit the slow loops. 
+  <li> + Get/SetProgress() to monitor the slow loops. 
+  <li> + SetStdPalette() to create a standard palette for 256 and 16 colors images. 
+  <li> + DecreaseBpp()/IncreaseBpp().<br>
+  </li>
+</ul>
+<b>Project - Libraries - Demo application</b> 
+<ul>
+  <li> Transparency handling menu &lt;DP&gt; 
+  <li> Fixed cast problem in Jcapimin.c, comparing JPEG_LIB_VERSION &lt;F. Livraghi&gt; 
+  <li> Resample, DecreaseBpp, IncreaseBpp menu &lt;DP&gt; 
+  <li> Stopwatch and ProgressBar in the status bar &lt;DP&gt; 
+  <li> Image computations are in a separate thread &lt;DP&gt; 
+  <li> Added CQuantizer class to implement the color reduction with the octree 
+    algorithm. &lt;Jeff Prosise&gt;</li>
+</ul>
+<hr>
+<h3>Version 1.10, 23 - Sep - 2001</h3>
+<b>Bugfixes</b> 
+<ul>
+  <li> Better exception handling in CxImagePNG &amp; CxImageBMP. &lt;DP&gt; 
+  <li> Gdi resource leakage and memory corruption in CxImage(HBITMAP). &lt;TRK&gt; 
+  <li> Rotate() didn't handle transparency. &lt;TRK&gt; 
+  <li> Fixed TIFF saving 1 &amp; 4 bit images. &lt;DP&gt;</li>
+</ul>
+<b>Changes and major additions</b><br>
+<ul>
+  <li> Extended LoadResource() to TIFF format. &lt;DP&gt; 
+  <li> - Removed info.szFileName : never used, and it's not an image related information. 
+    &lt;TRK&gt;<br>
+  <li> Reduced fopen/fclose clutter. &lt;TRK&gt;&lt;DP&gt; 
+  <li> Extended constructors with "imagetype" <i>(for future use)</i>. &lt;TRK&gt; 
+  <li> Replaced GetPaletteIndex() with GetPaletteColor() : the function returns 
+    a color, not an index. 
+  <li> Replaced GetFileType() with GetType() : to avoid confusion with the file 
+    extension. 
+  <li> GrayScale() now always create an 8 bit gray scale image. &lt;DP&gt; 
+  <li> + Implemented transparency in CxImage::Draw(). Now Draw() can also stretch 
+    the image, so Stretch() became obsolete. &lt;TRK&gt; 
+  <li> + CxImage(FILE * stream) constructor. &lt;TRK&gt; 
+  <li> + JPEG read CMYK format (adobe). &lt;DP&gt; 
+  <li> + Transparency for PNG. &lt;DP&gt; 
+  <li> + Enabled reading of RLE-compressed &lt;TRK&gt; and 16 &amp; 32 bit BITFIELD 
+    &lt;DP&gt; bitmaps. 
+  <li> + Unicode version for ReadFile/SaveFile. 
+  <li> + MakeBitmap() function &lt;Kurt Diesch&gt; 
+  <li> + JPEG can save 8 bit GrayScale images. &lt;DP&gt;<br>
+  </li>
+</ul>
+<b>Project - Libraries - Demo application</b> 
+<ul>
+  <li> Removed MFC-dependency (#include &lt;afxwin.h&gt;) &lt;TRK&gt; 
+  <li> Changed jconfig.h with HAVE_BOOLEAN stuff &lt;TRK&gt; 
+  <li> + new tiff_c.c module in theTIFF library, for straight C Runtime Library 
+    file functions. &lt;TRK&gt; 
+  <li> Demo : now using Project|Dependencies. 
+  <li> + Zoomin/Zoomout menu &lt;DP&gt; 
+  <li> + Capture window menu &lt;DP&gt; 
+  <li> + Acquire from TWAIN source &lt;DP&gt;</li>
+</ul>
+<hr>
+<h3>Version 1.01, 27 - Aug - 2001</h3>
+<b>Bugfixes</b> 
+<UL>
+  <LI> PNG Read/Save exceptions with non dword aligned scan lines. 
+  <LI> Mirror() doesn't handle the last column. &lt;Brian R. Zielinski&gt;</LI>
+</UL>
+<b>Changes and major additions</b> 
+<UL>
+  <LI> + GrayScale(). &lt;TRK&gt;<br>
+  <LI> + Rotate().<br>
+  <LI> + Read Multiple Image for TIFFs &amp; ICONs<br>
+  <LI> + LoadResource(). &lt;DP&gt; 
+  <LI> Changed GIF read implementation. Added animation handling. &lt;TRK&gt;<br>
+  </LI>
+</UL>
+<b>Project - Libraries - Demo application</b> 
+<ul>
+  <li> + Demo: added hatched background and Print functionality. &lt;TRK&gt; 
+  <li> + Undo/Redo menu. &lt;DP&gt;</li>
+</ul>
+<hr>
+<h3>Version 1.00, 07 - Aug - 2001</h3>
+<hr>
+<h3>PEOPLE:</h3>
+&lt;DP&gt; : Davide Pizzolato (info(at)xdp(dot)it)<br>
+&lt;TRK&gt; : Troels Knakkergaard (TRK(at)lyngsoe(dot)com)<br>
+&lt;Brian R(dot) Zielinski&gt; : Brian R(dot) Zielinski (brianz(at)digital(dot)risserimaging(dot)com)<br>
+&lt;Kurt Diesch&gt; : Kurt Diesch (kdiesch(at)enjoysoft(dot)com)<br>
+&lt;F. Livraghi &gt; : Francesco Livraghi (info(at)ceccoing(dot)it)<br>
+&lt;Steve McMahon&gt; : Steve McMahon (steve(at)dogma(dot)demon(dot)co(dot)uk)<br>
+&lt;Tuncer M. Ayaz&gt; : Tuncer M. Ayaz (tuncer(dot)ayaz(at)gmx(dot)de)<br>
+&lt;Kirk&gt; : Kirk Korver (kirk(at)the-right-stuff(dot)com)<br>
+&lt;Qiang&gt; : Qiang Liu (liuq(at)ee(dot)washington(dot)edu)<br>
+&lt;Patrick Hoffmann&gt; : Patrick Hoffmann (hoffmann(at)novacom(dot)net)<br>
+&lt;Wil Stark&gt; : Wil Stark (wil_stark(at)agilent(dot)com)<br>
+&lt;DIH&gt; : Dominic I. Holmes (DIH(dot)Junk(at)DigitalFormation(dot)com)<br>
+&lt;Henrik Stellmann&gt; : Henrik Stellmann (henrik(dot)stellmann(at)volleynet(dot)de)<br>
+&lt;Ranger&gt; : Ranger (RangerMail(at)mail(dot)ru)<br>
+&lt;Jeff Hu&gt; : Jeff Hu (v120160(at)yahoo(dot)com(dot)tw)<br>
+&lt;MTA&gt; : Matthew Armstrong (ArmstroM(at)faro(dot)com)<br>
+&lt;REC&gt; : Robert Edward Caldecott (rec(at)kerridge(dot)com)<br>
+&lt;RG&gt; : Roberto Guerzoni (r(dot)guerzoni(at)infomotion(dot)mo(dot)it)<br>
+&lt;MKVY&gt; : Murali Krishna V Yelchuru (muralikrishnayv(at)yahoo(dot)com)<br>
+&lt;Rogier&gt; Rogier Reedijk (xs4free(at)wish(dot)net)<br>
+&lt;Rob Cass&gt; : Rob Cass (rcass(at)compusult(dot)nf(dot)ca)<br>
+&lt;DJT&gt; : Dave Turnbull (Camel) (dave(at)camel(dot)co(dot)uk)<br>
+&lt;JA&gt; : Jörgen Alfredsson (jorgen(dot)alfredsson(at)kamera(dot)com)<br>
+&lt;Mpwolski&gt; : Mwolski (mpwolski(at)hotmail(dot)com)<br>
+&lt;CSC&gt; : Chris Shearer Cooper (cscooper(at)frii(dot)com)<br>
+&lt;Abe&gt; : Abe (God(dot)bless(at)marihuana(dot)com)<br>
+&lt;Ole Lange&gt; : Ole Lange (ol(at)ams-soft(dot)de)<br>
+&lt;vho&gt; : Volker Horch (vhorch(at)gmx(dot)de)<br>
+&lt;Kwyshell&gt; : Kwyshell (kwyshell(at)yahoo(dot)com(dot)tw)<br>
+&lt;Flanders&gt; : Flanders (flanders(at)2moors(dot)freeserve(dot)co(dot)uk)<br>
+&lt;Anatoly Ivasyuk&gt; : Anatoly Ivasyuk (aivasyuk(at)dtlink(dot)com)<br>
+&lt;T.Peck&gt; : T. Peck (tpeck(at)roundwave(dot)com)<br>
+&lt;Koray Geçici&gt; : Koray Geçici (kgecici(at)tam(dot)net(dot)tr)<br>
+&lt;Olivier Ansquer&gt; : Olivier Ansquer (olivier(dot)ansquer(at)freesbee(dot)fr)<br>
+&lt;elrod&gt; : Mark B. Elrod (elrod(at)bluedoor(dot)com)<br>
+&lt;Cui Ying Jie&gt; : Cui Ying Jie (cuiyj(at)163(dot)net)<br>
+&lt;dock&gt; : dock (dock(at)cmmail(dot)com)<br>
+&lt;handong&gt; : handong (jhandong(at)netian(dot)com)<br>
+&lt;candan&gt; : candan (candan(at)mail(dot)pagic(dot)net)<br>
+&lt;RJ&gt; : Roger Jane (roger(dot)jane(at)microtest(dot)co(dot)uk)<br>
+&lt;Robert Abram&gt; : Robert Abram (robert(dot)abram(at)prgx(dot)com)<br>
+&lt;dave&gt; : dave(at)posortho(dot)com)<br>
+&lt;CoreyRLucier&gt; : (CoreyRLucier(at)aol(dot)com)<br>
+&lt;Carsten Leue&gt; : (carsten(dot)leue(at)iwr(dot)uni-heidelberg(dot)de)<br>
+&lt;jh&gt; : jh (jhprivate(at)fescomail(dot)net)<br>
+&lt;lioucr&gt; : lioucr (lioucr(at)yahoo(dot)ca)<br>
+&lt;TomPeakz&gt; : TomPeakz (topman(at)vip(dot)sina(dot)com)<br>
+&lt;arnold wittenberg&gt; : Arnold Wittenberg (a(dot)wittenberg(at)eramco(dot)nl)<BR>
+&lt;H. Muelner&gt; : Helmut Muelner (hmuelner(at)iicm(dot)edu)<BR>
+&lt;jurgene&gt; : Jürgen Eidt (jurgene(at)hotmail(dot)com)<BR>
+&lt;W. Morrison&gt; : William Morrison (Bill(at)rosinante(dot)com)<BR>
+&lt;jaslet&gt; : Bertrand Jaslet (jaslet(at)hotmail(dot)com)<br>
+&lt;corwinkrisw&gt; : corwinkrisw (corwinkrisw(at)yahoo(dot)com)<br>
+&lt;gazzivan&gt; : gazzivan (gazzivan(at)libero(dot)it)<br>
+&lt;Stroupe David R&gt; : Stroupe David R (x5011) (David(dot)Stroupe(at)siemens(dot)com)<br>
+&lt;Frank Sowinski&gt; : Frank Sowinski (Frank(dot)Sowinski(at)fujitsu-siemens(dot)com)<br>
+&lt;JDL&gt; : Jordan DeLozier (support(at)triosade(dot)com)<br>
+&lt;Wassily Gibin&gt; : Wassily Gibin (vasily(at)gibin(dot)net)<br>
+&lt;osamu44&gt; : osamu44 (osamu44(at)juno(dot)ocn(dot)ne(dot)jp)<br>
+&lt;Sims&gt; : Sims (siminfrance(at)hotmail(dot)com)<br>
+&lt;Vitaly Titov&gt; : Vitaly Titov (vitalyt(at)scanvecamiable(dot)com)<br>
+&lt;Branko Dreven&#154;ek&gt; : Branko Dreven&#154;ek (branko(dot)drevensek(at)uni-mb(dot)si)<br>
+&lt;Henry P.&gt;: Henry P. (hdpham(at)allersoft(dot)com)<br>
+&lt;Kristian Kratzenstein&gt; : Kristian Kratzenstein (kristian(at)kratzenstein(dot)dyndns(dot)org)<br>
+&lt;Basara&gt; : Alexey Silinov (basara(at)in-cubus(dot)com)<br>
+&lt;ralphw&gt; : Ralph Walden (ralphw(at)exmsft(dot)com)<br>
+&lt;Zahi Kapeluto&gt; : Zahi Kapeluto (zahi(at)locationet(dot)com)<br>
+&lt;Colin Urquhart&gt; : Colin Urquhart (colin(dot)urquhart(at)primetv(dot)com(dot)au)<br>
+&lt;oboolo&gt; : Ludovic Baillet (oboolo(at)baillet(dot)org)<br>
+&lt;yuandi&gt; : yuandi (yuandi(at)www(dot)ps2love(dot)com)<br>
+&lt;Schuberth&gt; : Sebastian Schuberth (s(dot)schuberth(at)tu-bs(dot)de)<br>
+&lt;Squidge&gt; : Squidge (paulc(at)ibiblio(dot)org)<br>
+&lt;sihun&gt; : sihun (shsung(at)mbc(dot)co(dot)kr)<br>
+&lt;H.C.Anderson&gt; : Howard C. Anderson (howard(dot)anderson(at)anadigm(dot)com)<br>
+&lt;chupeev&gt; : alexander chupeev (chupeev(at)tmn(dot)ru)<br>
+&lt;Lucian Ioan&gt; : Lucian Ioan (xtndd(at)yahoo(dot)com)<br>
+&lt;Chieh An Lu&gt; : Chieh An Lu (calu(at)interactiveedge(dot)com) <br>
+&lt;James Dickson&gt; : James Dickson (Jamie(at)jdnet(dot)co(dot)uk)<br>
+&lt;Richard Collins&gt; : Richard Collins (rtc(at)steel-connections(dot)com)<br>
+&lt;Igor Rosenberg&gt; : Igor Rosenberg (rosenberg(at)infotrust.sk)<br>
+&lt;DT&gt; : Diego Tartara (dtartara(at)hotmail(dot)com)<br>
+&lt;VATI&gt; : Varga Attila (attila_varga(at)freemail(dot)hu)<br>
+&lt;DPR&gt; : DPR (info(at)brutzler(dot)de)<br>
+&lt;Trifon&gt; : Trifon (trifon(dot)alekov(at)dotrix(dot)be)<br>
+&lt;Nick Holgate&gt; : Nick Holgate (nick(at)barhop(dot)co(dot)uk)<br>
+&lt;Kenneth Ballard&gt; : Kenneth Ballard (ken_ballard(at)hotmail(dot)com)<br>
+&lt;Thomas M. Boser&gt; : Thomas M. Boser (tom(dot)boser(at)olimllc(dot)com)<br>
+&lt;ignacio&gt; : Ignacio Alvarez (ignacio(at)xentient(dot)com)<br>
+&lt;Arkadiy Olovyannikov&gt; : Arkadiy Olovyannikov (ark(at)msun(dot)ru)<br>
+&lt;nipper&gt; : nipper (nipper(at)rpnet(dot)cz)<br>
+&lt;Hermann62&gt; : Hermann62 (hild(at)smi-software)<br>
+&lt;Michael Gandyra&gt; : Michael Gandyra (M(dot)Gandyra(at)steinbichler(dot)de&gt;<br>
+&lt;Tacho&gt; : Tacho (tacho_fortin(at)hotmail(dot)com )<br>
+<p> 
+<hr>
+<p align="right"><font size="2"><em>Updated 08. feb. 2004 00:00 by Davide Pizzolato 
+  - www.xdp.it</em></font></p>
+<!--webbot bot="Include" endspan i-checksum="2469" -->
+</body>
+</html>

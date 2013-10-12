@@ -1,0 +1,1599 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// Neutral resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_NEU)
+#ifdef _WIN32
+LANGUAGE LANG_NEUTRAL, SUBLANG_NEUTRAL
+#pragma code_page(1252)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDR_MAINFRAME           ICON    DISCARDABLE     "res\\demo.ico"
+IDR_DEMOTYPE            ICON    DISCARDABLE     "res\\demoDoc.ico"
+IDI_OK                  ICON    DISCARDABLE     "res\\ok.ico"
+IDI_CANC                ICON    DISCARDABLE     "res\\canc.ico"
+IDI_R                   ICON    DISCARDABLE     "res\\no1.ico"
+IDI_G                   ICON    DISCARDABLE     "res\\r1.ico"
+IDI_B                   ICON    DISCARDABLE     "res\\b1.ico"
+IDI_GRAY                ICON    DISCARDABLE     "res\\gray.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDR_MAINFRAME           BITMAP  MOVEABLE PURE   "res\\Toolbar.bmp"
+IDB_BITMAP1             BITMAP  DISCARDABLE     "res\\bg.BMP"
+IDR_TOOLBAR1            BITMAP  DISCARDABLE     "res\\toolbar1.bmp"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Toolbar
+//
+
+IDR_MAINFRAME TOOLBAR DISCARDABLE  16, 15
+BEGIN
+    BUTTON      ID_FILE_NEW
+    BUTTON      ID_FILE_OPEN
+    BUTTON      ID_FILE_SAVE
+    BUTTON      ID_FILE_PRINT
+    BUTTON      ID_FILE_ACQUIRE
+    SEPARATOR
+    BUTTON      ID_EDIT_CUT
+    BUTTON      ID_EDIT_COPY
+    BUTTON      ID_EDIT_PASTE
+    SEPARATOR
+    BUTTON      ID_EDIT_UNDO
+    BUTTON      ID_EDIT_REDO
+    SEPARATOR
+    BUTTON      ID_VIEW_ZOOMIN
+    BUTTON      ID_VIEW_NORMALVIEWING11
+    BUTTON      ID_VIEW_ZOOMOUT
+    SEPARATOR
+    BUTTON      ID_VIEW_TOOLS_MOVE
+    BUTTON      ID_VIEW_TOOLS_SELECT
+    BUTTON      ID_VIEW_TOOLS_ZOOM
+    BUTTON      ID_VIEW_TOOLS_TEXT
+    SEPARATOR
+    BUTTON      ID_VIEW_HISTOGRAM
+    BUTTON      ID_VIEW_PALETTE
+    BUTTON      ID_CXIMAGE_OPTIONS
+    SEPARATOR
+    BUTTON      ID_APP_ABOUT
+END
+
+IDR_TOOLBAR1 TOOLBAR DISCARDABLE  16, 15
+BEGIN
+    BUTTON      ID_VIEW_NORMALVIEWING11
+    BUTTON      ID_CXIMAGE_OPTIONS
+    BUTTON      ID_APP_EXIT
+    BUTTON      ID_VIEW_ZOOMIN
+    BUTTON      ID_VIEW_ZOOMOUT
+    BUTTON      ID_CXIMAGE_ROTATE
+    BUTTON      ID_CXIMAGE_FLIP
+    BUTTON      ID_CXIMAGE_MIRROR
+    BUTTON      ID_CXIMAGE_RESAMPLE
+    BUTTON      ID_CXIMAGE_CROP
+    BUTTON      ID_CXIMAGE_GRAYSCALE
+    BUTTON      ID_CXIMAGE_NEGATIVE
+    BUTTON      ID_CXIMAGE_DECREASEBPP
+    BUTTON      ID_CXIMAGE_INCREASEBPP
+    BUTTON      ID_CXIMAGE_SPLITCHANNELS
+    BUTTON      ID_BUTTON32842
+    BUTTON      ID_CXIMAGE_SETTRANSPARENCY
+    BUTTON      ID_CXIMAGE_REMOVETRANSPARENCY
+    BUTTON      ID_VIEW_PALETTE
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Menu
+//
+
+IDR_MAINFRAME MENU PRELOAD DISCARDABLE 
+BEGIN
+    POPUP "&File"
+    BEGIN
+        MENUITEM "&New\tCtrl+N",                ID_FILE_NEW
+        MENUITEM "&Open...\tCtrl+O",            ID_FILE_OPEN
+        MENUITEM SEPARATOR
+        MENUITEM "Select Source...",            ID_FILE_SELECTSOURCE
+        MENUITEM "Acquire...",                  ID_FILE_ACQUIRE
+        MENUITEM SEPARATOR
+        MENUITEM "Capture...",                  ID_FILE_CAPTURE
+        MENUITEM SEPARATOR
+        MENUITEM "P&rint Setup...",             ID_FILE_PRINT_SETUP
+        MENUITEM SEPARATOR
+        MENUITEM "Recent File",                 ID_FILE_MRU_FILE1, GRAYED
+        MENUITEM SEPARATOR
+        MENUITEM "E&xit",                       ID_APP_EXIT
+    END
+    POPUP "&Edit"
+    BEGIN
+        MENUITEM "&Paste\tCtrl+V",              ID_EDIT_PASTE
+    END
+    POPUP "&View"
+    BEGIN
+        MENUITEM "&Toolbar",                    ID_VIEW_TOOLBAR
+        MENUITEM "&Status Bar",                 ID_VIEW_STATUS_BAR
+        MENUITEM "Histogram",                   ID_VIEW_HISTOGRAM
+        POPUP "Menu Style"
+        BEGIN
+            MENUITEM "Default",                     ID_VIEW_MENUSTYLE_NORMAL
+            MENUITEM "XP",                          ID_VIEW_MENUSTYLE_XP
+        END
+        MENUITEM SEPARATOR
+        MENUITEM "Full Screen",                 ID_VIEW_FULLSCREEN
+    END
+    POPUP "CxImage"
+    BEGIN
+        MENUITEM "Load Bitmap Resource",        ID_IMAGE_FROM_BITMAP
+        MENUITEM "Load Jpeg Resource",          ID_CXIMAGE_LOADJPEGRESOURCE
+        MENUITEM "Load Icon Resource",          ID_CXIMAGE_LOADICONRESOURCE
+        MENUITEM "Load Png Resource",           ID_CXIMAGE_LOADPNGRESOURCE
+        MENUITEM "Load Gif Resource",           ID_CXIMAGE_LOADGIFRESOURCE
+        MENUITEM "Load Tif Resource",           ID_CXIMAGE_LOADTIFRESOURCE
+        MENUITEM SEPARATOR
+        MENUITEM "Demo Save MultiPageTIFF",     ID_CXIMAGE_DEMOSAVEMULTIPAGETIFF
+
+        MENUITEM "Demo Save Animated GIF",      ID_CXIMAGE_DEMOSAVEANIMATEDGIF
+
+        MENUITEM "Download from URL ...",       ID_CXIMAGE_DOWNLOADFROMURL
+        MENUITEM "Demo CreateFromArray",        ID_CXIMAGE_DEMOCREATEFROMARRAY
+
+    END
+    POPUP "&Help"
+    BEGIN
+        MENUITEM "&About demo...",              ID_APP_ABOUT
+    END
+END
+
+IDR_DEMOTYPE MENU PRELOAD DISCARDABLE 
+BEGIN
+    POPUP "&File"
+    BEGIN
+        MENUITEM "&New\tCtrl+N",                ID_FILE_NEW
+        MENUITEM "&Open...\tCtrl+O",            ID_FILE_OPEN
+        MENUITEM "&Close",                      ID_FILE_CLOSE
+        MENUITEM "&Save\tCtrl+S",               ID_FILE_SAVE
+        MENUITEM "Save &As...",                 ID_FILE_SAVE_AS
+        MENUITEM SEPARATOR
+        MENUITEM "Select Source...",            ID_FILE_SELECTSOURCE
+        MENUITEM "Acquire...",                  ID_FILE_ACQUIRE
+        MENUITEM SEPARATOR
+        MENUITEM "Capture...",                  ID_FILE_CAPTURE
+        MENUITEM SEPARATOR
+        MENUITEM "&Print...\tCtrl+P",           ID_FILE_PRINT
+        MENUITEM "Print Pre&view",              ID_FILE_PRINT_PREVIEW
+        MENUITEM "P&rint Setup...",             ID_FILE_PRINT_SETUP
+        MENUITEM SEPARATOR
+        MENUITEM "Recent File",                 ID_FILE_MRU_FILE1, GRAYED
+        MENUITEM SEPARATOR
+        MENUITEM "E&xit",                       ID_APP_EXIT
+    END
+    POPUP "&Edit"
+    BEGIN
+        MENUITEM "&Undo\tCtrl+Z",               ID_EDIT_UNDO
+        MENUITEM "Redo\tCtrl+Y",                ID_EDIT_REDO
+        MENUITEM SEPARATOR
+        MENUITEM "Cu&t\tCtrl+X",                ID_EDIT_CUT
+        MENUITEM "&Copy\tCtrl+C",               ID_EDIT_COPY
+        MENUITEM "&Paste\tCtrl+V",              ID_EDIT_PASTE
+    END
+    POPUP "&View"
+    BEGIN
+        MENUITEM "&Toolbar",                    ID_VIEW_TOOLBAR
+        MENUITEM "&Status Bar",                 ID_VIEW_STATUS_BAR
+        MENUITEM "Histogram",                   ID_VIEW_HISTOGRAM
+        MENUITEM "Palette",                     ID_VIEW_PALETTE
+        POPUP "Tools"
+        BEGIN
+            MENUITEM "Move",                        ID_VIEW_TOOLS_MOVE
+            MENUITEM "Select",                      ID_VIEW_TOOLS_SELECT
+            MENUITEM "Zoom",                        ID_VIEW_TOOLS_ZOOM
+            MENUITEM "Text",                        ID_VIEW_TOOLS_TEXT
+        END
+        POPUP "Menu Style"
+        BEGIN
+            MENUITEM "Default",                     ID_VIEW_MENUSTYLE_NORMAL
+            MENUITEM "XP",                          ID_VIEW_MENUSTYLE_XP
+        END
+        MENUITEM SEPARATOR
+        MENUITEM "Str&etch mode",               ID_STRETCH_MODE
+        MENUITEM "Full Screen",                 ID_VIEW_FULLSCREEN
+        MENUITEM SEPARATOR
+        MENUITEM "Zoom In\t+",                  ID_VIEW_ZOOMIN
+        MENUITEM "Zoom Out\t-",                 ID_VIEW_ZOOMOUT
+        MENUITEM "Normal Viewing (1:1)\t/",     ID_VIEW_NORMALVIEWING11
+    END
+    POPUP "CxImage"
+    BEGIN
+        POPUP "Resources"
+        BEGIN
+            MENUITEM "Load Bitmap Resource",        ID_IMAGE_FROM_BITMAP
+            MENUITEM "Load Jpeg Resource",          ID_CXIMAGE_LOADJPEGRESOURCE
+
+            MENUITEM "Load Icon Resource",          ID_CXIMAGE_LOADICONRESOURCE
+
+            MENUITEM "Load Png Resource",           ID_CXIMAGE_LOADPNGRESOURCE
+
+            MENUITEM "Load Gif Resource",           ID_CXIMAGE_LOADGIFRESOURCE
+
+            MENUITEM "Load Tif Resource",           ID_CXIMAGE_LOADTIFRESOURCE
+
+        END
+        MENUITEM SEPARATOR
+        POPUP "Demo"
+        BEGIN
+            MENUITEM "&Ellipse transform",          ID_TRANSFORM_ELLIPSE
+            MENUITEM "Save MultiPageTIFF",          ID_CXIMAGE_DEMOSAVEMULTIPAGETIFF
+
+            MENUITEM "Save Animated GIF",           ID_CXIMAGE_DEMOSAVEANIMATEDGIF
+
+            MENUITEM "Download from URL ...",       ID_CXIMAGE_DOWNLOADFROMURL
+
+            MENUITEM "Demo CreateFromArray",        ID_CXIMAGE_DEMOCREATEFROMARRAY
+
+        END
+        MENUITEM SEPARATOR
+        MENUITEM "Mirror",                      ID_CXIMAGE_MIRROR
+        MENUITEM "Flip",                        ID_CXIMAGE_FLIP
+        MENUITEM "Negative",                    ID_CXIMAGE_NEGATIVE
+        MENUITEM SEPARATOR
+        MENUITEM "Rotate Left",                 ID_CXIMAGE_ROTATEL
+        MENUITEM "Rotate Right",                ID_CXIMAGE_ROTATER
+        MENUITEM "Rotate...",                   ID_CXIMAGE_ROTATE
+        MENUITEM "Resample...",                 ID_CXIMAGE_RESAMPLE
+        MENUITEM "Crop",                        ID_CXIMAGE_CROP
+        MENUITEM SEPARATOR
+        MENUITEM "Set Transparency... (click)", ID_CXIMAGE_SETTRANSPARENCY
+        MENUITEM "Remove Transparency",         ID_CXIMAGE_REMOVETRANSPARENCY
+
+        POPUP "Alpha Channel"
+        BEGIN
+            MENUITEM "Opacity...",                  ID_CXIMAGE_OPACITY
+            MENUITEM "Remove",                      ID_CXIMAGE_REMOVEALPHACHANNEL
+
+            MENUITEM "Split",                       ID_CXIMAGE_ALPHACHANNEL_SPLIT
+
+            MENUITEM "Strip",                       ID_CXIMAGE_ALPHASTRIP
+            MENUITEM "Invert",                      ID_CXIMAGE_INVETALPHA
+            MENUITEM "Toggle Alpha Palette ",       ID_CXIMAGE_ALPHAPALETTETOGGLE
+
+            MENUITEM "Create from lightness",       ID_CXIMAGE_ALPHACREATE
+        END
+        MENUITEM SEPARATOR
+        MENUITEM "Gray Scale",                  ID_CXIMAGE_GRAYSCALE
+        MENUITEM "Dither...",                   ID_CXIMAGE_DITHER
+        MENUITEM "Decrease Bpp...",             ID_CXIMAGE_DECREASEBPP
+        MENUITEM "Increase Bpp...",             ID_CXIMAGE_INCREASEBPP
+        POPUP "Histogram"
+        BEGIN
+            MENUITEM "Stretch",                     ID_CXIMAGE_HISTOGRAM_STRETCH
+
+            MENUITEM "Stretch1",                    ID_CXIMAGE_HISTOGRAM_STRETCH1
+
+            MENUITEM "Stretch2",                    ID_CXIMAGE_HISTOGRAM_STRETCH2
+
+            MENUITEM SEPARATOR
+            MENUITEM "Equalize",                    ID_CXIMAGE_HISTOGRAM_EQUALIZE
+
+            MENUITEM "Normalize",                   ID_CXIMAGE_HISTOGRAM_NORMALIZE
+
+            MENUITEM SEPARATOR
+            MENUITEM "Log",                         ID_CXIMAGE_HISTOGRAM_LOG
+            MENUITEM "Root",                        ID_CXIMAGE_HISTOGRAM_ROOT
+
+        END
+        MENUITEM SEPARATOR
+        MENUITEM "Options...",                  ID_CXIMAGE_OPTIONS
+    END
+    POPUP "Filters"
+    BEGIN
+        MENUITEM "Threshold...",                ID_CXIMAGE_THRESHOLD
+        MENUITEM "Colorize...",                 ID_CXIMAGE_COLORIZE
+        MENUITEM "Gamma...",                    ID_CXIMAGE_GAMMA
+        MENUITEM SEPARATOR
+        MENUITEM "Lighten",                     ID_CXIMAGE_LIGHTEN
+        MENUITEM "Darken",                      ID_CXIMAGE_DARKEN
+        MENUITEM "More Contrast",               ID_CXIMAGE_CONTRAST
+        MENUITEM "Less Contrast",               ID_CXIMAGE_LESSCONTRAST
+        MENUITEM SEPARATOR
+        MENUITEM "Add Noise",                   ID_CXIMAGE_ADDNOISE
+        MENUITEM "Median",                      ID_CXIMAGE_MEDIAN
+        MENUITEM "Erode",                       ID_CXIMAGE_ERODE
+        MENUITEM "Dilate",                      ID_CXIMAGE_DILATE
+        MENUITEM "Contour",                     ID_CXIMAGE_CONTOUR
+        MENUITEM "Jitter",                      ID_CXIMAGE_JITTER
+        MENUITEM SEPARATOR
+        POPUP "Linear"
+        BEGIN
+            MENUITEM "Blur",                        ID_CXIMAGE_BLUR
+            MENUITEM "Soften",                      ID_CXIMAGE_SOFTEN
+            MENUITEM "Gaussian 3x3",                ID_CXIMAGE_GAUSSIAN3X3
+            MENUITEM "Gaussian 5x5",                ID_CXIMAGE_GAUSSIAN5X5
+            MENUITEM "Sharpen",                     ID_CXIMAGE_SHARPEN
+            MENUITEM "Edge",                        ID_CXIMAGE_EDGE
+            MENUITEM "Emboss",                      ID_CXIMAGE_EMBOSS
+        END
+        POPUP "CircleTransform "
+        BEGIN
+            MENUITEM "Pinch",                       ID_CXIMAGE_CIRCLETRANSFORM_PINCH
+
+            MENUITEM "Punch",                       ID_CXIMAGE_CIRCLETRANSFORM_PUNCH
+
+            MENUITEM "Twirl",                       ID_CXIMAGE_CIRCLETRANSFORM_SWIRL
+
+            MENUITEM "Cylinder",                    ID_CXIMAGE_CIRCLETRANSFORM_CYLINDER
+
+            MENUITEM "Bathroom",                    ID_CXIMAGE_CIRCLETRANSFORM_BATHROOM
+
+        END
+        MENUITEM SEPARATOR
+        MENUITEM "Pseudo Colors",               ID_CXIMAGE_PSEUDOCOLORS
+        POPUP "Split"
+        BEGIN
+            MENUITEM "Split to RGB",                ID_CXIMAGE_SPLITRGB
+            MENUITEM "Split to HSL",                ID_CXIMAGE_SPLITHSL
+            MENUITEM "Split to YUV",                ID_CXIMAGE_SPLITYUV
+            MENUITEM "Split to YIQ",                ID_CXIMAGE_SPLITYIQ
+            MENUITEM "Split to XYZ",                ID_CXIMAGE_SPLITXYZ
+            MENUITEM "Split to CMYK",               ID_CXIMAGE_SPLITCMYK
+        END
+        MENUITEM "Combine ...",                 ID_CXIMAGE_COMBINE
+        MENUITEM "FFT...",                      ID_CXIMAGE_FFT
+        MENUITEM "Repair...",                   ID_CXIMAGE_REPAIR
+        MENUITEM "Mix ...",                     ID_FILTERS_MIX
+    END
+    POPUP "&Window"
+    BEGIN
+        MENUITEM "&New Window",                 ID_WINDOW_NEW
+        MENUITEM "&Cascade",                    ID_WINDOW_CASCADE
+        MENUITEM "&Tile",                       ID_WINDOW_TILE_HORZ
+        MENUITEM "&Arrange Icons",              ID_WINDOW_ARRANGE
+        MENUITEM SEPARATOR
+        MENUITEM "Close All",                   ID_WINDOW_CLOSEALL
+        MENUITEM SEPARATOR
+        MENUITEM "Duplicate\tCtrl+D",           ID_WINDOW_DUPLICATE
+    END
+    POPUP "&Help"
+    BEGIN
+        MENUITEM "&About demo...",              ID_APP_ABOUT
+    END
+END
+
+IDM_CXIMAGE1 MENU DISCARDABLE 
+BEGIN
+    POPUP "CxImage"
+    BEGIN
+        MENUITEM "&Undo\tCtrl+Z",               ID_EDIT_UNDO
+        MENUITEM "Redo\tCtrl+Y",                ID_EDIT_REDO
+        MENUITEM SEPARATOR
+        MENUITEM "&Copy\tCtrl+C",               ID_EDIT_COPY
+        MENUITEM "&Paste\tCtrl+V",              ID_EDIT_PASTE
+        MENUITEM SEPARATOR
+        MENUITEM "Mirror",                      ID_CXIMAGE_MIRROR
+        MENUITEM "Flip",                        ID_CXIMAGE_FLIP
+        MENUITEM "Negative",                    ID_CXIMAGE_NEGATIVE
+        POPUP "Filters"
+        BEGIN
+            MENUITEM "Threshold...",                ID_CXIMAGE_THRESHOLD
+            MENUITEM "Colorize...",                 ID_CXIMAGE_COLORIZE
+            MENUITEM "Gamma...",                    ID_CXIMAGE_GAMMA
+            MENUITEM SEPARATOR
+            MENUITEM "Lighten",                     ID_CXIMAGE_LIGHTEN
+            MENUITEM "Darken",                      ID_CXIMAGE_DARKEN
+            MENUITEM "More Contrast",               ID_CXIMAGE_CONTRAST
+            MENUITEM "Less Contrast",               ID_CXIMAGE_LESSCONTRAST
+            MENUITEM SEPARATOR
+            MENUITEM "Add Noise",                   ID_CXIMAGE_ADDNOISE
+            MENUITEM "Median",                      ID_CXIMAGE_MEDIAN
+            MENUITEM "Erode",                       ID_CXIMAGE_ERODE
+            MENUITEM "Dilate",                      ID_CXIMAGE_DILATE
+            MENUITEM "Contour",                     ID_CXIMAGE_CONTOUR
+            MENUITEM "Jitter",                      ID_CXIMAGE_JITTER
+            MENUITEM SEPARATOR
+            MENUITEM "Blur",                        ID_CXIMAGE_BLUR
+            MENUITEM "Soften",                      ID_CXIMAGE_SOFTEN
+            MENUITEM "Gaussian 3x3",                ID_CXIMAGE_GAUSSIAN3X3
+            MENUITEM "Gaussian 5x5",                ID_CXIMAGE_GAUSSIAN5X5
+            MENUITEM "Sharpen",                     ID_CXIMAGE_SHARPEN
+            MENUITEM "Edge",                        ID_CXIMAGE_EDGE
+            MENUITEM "Emboss",                      ID_CXIMAGE_EMBOSS
+            MENUITEM SEPARATOR
+            MENUITEM "Pseudo Colors",               ID_CXIMAGE_PSEUDOCOLORS
+            POPUP "Split"
+            BEGIN
+                MENUITEM "Split to RGB",                ID_CXIMAGE_SPLITRGB
+                MENUITEM "Split to HSL",                ID_CXIMAGE_SPLITHSL
+                MENUITEM "Split to YUV",                ID_CXIMAGE_SPLITYUV
+                MENUITEM "Split to YIQ",                ID_CXIMAGE_SPLITYIQ
+                MENUITEM "Split to XYZ",                ID_CXIMAGE_SPLITXYZ
+                MENUITEM "Split to CMYK",               ID_CXIMAGE_SPLITCMYK
+            END
+            MENUITEM "Combine...",                  ID_CXIMAGE_COMBINE
+            MENUITEM "FFT...",                      ID_CXIMAGE_FFT
+            MENUITEM "Repair...",                   ID_CXIMAGE_REPAIR
+            MENUITEM "Mix ...",                     ID_FILTERS_MIX
+        END
+        POPUP "CircleTransform "
+        BEGIN
+            MENUITEM "Pinch",                       ID_CXIMAGE_CIRCLETRANSFORM_PINCH
+
+            MENUITEM "Punch",                       ID_CXIMAGE_CIRCLETRANSFORM_PUNCH
+
+            MENUITEM "Twirl",                       ID_CXIMAGE_CIRCLETRANSFORM_SWIRL
+
+            MENUITEM "Cylinder",                    ID_CXIMAGE_CIRCLETRANSFORM_CYLINDER
+
+            MENUITEM "Bathroom",                    ID_CXIMAGE_CIRCLETRANSFORM_BATHROOM
+
+        END
+        MENUITEM SEPARATOR
+        MENUITEM "Rotate Left",                 ID_CXIMAGE_ROTATEL
+        MENUITEM "Rotate Right",                ID_CXIMAGE_ROTATER
+        MENUITEM "Rotate...",                   ID_CXIMAGE_ROTATE
+        MENUITEM "Resample...",                 ID_CXIMAGE_RESAMPLE
+        MENUITEM "Crop",                        ID_CXIMAGE_CROP
+        MENUITEM SEPARATOR
+        MENUITEM "Set Transparency... (click)", ID_CXIMAGE_SETTRANSPARENCY
+        MENUITEM "Remove Transparency",         ID_CXIMAGE_REMOVETRANSPARENCY
+
+        POPUP "Alpha Channel"
+        BEGIN
+            MENUITEM "Opacity...",                  ID_CXIMAGE_OPACITY
+            MENUITEM "Remove",                      ID_CXIMAGE_REMOVEALPHACHANNEL
+
+            MENUITEM "Split",                       ID_CXIMAGE_ALPHACHANNEL_SPLIT
+
+            MENUITEM "Strip",                       ID_CXIMAGE_ALPHASTRIP
+            MENUITEM "Invert",                      ID_CXIMAGE_INVETALPHA
+            MENUITEM "Toggle Alpha Palette ",       ID_CXIMAGE_ALPHAPALETTETOGGLE
+
+            MENUITEM "Create from lightness",       ID_CXIMAGE_ALPHACREATE
+        END
+        MENUITEM SEPARATOR
+        MENUITEM "Gray Scale",                  ID_CXIMAGE_GRAYSCALE
+        MENUITEM "Dither...",                   ID_CXIMAGE_DITHER
+        MENUITEM "Decrease Bpp...",             ID_CXIMAGE_DECREASEBPP
+        MENUITEM "Increase Bpp...",             ID_CXIMAGE_INCREASEBPP
+        POPUP "Histogram"
+        BEGIN
+            MENUITEM "Stretch",                     ID_CXIMAGE_HISTOGRAM_STRETCH
+
+            MENUITEM "Stretch1",                    ID_CXIMAGE_HISTOGRAM_STRETCH1
+
+            MENUITEM "Stretch2",                    ID_CXIMAGE_HISTOGRAM_STRETCH2
+
+            MENUITEM SEPARATOR
+            MENUITEM "Equalize",                    ID_CXIMAGE_HISTOGRAM_EQUALIZE
+
+            MENUITEM "Normalize",                   ID_CXIMAGE_HISTOGRAM_NORMALIZE
+
+            MENUITEM SEPARATOR
+            MENUITEM "Log",                         ID_CXIMAGE_HISTOGRAM_LOG
+            MENUITEM "Root",                        ID_CXIMAGE_HISTOGRAM_ROOT
+
+        END
+        MENUITEM SEPARATOR
+        MENUITEM "Options...",                  ID_CXIMAGE_OPTIONS
+    END
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Accelerator
+//
+
+IDR_MAINFRAME ACCELERATORS PRELOAD MOVEABLE PURE 
+BEGIN
+    "C",            ID_EDIT_COPY,           VIRTKEY, CONTROL, NOINVERT
+    "D",            ID_WINDOW_DUPLICATE,    VIRTKEY, CONTROL, NOINVERT
+    "N",            ID_FILE_NEW,            VIRTKEY, CONTROL, NOINVERT
+    "O",            ID_FILE_OPEN,           VIRTKEY, CONTROL, NOINVERT
+    "P",            ID_FILE_PRINT,          VIRTKEY, CONTROL, NOINVERT
+    "S",            ID_FILE_SAVE,           VIRTKEY, CONTROL, NOINVERT
+    "V",            ID_EDIT_PASTE,          VIRTKEY, CONTROL, NOINVERT
+    VK_ADD,         ID_VIEW_ZOOMIN,         VIRTKEY, NOINVERT
+    VK_BACK,        ID_EDIT_UNDO,           VIRTKEY, ALT, NOINVERT
+    VK_DELETE,      ID_EDIT_CUT,            VIRTKEY, SHIFT, NOINVERT
+    VK_DIVIDE,      ID_VIEW_NORMALVIEWING11, VIRTKEY, NOINVERT
+    VK_F6,          ID_NEXT_PANE,           VIRTKEY, NOINVERT
+    VK_F6,          ID_PREV_PANE,           VIRTKEY, SHIFT, NOINVERT
+    VK_INSERT,      ID_EDIT_COPY,           VIRTKEY, CONTROL, NOINVERT
+    VK_INSERT,      ID_EDIT_PASTE,          VIRTKEY, SHIFT, NOINVERT
+    VK_SUBTRACT,    ID_VIEW_ZOOMOUT,        VIRTKEY, NOINVERT
+    "X",            ID_EDIT_CUT,            VIRTKEY, CONTROL, NOINVERT
+    "Y",            ID_EDIT_REDO,           VIRTKEY, CONTROL, NOINVERT
+    "Z",            ID_EDIT_UNDO,           VIRTKEY, CONTROL, NOINVERT
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_ABOUTBOX DIALOGEX 0, 0, 245, 254
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "About demo"
+FONT 8, "MS Sans Serif"
+BEGIN
+    ICON            IDR_MAINFRAME,IDC_STATIC,7,7,20,20
+    LTEXT           "CImage Demo Version 1.0 © Julian Smart et al, 1997",
+                    IDC_STATIC,7,54,231,11,SS_NOPREFIX,WS_EX_STATICEDGE
+    DEFPUSHBUTTON   "OK",IDOK,188,7,50,16
+    CTEXT           "CxImage Demo Version 5.99a\n© Davide Pizzolato, 2001 - 2004\nwww.xdp.it",
+                    IDC_STATIC,38,7,143,28,SS_NOPREFIX,WS_EX_STATICEDGE
+    LTEXT           "CImage © Alejandro Aguilar Sierra, 1995 - 1998",
+                    IDC_STATIC,7,41,231,11,0,WS_EX_STATICEDGE
+    LTEXT           "BCMenu Version 3.033 © Brent Corkum, 2002",IDC_STATIC,7,
+                    106,231,11,0,WS_EX_STATICEDGE
+    LTEXT           "CQuantizer © Jeff Prosise, 1997",IDC_STATIC,7,67,231,11,
+                    0,WS_EX_STATICEDGE
+    LTEXT           "CTwain © Rajiv Ramachandran, 2000",IDC_STATIC,7,80,231,
+                    11,0,WS_EX_STATICEDGE
+    LTEXT           "CxTargetButton Version 1.00 © Davide Pizzolato, 2002",
+                    IDC_STATIC,7,93,231,11,0,WS_EX_STATICEDGE
+    LTEXT           "IJG JPEG library © Thomas G. Lane, 1994 - 1998",
+                    IDC_STATIC,7,119,231,11,0,WS_EX_STATICEDGE
+    LTEXT           "LibPNG version 1.2.5 © Glenn Randers-Pehrson, 1998 - 2003",
+                    IDC_STATIC,7,131,231,11,0,WS_EX_STATICEDGE
+    LTEXT           "LibTIFF version 3.5.7 © Sam Leffler, 1988 - 1997",
+                    IDC_STATIC,7,144,231,11,0,WS_EX_STATICEDGE
+    LTEXT           "GIF © CompuServe Incorporated",IDC_STATIC,7,157,231,11,
+                    0,WS_EX_STATICEDGE
+    LTEXT           "Gif-RLE © Hutchison Avenue Software Corporation, 1998",
+                    IDC_STATIC,7,170,231,11,0,WS_EX_STATICEDGE
+    LTEXT           "LIBMNG version 1.0.2 © Gerard Juyn, 2000 - 2001",
+                    IDC_STATIC,7,183,231,11,0,WS_EX_STATICEDGE
+    LTEXT           "LibJ2k © David Janssens, 2001 - 2002",IDC_STATIC,7,195,
+                    231,11,0,WS_EX_STATICEDGE
+    LTEXT           "LIBJBG © Markus Kuhn, 2002",IDC_STATIC,7,208,231,11,0,
+                    WS_EX_STATICEDGE
+    LTEXT           "JasPer ©  Image Power, UBC, Michael David Adams, 2001 - 2003 ",
+                    IDC_STATIC,7,220,231,11,0,WS_EX_STATICEDGE
+    LTEXT           "zlib version 1.2.1 © Jean-loup Gailly and Mark Adler, 1995 - 2003",
+                    IDC_STATIC,7,233,231,11,0,WS_EX_STATICEDGE
+END
+
+IDD_ROTATE DIALOG DISCARDABLE  0, 0, 143, 46
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Rotate"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,86,6,50,16
+    PUSHBUTTON      "Cancel",IDCANCEL,86,23,50,16
+    EDITTEXT        IDC_EDIT1,10,25,51,12,ES_AUTOHSCROLL
+    LTEXT           "Angle [degrees]",IDC_STATIC,10,10,50,8
+END
+
+IDD_CAPTURE DIALOG DISCARDABLE  0, 0, 297, 81
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Capture"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,5,58,50,16
+    PUSHBUTTON      "Cancel",IDCANCEL,60,58,50,16
+    LISTBOX         IDC_LIST1,5,5,285,45,LBS_SORT | LBS_NOINTEGRALHEIGHT | 
+                    WS_VSCROLL | WS_TABSTOP
+END
+
+IDD_RESAMPLE DIALOG DISCARDABLE  0, 0, 143, 71
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Resample"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,86,6,50,16
+    PUSHBUTTON      "Cancel",IDCANCEL,86,23,50,16
+    EDITTEXT        IDC_EDIT1,10,15,51,12,ES_AUTOHSCROLL
+    LTEXT           "Factor",IDC_STATIC,10,5,21,8
+    CONTROL         "Nearest Pixel",IDC_RADIO1,"Button",BS_AUTORADIOBUTTON | 
+                    WS_GROUP,7,32,57,10
+    CONTROL         "Bilinear",IDC_RADIO2,"Button",BS_AUTORADIOBUTTON,7,43,
+                    39,10
+    CONTROL         "Bicubic",IDC_RADIO3,"Button",BS_AUTORADIOBUTTON,7,54,39,
+                    10
+END
+
+IDD_DECBPP DIALOG DISCARDABLE  0, 0, 131, 106
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Decrease Bpp"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,74,7,50,16
+    PUSHBUTTON      "Cancel",IDCANCEL,74,24,50,16
+    CONTROL         "1",IDC_RADIO1,"Button",BS_AUTORADIOBUTTON | WS_GROUP,15,
+                    85,25,10
+    GROUPBOX        "Bpp",IDC_STATIC,7,70,118,30
+    CONTROL         "4",IDC_RADIO2,"Button",BS_AUTORADIOBUTTON,50,85,25,10
+    CONTROL         "8",IDC_RADIO3,"Button",BS_AUTORADIOBUTTON,85,85,25,10
+    GROUPBOX        "Palette",IDC_STATIC,7,5,63,35
+    CONTROL         "Standard",IDC_RADIO4,"Button",BS_AUTORADIOBUTTON | 
+                    WS_GROUP,15,15,45,10
+    CONTROL         "Optimized",IDC_RADIO5,"Button",BS_AUTORADIOBUTTON,15,25,
+                    45,10
+    CONTROL         " Error Diffusion",IDC_CHECK1,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,7,43,110,10
+    CONTROL         "Limit max colors:",IDC_CHECK2,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,7,55,67,10
+    EDITTEXT        IDC_EDIT1,87,54,22,12,ES_AUTOHSCROLL
+END
+
+IDD_INCBPP DIALOG DISCARDABLE  0, 0, 132, 71
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Increase Bpp"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,75,5,50,16
+    PUSHBUTTON      "Cancel",IDCANCEL,75,22,50,16
+    CONTROL         "4",IDC_RADIO1,"Button",BS_AUTORADIOBUTTON | WS_GROUP,15,
+                    20,25,10
+    GROUPBOX        "Bpp",-1,5,5,60,60
+    CONTROL         "8",IDC_RADIO2,"Button",BS_AUTORADIOBUTTON,15,35,25,10
+    CONTROL         "24",IDC_RADIO3,"Button",BS_AUTORADIOBUTTON,15,50,25,10
+END
+
+IDD_OPTIONS DIALOG DISCARDABLE  0, 0, 193, 156
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Options"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,136,7,50,16
+    PUSHBUTTON      "Cancel",IDCANCEL,136,23,50,16
+    LTEXT           "JPEG quality [0 ... 100]",IDC_STATIC,10,12,73,8
+    EDITTEXT        IDC_EDIT1,96,10,32,12,ES_AUTOHSCROLL
+    LTEXT           "X resolution [DPI]",IDC_STATIC,10,27,56,8
+    EDITTEXT        IDC_EDIT2,96,25,32,12,ES_AUTOHSCROLL
+    LTEXT           "Y resolution [DPI]",IDC_STATIC,10,42,56,8
+    EDITTEXT        IDC_EDIT3,96,40,32,12,ES_AUTOHSCROLL
+    GROUPBOX        "TIFF / GIF Encode Option",IDC_STATIC,7,57,121,92
+    CONTROL         "Default - TIF : auto, GIF : RLE",IDC_RADIO1,"Button",
+                    BS_AUTORADIOBUTTON | WS_GROUP,11,69,112,10
+    CONTROL         "none",IDC_RADIO2,"Button",BS_AUTORADIOBUTTON,11,80,32,
+                    10
+    CONTROL         "TIF : RLE, GIF : LZW",IDC_RADIO3,"Button",
+                    BS_AUTORADIOBUTTON | WS_DISABLED,11,91,84,10
+    CONTROL         "TIF : Fax",IDC_RADIO4,"Button",BS_AUTORADIOBUTTON,11,
+                    102,48,10
+    CONTROL         "TIF : Packbits",IDC_RADIO5,"Button",BS_AUTORADIOBUTTON,
+                    11,113,60,10
+    CONTROL         "TIF : Jpeg",IDC_RADIO6,"Button",BS_AUTORADIOBUTTON,11,
+                    124,48,10
+    CONTROL         "TIF : LZW",IDC_RADIO7,"Button",BS_AUTORADIOBUTTON | 
+                    WS_DISABLED,11,136,49,10
+    PUSHBUTTON      "Exif",IDEXIF,136,39,50,16
+END
+
+IDD_DITHER DIALOG DISCARDABLE  0, 0, 186, 46
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Dither"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,129,7,50,16
+    PUSHBUTTON      "Cancel",IDCANCEL,129,23,50,16
+    CONTROL         "Floyd-Steinberg error diffusion",IDC_RADIO1,"Button",
+                    BS_AUTORADIOBUTTON | WS_GROUP,7,7,109,10
+    CONTROL         "Ordered dither",IDC_RADIO2,"Button",BS_AUTORADIOBUTTON,
+                    7,21,61,10
+END
+
+IDD_THRESHOLD DIALOG DISCARDABLE  0, 0, 143, 46
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Threshold"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,86,6,50,16
+    PUSHBUTTON      "Cancel",IDCANCEL,86,23,50,16
+    EDITTEXT        IDC_EDIT1,10,25,51,12,ES_AUTOHSCROLL
+    LTEXT           "Level [0 ... 255]",IDC_STATIC,10,10,50,8
+END
+
+IDD_COLORIZE DIALOG DISCARDABLE  0, 0, 166, 114
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Colorize"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,109,6,50,16
+    PUSHBUTTON      "Cancel",IDCANCEL,109,23,50,16
+    EDITTEXT        IDC_EDIT1,75,17,25,12,ES_AUTOHSCROLL
+    LTEXT           "Hue: [0 : 255]",IDC_STATIC,7,20,44,8
+    EDITTEXT        IDC_EDIT2,75,33,25,12,ES_AUTOHSCROLL
+    LTEXT           "Saturation: [0 : 255]",IDC_STATIC,7,34,63,8
+    EDITTEXT        IDC_EDIT3,75,62,25,12,ES_AUTOHSCROLL
+    LTEXT           "Red:    [-255 : 255]",IDC_STATIC,7,64,60,8
+    EDITTEXT        IDC_EDIT4,75,79,25,12,ES_AUTOHSCROLL
+    LTEXT           "Green: [-255 : 255]",IDC_STATIC,7,81,60,8
+    EDITTEXT        IDC_EDIT5,75,95,25,12,ES_AUTOHSCROLL
+    LTEXT           "Blue:    [-255 : 255]",IDC_STATIC,7,97,61,8
+    CONTROL         "HSL",IDC_RADIO3,"Button",BS_AUTORADIOBUTTON | WS_GROUP,
+                    7,6,30,10
+    CONTROL         "RGB",IDC_RADIO4,"Button",BS_AUTORADIOBUTTON,7,50,31,10
+END
+
+IDD_OPACITY DIALOG DISCARDABLE  0, 0, 143, 46
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Opacity"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,86,6,50,16
+    PUSHBUTTON      "Cancel",IDCANCEL,86,23,50,16
+    EDITTEXT        IDC_EDIT1,10,25,51,12,ES_AUTOHSCROLL
+    LTEXT           "Level [0 ... 255]",IDC_STATIC,10,10,50,8
+END
+
+IDD_DWNURL DIALOGEX 0, 0, 287, 46
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Download from URL"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "Download",IDOK,230,7,50,16
+    PUSHBUTTON      "Cancel",IDCANCEL,230,23,50,16
+    LTEXT           "URL",IDC_STATIC,7,10,16,8
+    LTEXT           "Status",IDC_STATIC,7,26,21,8
+    LTEXT           "",IDC_STATUS,38,25,183,11,0,WS_EX_STATICEDGE
+    EDITTEXT        IDC_URL,38,7,183,14,ES_AUTOHSCROLL
+END
+
+IDD_GAMMA DIALOG DISCARDABLE  0, 0, 143, 46
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Gamma"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,86,6,50,16
+    PUSHBUTTON      "Cancel",IDCANCEL,86,23,50,16
+    EDITTEXT        IDC_EDIT1,10,25,51,12,ES_AUTOHSCROLL
+    LTEXT           "Correction [0...5]",IDC_STATIC,10,10,53,8
+END
+
+IDD_HISTO DIALOGEX 0, 0, 186, 115
+STYLE WS_CHILD
+EXSTYLE WS_EX_TOOLWINDOW
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    CONTROL         "log",IDC_LOG,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,148,
+                    7,30,15
+END
+
+IDD_PALETTE DIALOGEX 0, 0, 271, 135
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Palette"
+FONT 8, "MS Sans Serif", 0, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,159,7,50,16
+    PUSHBUTTON      "Cancel",IDCANCEL,214,7,50,16
+    CONTROL         "",IDC_STATIC,"Static",SS_ETCHEDFRAME,7,7,132,122,
+                    WS_EX_TRANSPARENT
+    PUSHBUTTON      "Load ...",IDC_LOAD,159,29,50,16
+    PUSHBUTTON      "Save ...",IDC_SAVE,214,29,50,16
+    GROUPBOX        "Load Options",IDC_STATIC,159,52,105,48
+    CONTROL         "Maintain indexes",IDC_RADIO1,"Button",
+                    BS_AUTORADIOBUTTON | WS_GROUP,168,64,69,10
+    CONTROL         "Nearest color matching",IDC_RADIO2,"Button",
+                    BS_AUTORADIOBUTTON,168,75,89,10
+    CONTROL         "Error diffusion dithering",IDC_RADIO3,"Button",
+                    BS_AUTORADIOBUTTON,168,87,87,10
+    CONTROL         "Edit alpha component",IDC_CHECK2,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,168,104,85,10
+    LTEXT           " I = 0, RGBA = (0,0,0,0)",IDC_BAR,143,117,121,12,
+                    SS_SUNKEN
+END
+
+IDD_COMBINE DIALOG DISCARDABLE  0, 0, 242, 119
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Combine"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,185,7,50,16
+    PUSHBUTTON      "Cancel",IDCANCEL,185,24,50,16
+    COMBOBOX        IDC_COMBO1,7,19,114,55,CBS_DROPDOWNLIST | WS_VSCROLL | 
+                    WS_TABSTOP
+    LTEXT           "Red / H /  Y /  X channel source:",IDC_STATIC,7,7,97,8
+    LTEXT           "Green / S / U /  I /  Y channel source:",IDC_STATIC,7,
+                    35,97,8
+    LTEXT           "Blue / L /  V / Q /  Z channel source:",IDC_STATIC,7,63,
+                    97,8
+    COMBOBOX        IDC_COMBO2,7,47,114,55,CBS_DROPDOWNLIST | WS_VSCROLL | 
+                    WS_TABSTOP
+    COMBOBOX        IDC_COMBO3,7,74,114,57,CBS_DROPDOWNLIST | WS_VSCROLL | 
+                    WS_TABSTOP
+    LTEXT           "Alpha channel source:",IDC_STATIC,7,90,97,8
+    COMBOBOX        IDC_COMBO4,7,101,114,61,CBS_DROPDOWNLIST | WS_VSCROLL | 
+                    WS_TABSTOP
+    COMBOBOX        IDC_COMBO5,125,19,48,55,CBS_DROPDOWNLIST | WS_VSCROLL | 
+                    WS_TABSTOP
+    COMBOBOX        IDC_COMBO6,125,47,48,55,CBS_DROPDOWNLIST | WS_VSCROLL | 
+                    WS_TABSTOP
+    COMBOBOX        IDC_COMBO7,125,74,48,55,CBS_DROPDOWNLIST | WS_VSCROLL | 
+                    WS_TABSTOP
+    COMBOBOX        IDC_COMBO8,125,100,48,55,CBS_DROPDOWNLIST | WS_VSCROLL | 
+                    WS_TABSTOP
+    COMBOBOX        IDC_COMBO9,185,60,50,79,CBS_DROPDOWNLIST | WS_VSCROLL | 
+                    WS_TABSTOP
+    LTEXT           "Color Space",IDC_STATIC,188,50,40,8
+END
+
+IDD_FFT DIALOG DISCARDABLE  0, 0, 252, 79
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "FFT"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,195,39,50,16
+    PUSHBUTTON      "Cancel",IDCANCEL,195,56,50,16
+    COMBOBOX        IDC_REAL,7,20,114,114,CBS_DROPDOWNLIST | WS_VSCROLL | 
+                    WS_TABSTOP
+    COMBOBOX        IDC_IMAG,131,20,114,126,CBS_DROPDOWNLIST | WS_VSCROLL | 
+                    WS_TABSTOP
+    LTEXT           "Real",IDC_STATIC,7,7,16,8
+    LTEXT           "Imaginary",IDC_STATIC,131,7,31,8
+    CONTROL         "Inverse",IDC_CHECK1,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,7,41,39,10
+    CONTROL         "Compute magnitude",IDC_CHECK3,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,7,51,79,10
+    CONTROL         "Force FFT",IDC_CHECK4,"Button",BS_AUTOCHECKBOX | 
+                    WS_TABSTOP,7,61,49,10
+END
+
+IDD_REPAIR DIALOG DISCARDABLE  0, 0, 186, 61
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Repair"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,129,7,50,16
+    PUSHBUTTON      "Cancel",IDCANCEL,129,23,50,16
+    LTEXT           "Radius",IDC_STATIC,10,27,23,8
+    EDITTEXT        IDC_EDIT2,65,25,38,12,ES_AUTOHSCROLL
+    LTEXT           "Iterations",IDC_STATIC,10,42,30,8
+    EDITTEXT        IDC_EDIT3,65,40,38,12,ES_AUTOHSCROLL
+    LTEXT           "Color Space",IDC_STATIC,7,7,40,8
+    COMBOBOX        IDC_COMBO9,65,7,50,79,CBS_DROPDOWNLIST | WS_VSCROLL | 
+                    WS_TABSTOP
+END
+
+IDD_TEXT DIALOG DISCARDABLE  0, 0, 262, 167
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Place text to image"
+FONT 8, "MS Sans Serif"
+BEGIN
+    PUSHBUTTON      "OK",IDOK,195,6,59,16
+    PUSHBUTTON      "Cancel",IDCANCEL,195,23,59,16
+    EDITTEXT        IDC_EDIT1,7,24,180,56,ES_MULTILINE | ES_AUTOVSCROLL | 
+                    ES_AUTOHSCROLL | ES_WANTRETURN
+    LTEXT           "Text to place:",IDC_STATIC,10,10,177,8
+    PUSHBUTTON      "Font",ID_FONT,195,49,59,14
+    PUSHBUTTON      "Color...",IDC_BTN_TXTCOLOR,195,64,59,14
+    PUSHBUTTON      "Color...",IDC_BTN_BCKCOLOR,108,95,59,14
+    CONTROL         "Text has background",IDC_CHECK1,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,13,98,90,8
+    GROUPBOX        "Background",IDC_STATIC,7,85,174,75
+    CONTROL         "Slider1",IDC_SLIDER_OPACITY,"msctls_trackbar32",
+                    TBS_AUTOTICKS | TBS_TOP | WS_TABSTOP,61,111,93,20
+    CONTROL         "Slider1",IDC_SLIDER_RADIUS,"msctls_trackbar32",
+                    TBS_AUTOTICKS | TBS_TOP | WS_TABSTOP,61,131,93,21
+    LTEXT           "Opacity:",IDC_STATIC,14,116,48,12
+    LTEXT           "Round radius:",IDC_STATIC,14,137,48,12
+    LTEXT           "0%",IDC_STATIC_OP,160,117,17,13
+    LTEXT           "0%",IDC_STATIC_RADIUS,160,138,17,13
+    GROUPBOX        "Alignment",IDC_STATIC,184,85,70,75
+    CONTROL         "centered",IDC_RADIO1,"Button",BS_AUTORADIOBUTTON,195,97,
+                    48,11
+    CONTROL         "to left",IDC_RADIO2,"Button",BS_AUTORADIOBUTTON,195,111,
+                    50,11
+    CONTROL         "to right",IDC_RADIO3,"Button",BS_AUTORADIOBUTTON,195,
+                    125,50,11
+END
+
+IDD_MIX DIALOG DISCARDABLE  0, 0, 209, 178
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Mix"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,152,143,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,152,158,50,14
+    COMBOBOX        IDC_DST,34,7,168,108,CBS_DROPDOWNLIST | WS_VSCROLL | 
+                    WS_TABSTOP
+    LTEXT           "Dst :",IDC_STATIC,7,11,16,8
+    LTEXT           "Src :",IDC_STATIC,7,25,16,8
+    COMBOBOX        IDC_SRC,33,23,169,92,CBS_DROPDOWNLIST | WS_VSCROLL | 
+                    WS_TABSTOP
+    COMBOBOX        IDC_OP,154,54,48,64,CBS_DROPDOWNLIST | WS_VSCROLL | 
+                    WS_TABSTOP
+    LTEXT           "OpType :",IDC_STATIC,172,41,30,8
+    CONTROL         "",IDC_PICTURE,"Static",SS_BITMAP | SS_SUNKEN,7,42,16,14
+    PUSHBUTTON      "Preview",IDC_BUTTON1,152,127,50,14
+    EDITTEXT        IDC_EDIT1,162,81,40,14,ES_AUTOHSCROLL
+    LTEXT           "X offset :",IDC_STATIC,173,70,29,8
+    LTEXT           "Y offset :",IDC_STATIC,173,98,29,8
+    EDITTEXT        IDC_EDIT2,162,110,40,14,ES_AUTOHSCROLL
+END
+
+
+#ifndef _MAC
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 5,9,9,0
+ PRODUCTVERSION 5,9,9,0
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x29L
+#else
+ FILEFLAGS 0x28L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904b0"
+        BEGIN
+            VALUE "Comments", " \0"
+            VALUE "CompanyName", "www.xdp.it\0"
+            VALUE "FileDescription", "DEMO CxImage Application\0"
+            VALUE "FileVersion", "5, 9, 9, 0\0"
+            VALUE "InternalName", "DEMO\0"
+            VALUE "LegalCopyright", " © Davide Pizzolato 2001-2004\0"
+            VALUE "LegalTrademarks", "Freeware\0"
+            VALUE "OriginalFilename", "DEMO.EXE\0"
+            VALUE "PrivateBuild", "5\0"
+            VALUE "ProductName", "CxImage\0"
+            VALUE "ProductVersion", "5, 9, 9, 0\0"
+            VALUE "SpecialBuild", "0\0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1200
+    END
+END
+
+#endif    // !_MAC
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_ABOUTBOX, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 238
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 247
+    END
+
+    IDD_ROTATE, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 136
+        TOPMARGIN, 6
+        BOTTOMMARGIN, 39
+    END
+
+    IDD_CAPTURE, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 290
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 74
+    END
+
+    IDD_RESAMPLE, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 136
+        TOPMARGIN, 6
+        BOTTOMMARGIN, 64
+    END
+
+    IDD_DECBPP, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 124
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 99
+    END
+
+    IDD_INCBPP, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 125
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 64
+    END
+
+    IDD_OPTIONS, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 186
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 149
+    END
+
+    IDD_DITHER, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 179
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 39
+    END
+
+    IDD_THRESHOLD, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 136
+        TOPMARGIN, 6
+        BOTTOMMARGIN, 39
+    END
+
+    IDD_COLORIZE, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 159
+        TOPMARGIN, 6
+        BOTTOMMARGIN, 107
+    END
+
+    IDD_OPACITY, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 136
+        TOPMARGIN, 6
+        BOTTOMMARGIN, 39
+    END
+
+    IDD_DWNURL, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 280
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 39
+    END
+
+    IDD_GAMMA, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 136
+        TOPMARGIN, 6
+        BOTTOMMARGIN, 39
+    END
+
+    IDD_HISTO, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 179
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 108
+    END
+
+    IDD_PALETTE, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 264
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 129
+    END
+
+    IDD_COMBINE, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 235
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 112
+    END
+
+    IDD_FFT, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 245
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 72
+    END
+
+    IDD_REPAIR, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 179
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 52
+    END
+
+    IDD_TEXT, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 254
+        TOPMARGIN, 6
+        BOTTOMMARGIN, 160
+    END
+
+    IDD_MIX, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 202
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 171
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog Info
+//
+
+IDD_COMBINE DLGINIT
+BEGIN
+    IDC_COMBO5, 0x403, 5, 0
+0x7267, 0x7961, "\000" 
+    IDC_COMBO5, 0x403, 4, 0
+0x6572, 0x0064, 
+    IDC_COMBO5, 0x403, 6, 0
+0x7267, 0x6565, 0x006e, 
+    IDC_COMBO5, 0x403, 5, 0
+0x6c62, 0x6575, "\000" 
+    IDC_COMBO6, 0x403, 5, 0
+0x7267, 0x7961, "\000" 
+    IDC_COMBO6, 0x403, 4, 0
+0x6572, 0x0064, 
+    IDC_COMBO6, 0x403, 6, 0
+0x7267, 0x6565, 0x006e, 
+    IDC_COMBO6, 0x403, 5, 0
+0x6c62, 0x6575, "\000" 
+    IDC_COMBO7, 0x403, 5, 0
+0x7267, 0x7961, "\000" 
+    IDC_COMBO7, 0x403, 4, 0
+0x6572, 0x0064, 
+    IDC_COMBO7, 0x403, 6, 0
+0x7267, 0x6565, 0x006e, 
+    IDC_COMBO7, 0x403, 5, 0
+0x6c62, 0x6575, "\000" 
+    IDC_COMBO8, 0x403, 5, 0
+0x7267, 0x7961, "\000" 
+    IDC_COMBO8, 0x403, 4, 0
+0x6572, 0x0064, 
+    IDC_COMBO8, 0x403, 6, 0
+0x7267, 0x6565, 0x006e, 
+    IDC_COMBO8, 0x403, 5, 0
+0x6c62, 0x6575, "\000" 
+    IDC_COMBO9, 0x403, 4, 0
+0x4752, 0x0042, 
+    IDC_COMBO9, 0x403, 4, 0
+0x5348, 0x004c, 
+    IDC_COMBO9, 0x403, 4, 0
+0x5559, 0x0056, 
+    IDC_COMBO9, 0x403, 4, 0
+0x4959, 0x0051, 
+    IDC_COMBO9, 0x403, 4, 0
+0x5958, 0x005a, 
+    0
+END
+
+IDD_REPAIR DLGINIT
+BEGIN
+    IDC_COMBO9, 0x403, 4, 0
+0x4752, 0x0042, 
+    IDC_COMBO9, 0x403, 4, 0
+0x5348, 0x004c, 
+    IDC_COMBO9, 0x403, 4, 0
+0x5559, 0x0056, 
+    IDC_COMBO9, 0x403, 4, 0
+0x4959, 0x0051, 
+    IDC_COMBO9, 0x403, 4, 0
+0x5958, 0x005a, 
+    0
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// JPG
+//
+
+IDR_JPG1                JPG     DISCARDABLE     "res\\bg.jpg"
+IDR_JPG2                JPG     DISCARDABLE     "res\\bg2.jpg"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// ICO
+//
+
+IDR_ICO1                ICO     DISCARDABLE     "res\\ico2.bin"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// GIF
+//
+
+IDR_GIF1                GIF     DISCARDABLE     "res\\bg.gif"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// PNG
+//
+
+IDR_PNG1                PNG     DISCARDABLE     "res\\us.png"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// TIF
+//
+
+IDR_TIF1                TIF     DISCARDABLE     "res\\bg.tif"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE PRELOAD DISCARDABLE 
+BEGIN
+    IDR_MAINFRAME           "demo"
+    IDR_DEMOTYPE            "\nDemo\nDemo\n\n\nDemo.Document\nDemo Document"
+END
+
+STRINGTABLE PRELOAD DISCARDABLE 
+BEGIN
+    AFX_IDS_APP_TITLE       "demo"
+    AFX_IDS_IDLEMESSAGE     "Ready"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_INDICATOR_EXT        "EXT"
+    ID_INDICATOR_CAPS       "CAP"
+    ID_INDICATOR_NUM        "NUM"
+    ID_INDICATOR_SCRL       "SCRL"
+    ID_INDICATOR_OVR        "OVR"
+    ID_INDICATOR_REC        "REC"
+    ID_INDICATOR1           " "
+    ID_INDICATOR2           "                            "
+    ID_INDICATOR3           "        "
+    ID_INDICATOR4           "                            "
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_FILE_NEW             "Create a new document\nNew"
+    ID_FILE_OPEN            "Open an existing document\nOpen"
+    ID_FILE_CLOSE           "Close the active document\nClose"
+    ID_FILE_SAVE            "Save the active document\nSave"
+    ID_FILE_SAVE_AS         "Save the active document with a new name\nSave As"
+    ID_FILE_PAGE_SETUP      "Change the printing options\nPage Setup"
+    ID_FILE_PRINT_SETUP     "Change the printer and printing options\nPrint Setup"
+    ID_FILE_PRINT           "Print the active document\nPrint"
+    ID_FILE_PRINT_PREVIEW   "Display full pages\nPrint Preview"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_APP_ABOUT            "Display program information, version number and copyright\nAbout"
+    ID_APP_EXIT             "Quit the application; prompts to save documents\nExit"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_FILE_MRU_FILE1       "Open this document"
+    ID_FILE_MRU_FILE2       "Open this document"
+    ID_FILE_MRU_FILE3       "Open this document"
+    ID_FILE_MRU_FILE4       "Open this document"
+    ID_FILE_MRU_FILE5       "Open this document"
+    ID_FILE_MRU_FILE6       "Open this document"
+    ID_FILE_MRU_FILE7       "Open this document"
+    ID_FILE_MRU_FILE8       "Open this document"
+    ID_FILE_MRU_FILE9       "Open this document"
+    ID_FILE_MRU_FILE10      "Open this document"
+    ID_FILE_MRU_FILE11      "Open this document"
+    ID_FILE_MRU_FILE12      "Open this document"
+    ID_FILE_MRU_FILE13      "Open this document"
+    ID_FILE_MRU_FILE14      "Open this document"
+    ID_FILE_MRU_FILE15      "Open this document"
+    ID_FILE_MRU_FILE16      "Open this document"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_NEXT_PANE            "Switch to the next window pane\nNext Pane"
+    ID_PREV_PANE            "Switch back to the previous window pane\nPrevious Pane"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_WINDOW_NEW           "Open another window for the active document\nNew Window"
+    ID_WINDOW_ARRANGE       "Arrange icons at the bottom of the window\nArrange Icons"
+    ID_WINDOW_CASCADE       "Arrange windows so they overlap\nCascade Windows"
+    ID_WINDOW_TILE_HORZ     "Arrange windows as non-overlapping tiles\nTile Windows"
+    ID_WINDOW_TILE_VERT     "Arrange windows as non-overlapping tiles\nTile Windows"
+    ID_WINDOW_SPLIT         "Split the active window into panes\nSplit"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_EDIT_CLEAR           "Erase the selection\nErase"
+    ID_EDIT_CLEAR_ALL       "Erase everything\nErase All"
+    ID_EDIT_COPY            "Copy the selection and put it on the Clipboard\nCopy"
+    ID_EDIT_CUT             "Cut the selection and put it on the Clipboard\nCut"
+    ID_EDIT_FIND            "Find the specified text\nFind"
+    ID_EDIT_PASTE           "Insert Clipboard contents\nPaste"
+    ID_EDIT_REPEAT          "Repeat the last action\nRepeat"
+    ID_EDIT_REPLACE         "Replace specific text with different text\nReplace"
+    ID_EDIT_SELECT_ALL      "Select the entire document\nSelect All"
+    ID_EDIT_UNDO            "Undo the last action\nUndo"
+    ID_EDIT_REDO            "Redo the previously undone action\nRedo"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_VIEW_TOOLBAR         "Show or hide the toolbar\nToggle ToolBar"
+    ID_VIEW_STATUS_BAR      "Show or hide the status bar\nToggle StatusBar"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    AFX_IDS_SCSIZE          "Change the window size"
+    AFX_IDS_SCMOVE          "Change the window position"
+    AFX_IDS_SCMINIMIZE      "Reduce the window to an icon"
+    AFX_IDS_SCMAXIMIZE      "Enlarge the window to full size"
+    AFX_IDS_SCNEXTWINDOW    "Switch to the next document window"
+    AFX_IDS_SCPREVWINDOW    "Switch to the previous document window"
+    AFX_IDS_SCCLOSE         "Close the active window and prompts to save the documents"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    AFX_IDS_SCRESTORE       "Restore the window to normal size"
+    AFX_IDS_SCTASKLIST      "Activate Task List"
+    AFX_IDS_MDICHILD        "Activate this window"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    AFX_IDS_PREVIEW_CLOSE   "Close print preview mode\nCancel Preview"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_STRETCH_MODE         "Set stretch mode\nStretch mode"
+    ID_TRANSFORM_ELLIPSE    "Ellipse transform\nEllipse transform"
+    ID_IMAGE_FROM_BITMAP    "Make CxImage from Resource\nCxImage from Resource"
+    ID_CXIMAGE_MIRROR       "Mirror\nMirror"
+    ID_CXIMAGE_FLIP         "Flip\nFlip"
+    ID_WINDOW_DUPLICATE     "Duplicate\nDuplicate"
+    ID_CXIMAGE_NEGATIVE     "Negative\nNegative"
+    ID_CXIMAGE_GRAYSCALE    "Gray Scale"
+    ID_CXIMAGE_ROTATE       "Rotate"
+    ID_CXIMAGE_LOADJPEGRESOURCE "Load JPEG Resource"
+    ID_CXIMAGE_LOADICONRESOURCE "Load Icon Resource"
+    ID_CXIMAGE_LOADGIFRESOURCE "Load Gif Resource"
+    ID_CXIMAGE_LOADPNGRESOURCE "Load Png Resource"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_VIEW_ZOOMIN          "Zoom In\nZoom In"
+    ID_VIEW_ZOOMOUT         "Zoom Out\nZoom Out"
+    ID_VIEW_NORMALVIEWING11 "Normal Viewing (1:1)\nNormal View"
+    ID_FILE_CAPTURE         "Capture..."
+    ID_CXIMAGE_LOADTIFRESOURCE "Load Tif Resource"
+    ID_WINDOW_CLOSEALL      "Close all"
+    ID_CXIMAGE_SETTRANSPARENCY "Set Transparency... (click on the image)"
+    ID_CXIMAGE_REMOVETRANSPARENCY "Remove Transparency"
+    ID_CXIMAGE_RESAMPLE     "Resample"
+    ID_CXIMAGE_DECREASEBPP  "Decrease Bpp..."
+    ID_CXIMAGE_INCREASEBPP  "Increase Bpp..."
+    ID_CXIMAGE_OPTIONS      "Options..."
+    ID_CXIMAGE_DITHER       "Dither"
+    ID_CXIMAGE_THRESHOLD    "Threshold"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_CXIMAGE_EDGE         "Edge"
+    ID_CXIMAGE_ERODE        "Erode"
+    ID_CXIMAGE_DILATE       "Dilate"
+    ID_FILE_SELECTSOURCE    "Select Source...\nSelect Source..."
+    ID_FILE_ACQUIRE         "Acquire from Twain source\nAcquire"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_CXIMAGE_SPLITRGB     "Split RGB"
+    ID_CXIMAGE_SPLITYUV     "Split YUV"
+    ID_CXIMAGE_SPLITHSL     "Split HSL"
+    ID_CXIMAGE_PSEUDOCOLORS "Pseudo Colors"
+    ID_CXIMAGE_SPLITCHANNELS "Split Channels"
+    ID_CXIMAGE_RESOURCES    "Resources"
+    ID_CXIMAGE_COLORIZE     "Colorize..."
+    ID_CXIMAGE_LIGHTEN      "Lighten"
+    ID_CXIMAGE_DARKEN       "Darken"
+    ID_CXIMAGE_CONTRAST     "More Contrast"
+    ID_CXIMAGE_EMBOSS       "Emboss"
+    ID_CXIMAGE_BLUR         "Blur"
+    ID_CXIMAGE_SOFTEN       "Soften"
+    ID_CXIMAGE_SHARPEN      "Sharpen"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_CXIMAGE_CROP         "Crop"
+    ID_CXIMAGE_REMOVEALPHACHANNEL "Remove Alpha Channel"
+    ID_CXIMAGE_OPACITY      "Opacity"
+    ID_CXIMAGE_INVETALPHA   "Invert Alpha Channel"
+    ID_CXIMAGE_ALPHAPALETTETOGGLE "Toggle Alpha Palette "
+    ID_CXIMAGE_ALPHASTRIP   "Strip Alpha"
+    ID_CXIMAGE_ROTATEL      "Rotate Left"
+    ID_CXIMAGE_ROTATER      "Rotate Right"
+    ID_CXIMAGE_DEMOSAVEMULTIPAGETIFF "Creates a multi page TIF file "
+    ID_CXIMAGE_DEMOSAVEANIMATEDGIF "Demo Save Animated GIF"
+    ID_CXIMAGE_DOWNLOADFROMURL "Download from URL "
+    ID_CXIMAGE_GAMMA        "Gamma"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_VIEW_MENUSTYLE_NORMAL "Default"
+    ID_VIEW_MENUSTYLE_XP    "XP"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_CXIMAGE_MEDIAN       "Median"
+    ID_CXIMAGE_ADDNOISE     "Noise"
+    ID_VIEW_TOOLS_MOVE      "Move\nMove"
+    ID_VIEW_TOOLS_SELECT    "Select\nSelect"
+    ID_VIEW_FULLSCREEN      "Full Screen"
+    ID_VIEW_TOOLS_ZOOM      "Zoom\nZoom"
+    ID_VIEW_HISTOGRAM       "Histogram\nHistogram"
+    ID_VIEW_PALETTE         "Palette\nPalette"
+    ID_CXIMAGE_COMBINE      "Combine"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_CXIMAGE_FFT          "FFT"
+    ID_CXIMAGE_SPLITYIQ     "Split YIQ"
+    ID_CXIMAGE_SPLITXYZ     "Split XYZ"
+    ID_CXIMAGE_REPAIR       "Repair..."
+    ID_FILTERS_SPLIT        "Split"
+    ID_CXIMAGE_ALPHACHANNEL_SPLIT "Split"
+    ID_VIEW_TOOLS_TEXT      "Text"
+    ID_CXIMAGE_SPLITCMYK    "Split to CMYK"
+    ID_CXIMAGE_ALPHACREATE  "Create from lightness"
+    ID_CXIMAGE_HISTOGRAM_STRETCH "Stretch"
+    ID_CXIMAGE_HISTOGRAM_EQUALIZE "Equalize"
+    ID_CXIMAGE_HISTOGRAM_NORMALIZE "Normalize"
+    ID_CXIMAGE_HISTOGRAM_LOG "Log"
+    ID_CXIMAGE_HISTOGRAM_ROOT "Root"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_CXIMAGE_GAUSSIAN3X3  "Gaussian 3x3"
+    ID_CXIMAGE_GAUSSIAN5X5  "Gaussian 5x5"
+    ID_CXIMAGE_CONTOUR      "Contour"
+    ID_CXIMAGE_FILTERS_LESSCONTRAST "Less Contrast"
+    ID_CXIMAGE_LESSCONTRAST "Less Contrast"
+    ID_CXIMAGE_JITTER       "Jitter"
+    ID_FILTERS_MIX          "Mix"
+    ID_CXIMAGE_CIRCLETRANSFORM_PINCH "Pinch"
+    ID_CXIMAGE_CIRCLETRANSFORM_PUNCH "Punch"
+    ID_CXIMAGE_CIRCLETRANSFORM_SWIRL "Twirl"
+    ID_CXIMAGE_CIRCLETRANSFORM_CYLINDER "Cylinder"
+    ID_FILTERS_CIRCLETRANSFORM_BATHROOM "bathroom"
+    ID_CXIMAGE_CIRCLETRANSFORM_BATHROOM "bathroom"
+    ID_CXIMAGE_DEMOCREATEFROMARRAY "CreateFromArray"
+    ID_CXIMAGE_HISTOGRAM_STRETCH1 "Stretch1"
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    ID_CXIMAGE_HISTOGRAM_STRETCH2 "Stretch2"
+END
+
+#endif    // Neutral resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// English (U.K.) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENG)
+#ifdef _WIN32
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_UK
+#pragma code_page(1252)
+#endif //_WIN32
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#define _AFX_NO_SPLITTER_RESOURCES\r\n"
+    "#define _AFX_NO_OLE_RESOURCES\r\n"
+    "#define _AFX_NO_TRACKER_RESOURCES\r\n"
+    "#define _AFX_NO_PROPERTY_RESOURCES\r\n"
+    "\r\n"
+    "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)\r\n"
+    "#ifdef _WIN32\r\n"
+    "LANGUAGE 9, 1\r\n"
+    "#pragma code_page(1252)\r\n"
+    "#endif\r\n"
+    "#include ""res\\demo.rc2""  // non-Microsoft Visual C++ edited resources\r\n"
+    "#include ""afxres.rc""         // Standard components\r\n"
+    "#include ""afxprint.rc""       // printing/print preview resources\r\n"
+    "#endif\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+#endif    // English (U.K.) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+#define _AFX_NO_SPLITTER_RESOURCES
+#define _AFX_NO_OLE_RESOURCES
+#define _AFX_NO_TRACKER_RESOURCES
+#define _AFX_NO_PROPERTY_RESOURCES
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_ENU)
+#ifdef _WIN32
+LANGUAGE 9, 1
+#pragma code_page(1252)
+#endif
+#include "res\demo.rc2"  // non-Microsoft Visual C++ edited resources
+#include "afxres.rc"         // Standard components
+#include "afxprint.rc"       // printing/print preview resources
+#endif
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

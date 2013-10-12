@@ -1,0 +1,1071 @@
+<html>
+	<head>
+		<title>CxImage reference</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+	</head>
+	<body bgcolor="#ffffff" text="#000000">
+		<h2>CxImage Class Members &amp; Operations</h2>
+		
+<ul>
+  <li> <a href="#Construction">Constructors</a> 
+  <li> <a href="#Initialization">Initialization</a> 
+  <li> <a href="#File">File</a> 
+  <li> <a href="#Image">Generic</a> 
+  <li> <a href="#DSP">DSP</a> 
+  <li> <a href="#Painting">Painting</a> 
+  <li> <a href="#Multiple">Multiple Images</a> 
+  <li> <a href="#Transparency">Transparency</a> 
+  <li> <a href="#Palette">Palette</a> 
+  <li> <a href="#Pixels">Pixels</a> 
+  <li> <a href="#Region">Region Selection</a> 
+  <li> <a href="#Alpha">Alpha Channel</a> 
+  <li><a href="#layers">Layers</a> 
+  <li> <a href="#Attributes">Attributes</a> 
+  <li> <a href="#Miscellaneous">Miscellaneous</a><br>
+  </li>
+</ul>
+		<h3><b>Supported file formats</b></h3>
+		
+<p>At the begining of the main header file <code>ximage.h</code> you'll find the 
+  definitions to enable or disable a specific format:<br>
+  <code>// CxImage supported formats<br>
+  #define CXIMAGE_SUPPORT_BMP 1<br>
+  #define CXIMAGE_SUPPORT_GIF 1<br>
+  #define CXIMAGE_SUPPORT_JPG 1<br>
+  #define CXIMAGE_SUPPORT_PNG 1<br>
+  #define CXIMAGE_SUPPORT_MNG 0<br>
+  #define CXIMAGE_SUPPORT_ICO 1<br>
+  #define CXIMAGE_SUPPORT_TIF 1<br>
+  #define CXIMAGE_SUPPORT_TGA 1<br>
+  #define CXIMAGE_SUPPORT_PCX 1<br>
+  #define CXIMAGE_SUPPORT_WBMP 1<br>
+  #define CXIMAGE_SUPPORT_WMF 1<br>
+  #define CXIMAGE_SUPPORT_J2K 0<br>
+  #define CXIMAGE_SUPPORT_JBG 0<br>
+  #define CXIMAGE_SUPPORT_JP2 1<br>
+  #define CXIMAGE_SUPPORT_JPC 1<br>
+  #define CXIMAGE_SUPPORT_PGX 1<br>
+  #define CXIMAGE_SUPPORT_PNM 1<br>
+  #define CXIMAGE_SUPPORT_RAS 1<br></code>
+  Remember to rebuild the library if you change these statements.</p>
+		<h3><b>Construction<a name="Construction"></a></b></h3>
+		<table width="100%" border="1" cellspacing="0">
+			<tbody>
+				<tr valign="top">
+					<td width="47%"><code>CxImage(DWORD imagetype=0)</code></td>
+					
+    <td width="50%">Creates an empty image. <code>imagetype</code> (optional) 
+      sets the image format.</td>
+				</tr>
+				<tr valign="top">
+					
+    <td width="47%"><code>CxImage(DWORD dwWidth, DWORD dwHeight, DWORD wBpp, DWORD 
+      imagetype=0)</code></td>
+					<td width="50%">
+						Creates an image with the specified width, height, bit per pixel and (optional) 
+						image type arguments.</td>
+				</tr>
+				<tr valign="top">
+					<td width="47%"><code>CxImage(const CxImage &amp;isrc, bool copypixels=true, bool 
+							copyselection=true, bool copyalpha=true)</code></td>
+					<td width="50%">Creates an image with the same characteristics of the source image.</td>
+				</tr>
+				<tr valign="top">
+					
+    <td width="47%"> 
+      <p><code>CxImage(const TCHAR * filename, DWORD imagetype)<br>
+        <br>
+        CxImage(FILE * stream, DWORD imagetype)<br>
+        <br>
+        CxImage(CxFile * stream, DWORD imagetype)<br>
+        <br>
+        CxImage(BYTE * buffer, DWORD size, DWORD imagetype)</code></p>
+					</td>
+					<td width="50%">Creates an image from file or memory. <code>imagetype</code> can be 
+						one of these formats:<br>
+      <code>CXIMAGE_FORMAT_JPG, CXIMAGE_FORMAT_TIF, CXIMAGE_FORMAT_MNG, CXIMAGE_FORMAT_BMP, 
+      CXIMAGE_FORMAT_ICO, CXIMAGE_FORMAT_GIF, CXIMAGE_FORMAT_PNG, CXIMAGE_FORMAT_PCX, 
+      CXIMAGE_FORMAT_TGA, CXIMAGE_FORMAT_WMF, CXIMAGE_FORMAT_JBG, CXIMAGE_FORMAT_J2K,<br>
+      CXIMAGE_FORMAT_JP2, CXIMAGE_FORMAT_JPC, CXIMAGE_FORMAT_PGX,<br>
+      CXIMAGE_FORMAT_PNM, CXIMAGE_FORMAT_RAS, CXIMAGE_FORMAT_WBMP</code><br>
+						For automatic image type detection use <code>CXIMAGE_FORMAT_UNKNOWN</code></td>
+				</tr>
+			</tbody>
+		</table>
+		<h3><b>Initialization</b><a name="Initialization"></a>
+		</h3>
+		<table width="100%" border="1" cellspacing="0">
+			<tbody>
+				<tr valign="top">
+					
+    <td width="47%"><code>void* Create(DWORD dwWidth, DWORD dwHeight, DWORD wBpp, 
+      DWORD imagetype=0)</code></td>
+					<td width="50%">
+						Initializes or rebuilds the image. Returns the pointer to the internal pDib 
+						object.</td>
+				</tr>
+				<tr valign="top">
+					<td width="47%"><code>void Clear(BYTE bval=0)</code></td>
+					<td width="50%">Sets the image bits to the specified value.</td>
+				</tr>
+				<tr valign="top">
+					
+    <td width="47%"><code> bool Destroy()</code></td>
+					<td width="50%">Releases the image buffers.</td>
+				</tr>
+				<tr valign="top">
+					<td width="47%"><code>void Copy(const CxImage &amp;src, bool copypixels = true, bool 
+							copyselection = true, bool copyalpha = true)</code></td>
+					<td width="50%">Copies the image from an exsisting one.</td>
+				</tr>
+				<tr valign="top">
+					<td width="47%"><code>HANDLE CopyToHandle()</code></td>
+					<td width="50%">Copies the image to a global memory handle (clipboard operations)</td>
+				</tr>
+				<tr valign="top">
+					
+    <td width="47%"><code>bool CreateFromHBITMAP(HBITMAP hbmp, HPALETTE hpal=0)<br>
+      <br>
+      bool CreateFromHICON(HICON hico)</code></td>
+					<td width="50%">Creates an image from a bitmap or icon object. (resource)</td>
+				</tr>
+				<tr valign="top">
+					<td width="47%"><code>bool CreateFromHANDLE(HANDLE hMem)</code></td>
+					<td width="50%">Creates an image from a global bitmap handle. (clipboard 
+						operations)</td>
+				</tr>
+				<tr valign="top">
+					
+    <td width="47%"><code> bool CreateFromArray(BYTE* pArray,DWORD dwWidth,DWORD 
+      dwHeight,DWORD dwBitsperpixel, DWORD dwBytesperline, bool bFlipImage);<br>
+      <br>
+      bool CreateFromMatrix(BYTE** ppMatrix,DWORD dwWidth,DWORD dwHeight,DWORD 
+      dwBitsperpixel, DWORD dwBytesperline, bool bFlipImage);<br>
+      </code></td>
+					
+    <td width="50%"> 
+      <p>Creates an image from a generic buffer.<br>
+        <code>dwBitsperpixel</code> can be 1,4,8,24,32</p>
+      </td>
+				</tr>
+				<tr valign="top">
+					
+    <td width="47%"><code>bool Transfer(CxImage &amp;from)</code></td>
+					<td width="50%">Transfers the image from an existing source image. The source 
+						become empty.</td>
+				</tr>
+			</tbody>
+		</table>
+		<h3>File<a name="File"></a> operations</h3>
+		<table width="100%" border="1" cellspacing="0">
+			<tbody>
+				<tr valign="top">
+					<td width="47%" height="27"><code>bool LoadResource(HRSRC hRes, DWORD imagetype, 
+							HMODULE hModule=NULL)</code></td>
+					<td width="50%" height="27">Loads an image from the application resources.<br>
+						<code>hRes</code> is the resource handle returned by <code>FindResource()</code>.</td>
+				</tr>
+				<tr valign="top">
+					
+    <td width="47%" height="97"><code>bool Save(const TCHAR * filename,DWORD imagetype=0)</code><br>
+      <br>
+      <code>bool Encode(FILE * hFile, DWORD imagetype)</code><br>
+      <br>
+      <code>bool Encode(CxFile * hFile, DWORD imagetype)</code> <br>
+      <br>
+						<code>bool Encode(BYTE * &amp;buffer, long &amp;size, DWORD imagetype)</code>
+						<br>
+					</td>
+					
+    <td width="50%" height="97">Saves to disk or memory the image in a specific 
+      format.<br>
+						(Note: <code>buffer</code> must be NULL, the function allocates and fill the 
+						memory, the application must free the buffer)</td>
+				</tr>
+				<tr valign="top">
+					
+    <td width="47%" height="52"><code>bool Load(const TCHAR * filename,DWORD imagetype=0)</code><br>
+      <br>
+      <code>bool Decode(FILE * hFile, DWORD imagetype)</code><br>
+      <br>
+      <code>bool Decode(CxFile * hFile, DWORD imagetype)</code> <br>
+      <br>
+						<code>bool Decode(BYTE * buffer, DWORD size, DWORD imagetype)</code>
+						<br>
+					</td>
+					<td width="50%" height="52">Reads from disk or memory the image in a specific 
+						format.</td>
+				</tr>
+				<tr valign="top">
+					
+    <td width="47%" height="52"> <code>bool Encode(CxFile * hFile, CxImage ** 
+      pImages, int pagecount, DWORD imagetype);<br>
+      <br>
+      bool Encode(FILE *hFile, CxImage ** pImages, int pagecount, DWORD imagetype);</code> 
+    </td>
+					<td width="50%" height="52">Saves to disk or memory <code>pagecount</code> images, 
+						referenced by an array of <code>CxImage</code> pointers. <code>imagetype</code> 
+						can be <code>CXIMAGE_FORMAT_TIF</code> or <code>CXIMAGE_FORMAT_GIF</code></td>
+				</tr>
+			</tbody>
+		</table>
+		<h3>Image<a name="Image"></a> operations</h3>
+		
+<table width="100%" border="1" cellspacing="0">
+  <TBODY> 
+  <tr valign="top"> 
+    <td width="47%"><code>bool IsValid()</code></td>
+    <td width="50%">Checks if the image is correctly initializated.</td>
+  </tr>
+  <tr valign="top"> 
+    <td width="47%"><code>bool IsEnabled()</code></td>
+    <td width="50%">True if the image is enabled for painting.</td>
+  </tr>
+  <tr valign="top"> 
+    <td width="47%"><code>void Enable(bool enable=true)</code></td>
+    <td width="50%">Enables/disables the image.</td>
+  </tr>
+  <tbody> 
+  <tr valign="top"> 
+    <td width="47%"><code>bool Flip()</code></td>
+    <td width="50%">Flips upside down the image.</td>
+  </tr>
+  <tr valign="top"> 
+    <td width="47%"><code>bool Mirror()</code></td>
+    <td width="50%">Mirrors the image.</td>
+  </tr>
+  <tr valign="top"> 
+    <td width="47%"><code>bool Rotate(float angle, CxImage* iDst = NULL)<br>
+      <br>
+      bool RotateLeft(CxImage* iDst = NULL)<br>
+      <br>
+      bool RotateRight(CxImage* iDst = NULL)<br>
+      <br>
+      bool Rotate180(CxImage* iDst = NULL) </code> </td>
+    <td width="50%">Rotates the image. <code>angle</code> can be positive for 
+      clockwise rotation or negative for counter-clockwise rotation. If <code>iDst</code> 
+      is NULL, the resulting image replaces the original.</td>
+  </tr>
+  <tr valign="top"> 
+    <td width="47%"><code>bool Negative()</code></td>
+    <td width="50%">Inverts the image colors.</td>
+  </tr>
+  <tr valign="top"> 
+    <td width="47%"><code>bool GrayScale()</code></td>
+    <td width="50%"> Converts the image colors to 8 bit gray scale.</td>
+  </tr>
+  <tr valign="top"> 
+    <td width="47%"><code>bool Resample(long newx, long newy, int mode = 1, CxImage* 
+      iDst = NULL)</code><br>
+    </td>
+    <td width="50%">Resizes the image. <code>mode</code> can be 0 for slow (bilinear) 
+      method , 1 for fast (nearest pixel) method, or 2 for accurate (bicubic spline 
+      interpolation) method. The function is faster with 24 and 1 bpp images, 
+      slow for 4 bpp images and slowest for 8 bpp images.</td>
+  </tr>
+  <tr valign="top"> 
+    <td width="47%"><code>bool DecreaseBpp(DWORD nbit, bool errordiffusion, RGBQUAD* 
+      ppal = 0)</code></td>
+    <td width="50%">Reduces the number of bits per pixel to <code>nbit</code> 
+      (1, 4 or 8).<br>
+      <code>ppal</code> points to a valid palette for the final image; if not 
+      supplied the function will use a standard palette. <code>ppal</code> is 
+      not necessary for reduction to 1 bpp.</td>
+  </tr>
+  <tr valign="top"> 
+    <td width="47%"><code>bool IncreaseBpp(DWORD nbit)</code></td>
+    <td width="50%">Increases the number of bits per pixel of the image.</td>
+  </tr>
+  <tr valign="top"> 
+    <td width="47%"><code>bool Dither(long method = 0)</code></td>
+    <td width="50%"> Converts the image to B&amp;W using the Floyd-Steinberg (<code>method</code> 
+      = 0) or Ordered-Dithering (<code>method</code> = 1) algorithms. </td>
+  </tr>
+  <tr valign="top"> 
+    <td width="47%"><code>bool Crop(long left, long top, long right, long bottom, 
+      CxImage* iDst = NULL)<br>
+      <br>
+      bool Crop(const RECT&amp; rect, CxImage* iDst = NULL) <br>
+      <br>
+      bool CropRotatedRectangle( long topx, long topy, long width, long height, 
+      float angle, CxImage* iDst = NULL); </code> </td>
+    <td width="50%"> Extracts the specified rectangle from the image. If <code>iDst</code> 
+      is NULL, the resulting image replaces the original.</td>
+  </tr>
+  <tr valign="top">
+    <td width="47%" height="112"><code>bool CircleTransform(int type,long rmax=0,float 
+      Koeff=1.0f);</code></td>
+    <td width="50%" height="112">Perform circle_based transformations. <code>type</code> 
+      is for different transformations :<br>
+      - 0 for normal (proturberant) FishEye<br>
+      - 1 for reverse (concave) FishEye<br>
+      - 2 for Swirle <br>
+      - 3 for Cilinder mirror<br>
+      - 4 for bathroom</td>
+  </tr>
+  <tr valign="top"> 
+    <td width="47%"><code> bool Expand(long left, long top, long right, long bottom, 
+      RGBQUAD canvascolor, CxImage* iDst = 0);<br>
+      <br>
+      bool Expand(long newx, long newy, RGBQUAD canvascolor, CxImage* iDst = 0);<br>
+      </code></td>
+    <td width="50%">Expands the borders.</td>
+  </tr>
+  <tr valign="top"> 
+    <td width="47%"><code>bool Thumbnail(long newx, long newy, RGBQUAD canvascolor, 
+      CxImage* iDst = 0);</code></td>
+    <td width="50%">Resamples the image with the correct aspect ratio, and fills 
+      the borders.</td>
+  </tr>
+  </tbody> 
+</table>
+		<h3>DSP<a name="DSP"></a> operations</h3>
+		
+<table width="100%" border="1" cellspacing="0">
+  <tr valign="top"> 
+    <td width="47%"><code>bool Threshold(BYTE level)</code></td>
+    <td width="50%">Converts the image to B&amp;W. <code>level</code> is the lightness 
+      threshold. The <code>Mean()</code> function can be used for calculating 
+      the optimal threshold.</td>
+  </tr>
+  <tr valign="top"> 
+    <td width="47%"><code>bool SplitRGB(CxImage* r,CxImage* g,CxImage* b)<br>
+      <br>
+      bool SplitYUV(CxImage* y,CxImage* u,CxImage* v)<br>
+      <br>
+      bool SplitHSL(CxImage* h,CxImage* s,CxImage* l)<br>
+      <br>
+      bool SplitYIQ(CxImage* y,CxImage* i,CxImage* q)<br>
+      <br>
+      bool SplitXYZ(CxImage* x,CxImage* y,CxImage* z)<br>
+      <br>
+      bool SplitCMYK(CxImage* c,CxImage* m,CxImage* y,CxImage* k) </code> </td>
+    <td width="50%">Extract various channels from the image. Each channel is an 
+      8 bit grayscale image. </td>
+  </tr>
+  <tr valign="top"> 
+    <td width="47%"><code>bool Colorize(BYTE hue, BYTE sat)</code></td>
+    <td width="50%"> Replaces the original hue and saturation values with <code>hue</code> 
+      and <code>sat</code>.</td>
+  </tr>
+  <tr valign="top"> 
+    <td width="47%"><code>bool Light(long brightness, long contrast=0)</code></td>
+    <td width="50%">Changes the brightness and the contrast of the image. <code>level</code> 
+      can be from -255 to 255, if <code>level</code> is negative, the image becomes 
+      dark. <code>contrast</code> can be from&nbsp;-100 to 100, the neutral value 
+      is 0.</td>
+  </tr>
+  <tr valign="top"> 
+    <td width="47%"><code>float Mean()</code></td>
+    <td width="50%">Returns the mean lightness of the image. Useful with <code>Threshold</code> 
+      and <code>Light</code></td>
+  </tr>
+  <tr valign="top"> 
+    <td width="47%" height="26"><code>bool Erode(long Ksize=2)</code></td>
+    <td width="50%" height="26">Enhance the dark areas of the image. <code>Ksize</code> 
+      is the size of the kernel.</td>
+  </tr>
+  <tr valign="top"> 
+    <td width="47%"><code>bool Dilate(long Ksize=2)</code></td>
+    <td width="50%">Enhance the light areas of the image. <code>Ksize</code> is 
+      the size of the kernel.</td>
+  </tr>
+  <tr valign="top"> 
+    <td width="47%"><code>bool Filter(long* kernel, long Ksize, long Kfactor, 
+      long Koffset)</code></td>
+    <td width="50%"> 
+      <p>2D linear filter. <code>kernel</code> is the convolving matrix, in row 
+        format; <code> Ksize</code> is the size of the kernel. <code>Kfactor</code> 
+        is the normalization constant; <code>Koffset</code> is the bias.<br>
+        Example: the "soften" filter uses this kernel:</p>
+      <p align="center">1 1 1<br>
+        1 8 1<br>
+        1 1 1</p>
+      <p align="left">the function needs: <code>kernel</code>={1,1,1,1,8,1,1,1,1}; 
+        <code>Ksize</code>=3; <code>Kfactor</code>=16; <code>Koffset</code>=0;</p>
+    </td>
+  </tr>
+  <tr valign="top"> 
+    <td width="47%"><code>void Mix(CxImage &amp; imgsrc2, ImageOpType op, long 
+      lXOffset = 0, long lYOffset = 0)<br>
+      <br>
+      void MixFrom(CxImage &amp; imagesrc2, long lXOffset, long lYOffset); </code></td>
+    <td width="50%">Blends two images. <code>op</code> can be : <code>OpAdd, OpAnd, 
+      OpXor, OpOr, OpMask, OpSrcCopy, OpDstCopy, OpSub, OpSrcBlend</code></td>
+  </tr>
+  <tr valign="top"> 
+    <td width="47%"><code>bool ShiftRGB(long r, long g, long b)</code></td>
+    <td width="50%">Adjusts separately the red, green, and blue values in the 
+      image.</td>
+  </tr>
+  <tr valign="top"> 
+    <td width="47%"><code>bool Gamma(float gamma)</code></td>
+    <td width="50%">Adjusts the color balance of the image. <code>gamma</code> 
+      can be from 0.1 to 5.</td>
+  </tr>
+  <tr valign="top"> 
+    <td width="47%"><code>bool Median(long Ksize = 3)</code></td>
+    <td width="50%">Adjusts the intensity of each pixel to the median intensity 
+      of its surrounding pixels.</td>
+  </tr>
+  <tr valign="top"> 
+    <td width="47%"><code>bool Noise(long level)</code></td>
+    <td width="50%">Adds an uniform noise to the image, <code>level</code> can 
+      be from 0 to 255.</td>
+  </tr>
+  <TR> 
+    <TD width="47%"><code>bool Skew(float xgain, float ygain, long xpivot, long 
+      ypivot)</code></TD>
+    <TD width="50%">image skewing, <code>xgain</code> and <code>ygain</code> can 
+      be from 0 to 1, <code>xpivot</code> and <code>ypivot</code> is the center 
+      of the transformation.</TD>
+  </TR>
+  <TR> 
+    <TD width="47%"><CODE>bool Jitter(long radius = 2)</CODE></TD>
+    <TD width="50%">Adds a random offset to each pixel in&nbsp;the image</TD>
+  </TR>
+  <tr valign="top"> 
+    <td width="47%"><code>long Histogram(long* red, long* green = 0, long* blue 
+      = 0, long* gray = 0, long colorspace = 0)</code></td>
+    <td width="50%">Build the istogram of the image. <code>red</code>, <code>green</code>, 
+      <code>blue</code>, <code>gray</code> are <code>long[256]</code> or NULL. 
+      <code>colorspace</code> can be:<br>
+      0 = RGB, 1 = HSL, 2 = YUV, 3 = YIQ, 4 = XYZ.<br>
+      The function returns the maximum value stored in the <code>red</code>, <code>green</code>, 
+      <code>blue</code>, <code>gray</code> buffers.</td>
+  </tr>
+  <tr valign="top"> 
+    <td width="47%"><code>HistogramStretch(long method = 0);<br>
+      <br>
+      HistogramEqualize();<br>
+      <br>
+      HistogramNormalize();<br>
+      <br>
+      HistogramRoot();<br>
+      <br>
+      HistogramLog();</code></td>
+    <td width="50%">Histogram functions.<br>
+      methos for HistogramStretch are : 0 = luminance , 1 = linked channels , 
+      2 = independent channels.</td>
+  </tr>
+  <tr valign="top"> 
+    <td width="47%"><code>bool FFT2(CxImage* srcReal, CxImage* srcImag, CxImage* 
+      dstReal, CxImage* dstImag, long direction = 1, bool bForceFFT = true, bool 
+      bMagnitude = true)</code></td>
+    <td width="50%">Computes the bidimensional FFT or DFT of the image. If the 
+      dimensions of the image are a power of, 2 the FFT is performed automatically.<br>
+      If <code>dstReal</code> and/or <code>dstImag</code> are NULL, the resulting 
+      images replaces the original(s).<br>
+      <code>direction</code>: 1 = forward, -1 = inverse.<br>
+      <code>bForceFFT</code>: Resample the image to make the dimensions a power 
+      of 2.<br>
+      <code>bMagnitude</code>: the real part returns the magnitude, the imaginary 
+      part returns the phase.<br>
+      Note: with 8 bits there is a HUGE loss in the dynamics the function tries 
+      to keep an acceptable SNR, but 8bit = 48dB...</td>
+  </tr>
+  <tr valign="top"> 
+    <td width="47%"><code>bool Combine(CxImage* r,CxImage* g,CxImage* b,CxImage* 
+      a, long colorspace = 0)</code></td>
+    <td width="50%">Combines different color components, <code>"a"</code> can 
+      be NULL,<br>
+      the source colorspace can be:<br>
+      0 = RGB, 1 = HSL, 2 = YUV, 3 = YIQ, 4 = XYZ </td>
+  </tr>
+  <tr valign="top"> 
+    <td width="47%"><code>bool Repair(float radius = 0.25f, long niterations = 
+      1, long colorspace = 0)</code></td>
+    <td width="50%">Smart blurring to remove small defects, dithering or artifacts.</td>
+  </tr>
+  <tr valign="top"> 
+    <td width="47%"><code>bool UnsharpMask(float radius = 5.0, float amount = 
+      0.5, int threshold = 0);</code></td>
+    <td width="50%">&nbsp;</td>
+  </tr>
+  <tr valign="top"> 
+    <td width="47%"><code>bool Lut(BYTE* pLut);<br>
+      <br>
+      bool Lut(BYTE* pLutR, BYTE* pLutG, BYTE* pLutB, BYTE* pLutA = 0);</code></td>
+    <td width="50%">Apply a look up table to the image or for each channel. <code>&quot;pLut&quot;</code>s 
+      are BYTE[256]</td>
+  </tr>
+  <tr valign="top"> 
+    <td width="47%">&nbsp;</td>
+    <td width="50%">&nbsp;</td>
+  </tr>
+</table>
+		<h3><b>Painting<a name="Painting"></a> operations</b></h3>
+		<table width="100%" border="1" cellspacing="0">
+			<tbody>
+				<tr valign="top">
+					
+    <td width="47%"><code>long Draw(HDC pDC, long xoffset, long yoffset, long 
+      xsize = -1, long size = -1, RECT* pClipRect = 0)</code><br>
+      <br>
+						<code>long Draw(HDC hdc, const RECT&amp; rect, RECT* pClipRect = 0)</code>
+					</td>
+					<td width="50%">Draws the image in the specified device context, with support for 
+						alpha channel, alpha palette, transparency, opacity.</td>
+				</tr>
+				<tr valign="top">
+					
+    <td width="47%"><code>long Draw2(HDC pDC, long xoffset, long yoffset, long 
+      xsize = -1, long size = -1)</code><br>
+      <br>
+						<code>long Draw2(HDC hdc, const RECT&amp; rect)</code>
+					</td>
+					<td width="50%">Draws the image in the specified device context, using the "true 
+						mask" method (simple transparency)</td>
+				</tr>
+				<tr valign="top">
+					
+    <td width="47%"><code>long Stretch(HDC pDC,long xoffset,long yoffset,long 
+      xsize,long ysize, DWORD dwRop = SRCCOPY)</code><br>
+      <br>
+      <code>long Stretch(HDC hdc, const RECT&amp; rect, DWORD dwRop = SRCCOPY)</code> 
+    </td>
+					<td width="50%">Stretch the image <i>(obsolete, use Draw)</i>, still useful for 
+						printing operations.</td>
+				</tr>
+				<tr valign="top">
+					<td width="47%"><code>long Tile(HDC pDC, RECT *rc)</code></td>
+					<td width="50%">Tiles the image to fill the specified rectangle.</td>
+				</tr>
+				<tr valign="top">
+					
+    <td width="47%"><code>long DrawString(HDC hdc, long x, long y, const TCHAR* 
+      text, RGBQUAD color, const TCHAR* font, long lSize=0, long lWeight=400, 
+      BYTE bItalic=0, BYTE bUnderline=0, bool bSetAlpha=false);<br>
+      <br>
+      long DrawStringEx(HDC hdc, long x, long y, CXTEXTINFO *pTextType, bool bSetAlpha=false 
+      ); </code></td>
+					<td width="50%">Draws a string in the image.</td>
+				</tr>
+				<tr valign="top">
+					<td width="47%"><code>long Blt(HDC pDC, long x=0, long y=0)</code></td>
+					<td width="50%">
+						Only for WinCE.</td>
+				</tr>
+			</tbody>
+		</table>
+		<h3><b>Multiple<a name="Multiple"></a> Images operations</b></h3>
+		<p>These are specific function to load multiple TIFF, GIF and ICON images.</p>
+		<table width="100%" border="1" cellspacing="0">
+			<tbody>
+				<tr valign="top">
+					<td width="47%"><code>long GetNumFrames()</code></td>
+					
+    <td width="50%">Returns the number of images in the file. This function must 
+      be used after a <code>Load()</code> call.<br>
+      Use the sequence <code>SetFrame(-1); Load(...); GetNumFrames(); </code>to 
+      get the number of images without loading the first image.</td>
+				</tr>
+				<tr valign="top">
+					<td width="47%"><code>long GetFrame()</code></td>
+					<td width="50%">
+						Returns the current selected image (zero-based index).</td>
+				</tr>
+				<tr valign="top">
+					<td width="47%"><code>long SetFrame()</code></td>
+					<td width="50%">Set the image number that the next <code>ReadFile()</code> call 
+						will load.</td>
+				</tr>
+			</tbody>
+		</table>
+		<h3><b>Transparency<a name="Transparency"></a></b></h3>
+		<table width="100%" border="1" dwcopytype="CopyTableRow" cellspacing="0">
+			<tbody>
+				<tr valign="top">
+					<td width="47%"><code>long GetTransIndex()</code></td>
+					<td width="50%">
+						Gets the index used for transparency. Returns -1 for no transparancy.</td>
+				</tr>
+				<tr valign="top">
+					<td width="47%"><code>RGBQUAD GetTransColor()</code></td>
+					<td width="50%">Gets the color used for transparency.</td>
+				</tr>
+				<tr valign="top">
+					<td width="47%"><code>void SetTransIndex(long idx)</code></td>
+					<td width="50%">Sets the index used for transparency with 1, 4 and 8 bpp images. 
+						Set to -1 to remove the effect.</td>
+				</tr>
+				<tr valign="top">
+					<td width="47%"><code>void SetTransColor(RGBQUAD rgb)</code></td>
+					<td width="50%">Sets the color used for transparency with 24 bpp images. You must 
+						call <code>SetTransIndex(0)</code> to enable the effect, <code>SetTransIndex(-1)</code>
+						to disable it.</td>
+				</tr>
+				<tr valign="top">
+					<td width="47%"><code>bool IsTransparent()</code></td>
+					<td width="50%">&nbsp;</td>
+				</tr>
+			</tbody>
+		</table>
+		<h3><b>Palette<a name="Palette"></a> operations</b></h3>
+		<p>These functions have no effects on RGB images and in this case the returned 
+			value is always 0.</p>
+		<table width="100%" border="1" cellspacing="0">
+			<tbody>
+				<tr valign="top">
+					<td width="47%"><code>DWORD GetPaletteSize()</code></td>
+					<td width="50%">Returns the palette dimension in bytes.</td>
+				</tr>
+				<tr valign="top">
+					<td width="47%"><code>RGBQUAD* GetPalette()</code></td>
+					<td width="50%">Returns the pointer to the first palette index.</td>
+				</tr>
+				<tr valign="top">
+					
+    <td width="47%"><code>RGBQUAD GetPaletteColor(BYTE idx)<br>
+      <br>
+      bool GetPaletteColor(int i, BYTE* r, BYTE* g, BYTE* b) </code> </td>
+					<td width="50%">Returns the color of the specified index.</td>
+				</tr>
+				<tr valign="top">
+					<td width="47%"><code>BYTE GetNearestIndex(RGBQUAD c)</code></td>
+					<td width="50%">
+						Returns the best palette index that matches a specified color .</td>
+				</tr>
+				<tr valign="top">
+					
+    <td width="47%"><code>void SetPalette(DWORD n, BYTE *r, BYTE *g, BYTE *b)</code><br>
+      <br>
+      <code>void SetPalette(RGBQUAD* pPal,DWORD nColors=256)</code><br>
+      <br>
+						<code>void SetPalette(rgb_color_struct *rgb,DWORD nColors=256)</code></td>
+					<td width="50%">Sets the palette entries.</td>
+				</tr>
+				<tr valign="top">
+					
+    <td width="47%"><code>void SetPaletteColor(BYTE idx, BYTE r, BYTE g, BYTE 
+      b)</code><br>
+      <br>
+      <code>void SetPaletteColor(BYTE idx, RGBQUAD c)</code><br>
+      <br>
+						<code>void SetPaletteColor(BYTE idx, COLORREF cr)</code></td>
+					<td width="50%">Sets the color of the specified palette index.</td>
+				</tr>
+				<tr valign="top">
+					<td width="47%"><code>void SetGrayPalette()</code></td>
+					<td width="50%">Turns to gray scale palette.</td>
+				</tr>
+				<tr valign="top">
+					<td width="47%"><code>void BlendPalette(COLORREF cr,long perc)</code></td>
+					<td width="50%">Colorize the palette.</td>
+				</tr>
+				<tr valign="top">
+					<td width="47%"><code>bool IsGrayScale()</code></td>
+					<td width="50%">Returns true if the image has 256 colors and a linear grey scale 
+						palette.</td>
+				</tr>
+				<tr valign="top">
+					<td width="47%"><code>bool IsIndexed()</code></td>
+					<td width="50%">Returns true if the image has 256 colors or less.</td>
+				</tr>
+				<tr valign="top">
+					<td width="47%"><code>void SwapIndex(BYTE idx1, BYTE idx2)</code></td>
+					<td width="50%">Swaps two indexes in the image and their colors in the palette.</td>
+				</tr>
+				<tr valign="top">
+					<td width="47%"><code>void SetStdPalette()</code></td>
+					<td width="50%">Sets a palette with standard colors for 4 and 8 bpp images.</td>
+				</tr>
+				<tr valign="top">
+					<td width="47%"><code>void HuePalette(float correction=1)</code></td>
+					<td width="50%">Generates a "rainbow" palette with saturated colors. <code>correction=1</code>
+						generates a single hue spectrum. <code>correction=0.75</code> is nice for 
+						scientific applications.</td>
+				</tr>
+				<tr valign="top">
+					<td width="47%"><code>RGBQUAD HSLtoRGB(COLORREF cHSLColor)</code><br>
+						<code>RGBQUAD RGBtoRGBQUAD(COLORREF cr)</code><br>
+						<code>COLORREF RGBQUADtoRGB (RGBQUAD c)</code><br>
+						<code>RGBQUAD RGBtoHSL(RGBQUAD lRGBColor)</code><br>
+						<code>RGBQUAD HSLtoRGB(RGBQUAD lHSLColor)<br>
+							RGBQUAD YUVtoRGB(RGBQUAD lYUVColor)<br>
+							RGBQUAD RGBtoYUV(RGBQUAD lRGBColor)<br>
+							RGBQUAD YIQtoRGB(RGBQUAD lYIQColor);<br>
+							RGBQUAD RGBtoYIQ(RGBQUAD lRGBColor);<br>
+							RGBQUAD XYZtoRGB(RGBQUAD lXYZColor);<br>
+							RGBQUAD RGBtoXYZ(RGBQUAD lRGBColor);<br>
+							RGBtoBGR(BYTE *buffer, int length);<br>
+							RGB2GRAY(r,g,b)<br>
+						</code>
+					</td>
+					<td width="50%">Color transformation utilities.</td>
+				</tr>
+			</tbody>
+		</table>
+		<h3><b>Pixels<a name="Pixels"></a> operations</b></h3>
+		
+<table width="100%" border="1" cellspacing="0">
+  <TBODY> 
+  <tr valign="top"> 
+    <td width="47%"><code>bool IsInside(long x, long y)</code></td>
+    <td width="50%">Checks if the coordinates are inside the image.</td>
+  </tr>
+  <tbody> 
+  <tr valign="top"> 
+    <td width="47%"><code>BYTE GetPixelIndex(long x,long y)</code></td>
+    <td width="50%">Returns the pixel index (0 for RGB images).</td>
+  </tr>
+  <tr valign="top"> 
+    <td width="47%"><code>RGBQUAD GetPixelColor(long x,long y, bool bGetAlpha 
+      = true)</code></td>
+    <td width="50%">Returns the pixel color.</td>
+  </tr>
+  <tr valign="top"> 
+    <td width="47%"><code>BYTE GetPixelGray(long x,long y)</code></td>
+    <td width="50%">Returns the pixel lightness</td>
+  </tr>
+  <tr valign="top"> 
+    <td width="47%"><code>void SetPixelIndex(long x,long y,BYTE i)</code></td>
+    <td width="50%">Sets the pixel index, only for indexed images.</td>
+  </tr>
+  <tr valign="top"> 
+    <td width="47%"><code>void SetPixelColor(long x,long y,RGBQUAD c, bool bSetAlpha 
+      = false)</code><br>
+      <br>
+      <code>void SetPixelColor(long x,long y,COLORREF cr)</code></td>
+    <td width="50%">Sets the pixel color.</td>
+  </tr>
+  <tr valign="top">
+    <td width="47%"> <code>void DrawLine(int StartX, int EndX, int StartY, int 
+      EndY, RGBQUAD color, bool bSetAlpha=false);<br>
+      <br>
+      void DrawLine(int StartX, int EndX, int StartY, int EndY, COLORREF cr)</code><br>
+    </td>
+    <td width="50%">&nbsp;</td>
+  </tr>
+  </tbody> 
+</table>
+		<h3><b>Region<a name="Region"></a> selection</b></h3>
+		
+<table width="100%" border="1" cellspacing="0">
+  <TBODY> 
+  <tr valign="top"> 
+    <td width="47%"><code>bool SelectionCreate()</code></td>
+    <td width="50%"> Allocates an empty selection.</td>
+  </tr>
+  <tbody> 
+  <tr valign="top"> 
+    <td width="47%"><code>bool SelectionDelete()</code></td>
+    <td width="50%">Deallocates the selction.</td>
+  </tr>
+  <tr valign="top"> 
+    <td width="47%"><code>bool SelectionClear()</code></td>
+    <td width="50%"> Empties the selection.</td>
+  </tr>
+  <tr valign="top"> 
+    <td width="47%"><code>bool SelectionCopy(CxImage &amp;from)</code></td>
+    <td width="50%">Imports an existing region from another image with the same 
+      width and height.</td>
+  </tr>
+  <tr valign="top"> 
+    <td width="47%"><code>bool SelectionInvert()</code></td>
+    <td width="50%">Inverts the selection.</td>
+  </tr>
+  <tr valign="top">
+    <td width="47%" height="18"><code>bool SelectionAddPixel(int x, int y)</code></td>
+    <td width="50%" height="18">Adds a single pixel to the existing selection.</td>
+  </tr>
+  <tr valign="top"> 
+    <td width="47%" height="18"><code>bool SelectionAddRect(RECT r)</code></td>
+    <td width="50%" height="18">Adds a rectangle to the existing selection.</td>
+  </tr>
+  <tr valign="top"> 
+    <td width="47%" height="18"><code>bool SelectionAddEllipse(RECT r)</code></td>
+    <td width="50%" height="18">Adds an ellipse to the existing selection.</td>
+  </tr>
+  <tr valign="top"> 
+    <td width="47%" height="18"><code>bool SelectionAddPolygon(POINT *points, 
+      long npoints)</code></td>
+    <td width="50%" height="18">Adds a polygonal region to the existing selection. 
+      <code>points</code> points to an array of <code>POINT</code> structures. 
+      Each structure specifies the x-coordinate and y-coordinate of one vertex 
+      of the polygon. <code>npoints</code> specifies the number of <code>POINT</code> 
+      structures in the array pointed to by <code>points</code>.</td>
+  </tr>
+  <tr valign="top"> 
+    <td width="47%" height="18"><code>void SelectionGetBox(RECT&amp; r)</code></td>
+    <td width="50%" height="18">Gets the smallest rectangle that contains the 
+      selection </td>
+  </tr>
+  <tr valign="top"> 
+    <td width="47%" height="18"><code>bool SelectionIsInside(long x, long y)</code></td>
+    <td width="50%" height="18">Checks if the coordinates are inside the selection.</td>
+  </tr>
+  <tr valign="top"> 
+    <td width="47%" height="18"><code>bool SelectionAddColor(RGBQUAD c)</code></td>
+    <td width="50%" height="18">Adds to the selection all the pixels matching 
+      the specified color.</td>
+  </tr>
+  <tr valign="top"> 
+    <td width="47%" height="18"><code>bool SelectionToHRGN(HRGN&amp; region)</code></td>
+    <td width="50%" height="18">Converts the selection in a HRGN object.</td>
+  </tr>
+  <tr valign="top"> 
+    <td width="47%" height="18"><code>bool SelectionIsValid()</code> </td>
+    <td width="50%" height="18">Checks if the image has a valid selection.</td>
+  </tr>
+  </tbody> 
+</table>
+		<h3><b>Alpha<a name="Alpha"></a> channel</b></h3>
+		
+<table width="100%" border="1" cellspacing="0">
+  <TBODY> 
+  <tr valign="top"> 
+    <td width="47%"><code>void AlphaCreate()</code></td>
+    <td width="50%">Allocates an empty (transparent) alpha channel.</td>
+  </tr>
+  <tr valign="top"> 
+    <td width="47%"><code>void AlphaDelete()</code></td>
+    <td width="50%">Deallocates the alpha channel.</td>
+  </tr>
+  <tr valign="top"> 
+    <td width="47%"><code>void AlphaClear()</code></td>
+    <td width="50%">Resets the alpha channel.</td>
+  </tr>
+  <tr valign="top"> 
+    <td width="47%"><code>void AlphaInvert()</code></td>
+    <td width="50%">Inverts the alpha channel.</td>
+  </tr>
+  <tr valign="top"> 
+    <td width="47%"><code>bool AlphaMirror()</code></td>
+    <td width="50%">Mirrors the alpha channel.</td>
+  </tr>
+  <tr valign="top"> 
+    <td width="47%"><code>bool AlphaFlip()</code></td>
+    <td width="50%">Flips the alpha channel.</td>
+  </tr>
+  <tr valign="top"> 
+    <td width="47%"><code>bool AlphaCopy(CxImage &amp;from)</code></td>
+    <td width="50%"> Imports an existing alpa channel from another image with 
+      the same width and height.</td>
+  </tr>
+  <tr valign="top"> 
+    <td width="47%"><code>void AlphaStrip()</code></td>
+    <td width="50%">Blends the alpha channel and the alpha palette with the pixels. 
+      The result is a 24 bit image. The background color can be selected using 
+      <code>SetTransColor</code>().</td>
+  </tr>
+  <tr valign="top"> 
+    <td width="47%"><code>bool AlphaSplit(CxImage *dest)</code></td>
+    <td width="50%">Exports the alpha channel in a 8bpp grayscale image.</td>
+  </tr>
+  <tr valign="top"> 
+    <td width="47%"><code>void AlphaSet(BYTE level)<br>
+      void AlphaSet(long x,long y,BYTE level) </code> </td>
+    <td width="50%">Sets the alpha level for the whole image or for a single pixel 
+    </td>
+  </tr>
+  <tr valign="top"> 
+    <td width="47%"><code>void AlphaSet(CxImage &amp;from)</code></td>
+    <td width="50%">Creates the alpha channel from a gray scale image</td>
+  </tr>
+  <tr valign="top"> 
+    <td width="47%"><code>BYTE AlphaGet(long x,long y)</code></td>
+    <td width="50%">Returns the alpha level for the specified pixel.</td>
+  </tr>
+  <tr valign="top"> 
+    <td width="47%"><code>BYTE AlphaGetMax() / void AlphaSetMax(BYTE nAlphaMax)</code></td>
+    <td width="50%">Get/Set global Alpha (opacity) value applied to the whole 
+      image.</td>
+  </tr>
+  <tr valign="top"> 
+    <td width="47%"><code>bool AlphaIsValid()</code></td>
+    <td width="50%">Checks if the image has a valid alpha channel.</td>
+  </tr>
+  <tr valign="top"> 
+    <td width="47%"><code>void AlphaPaletteClear()</code></td>
+    <td width="50%">Resets the alpha palette.</td>
+  </tr>
+  <tr valign="top"> 
+    <td width="47%"><code>void AlphaPaletteEnable(bool enable=true)</code></td>
+    <td width="50%">Enables the alpha palette, so the Draw() function changes 
+      its behavior.</td>
+  </tr>
+  <tbody> 
+  <tr valign="top"> 
+    <td width="47%"><code>bool AlphaPaletteIsEnabled()</code></td>
+    <td width="50%">True if the alpha palette is enabled for painting.</td>
+  </tr>
+  <tr valign="top"> 
+    <td width="47%"><code>bool AlphaPaletteSplit(CxImage *dest)</code></td>
+    <td width="50%">Exports the alpha channel in a 8bpp grayscale image.</td>
+  </tr>
+  <tr valign="top"> 
+    <td width="47%"><code>bool AlphaPaletteIsValid()</code></td>
+    <td width="50%">Checks if the image has a valid alpha palette.</td>
+  </tr>
+  <tr valign="top">
+    <td width="47%"><code>BYTE* AlphaGetBits()</code></td>
+    <td width="50%">Returns the pointer to the alpha layer (USE CAREFULLY)</td>
+  </tr>
+  </tbody> 
+</table>
+		
+<h3>Layers<a name="layers"></a></h3>
+<table width="100%" border="1" cellspacing="0">
+  <tr> 
+    <td width="47%"> <code>bool LayerCreate(long position = -1)</code>
+    </td>
+    <td width="50%">Creates an empty layer. If <code>position</code> is less than 
+      0, the new layer will be placed in the last position</td>
+  </tr>
+  <tr> 
+    <td width="47%"><code>bool LayerDelete(long position = -1)</code></td>
+    <td width="50%">Deletes a layer. If <code>position</code> is less than 0, 
+      the last layer will be deleted</td>
+  </tr>
+  <tr> 
+    <td width="47%"><code>void LayerDeleteAll()</code></td>
+    <td width="50%">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="47%"><code>CxImage* GetLayer(long position)</code></td>
+    <td width="50%">Returns a pointer to a layer. If <code>position</code> is 
+      less than 0, the last layer will be returned</td>
+  </tr>
+  <tr> 
+    <td width="47%"><code>CxImage* GetParent()</code></td>
+    <td width="50%">If the object is an internal layer, <code>GetParent</code> 
+      return its parent in the hierarchy.</td>
+  </tr>
+  <tr> 
+    <td width="47%"><code>long GetNumLayers()</code></td>
+    <td width="50%">Number of layers allocated directly by the object.</td>
+  </tr>
+</table>
+<h3><b>Attributes<a name="Attributes"></a></b></h3>
+<table width="100%" border="1" cellspacing="0">
+  <tbody> 
+  <tr valign="top"> 
+    <td width="47%"><code>long GetSize()</code></td>
+    <td width="50%">Returns the size in byte of the internal hDib object.</td>
+  </tr>
+  <tr valign="top"> 
+    <td width="47%"><code>BYTE* GetBits(DWORD row)</code></td>
+    <td width="50%">Returns the pointer to the image pixels (USE CAREFULLY).</td>
+  </tr>
+  <tr valign="top"> 
+    <td width="47%"><code>DWORD GetHeight()</code></td>
+    <td width="50%">&nbsp;</td>
+  </tr>
+  <tr valign="top"> 
+    <td width="47%"><code>DWORD GetWidth()</code></td>
+    <td width="50%">&nbsp;</td>
+  </tr>
+  <tr valign="top"> 
+    <td width="47%"><code>DWORD GetEffWidth()</code></td>
+    <td width="50%">Returns the DWORD aligned width of the image.</td>
+  </tr>
+  <tr valign="top"> 
+    <td width="47%"><code>DWORD GetNumColors()</code></td>
+    <td width="50%">Returns 2, 16, 256; 0 for RGB images.</td>
+  </tr>
+  <tr valign="top"> 
+    <td width="47%"><code>BYTE GetColorType()</code></td>
+    <td width="50%"> Returns: 1=Palette, 2=RGB, 4=Alpha.</td>
+  </tr>
+  <tr valign="top"> 
+    <td width="47%"><code>WORD GetBpp()</code></td>
+    <td width="50%">Returns: 1, 4, 8, 24.</td>
+  </tr>
+  <tr valign="top"> 
+    <td width="47%"><code>DWORD GetType()</code></td>
+    <td width="50%">Returns the file extension associated with the image.</td>
+  </tr>
+  <tr valign="top"> 
+    <td width="47%"><code>LPSTR GetLastError()</code></td>
+    <td width="50%"> Returns the last reported error.</td>
+  </tr>
+  <tr valign="top"> 
+    <td width="47%"><code>void* GetDIB()</code></td>
+    <td width="50%">Returns the internal hDib object.</td>
+  </tr>
+  <tr valign="top"> 
+    <td width="47%"><code>BYTE GetJpegQuality() / void SetJpegQuality(BYTE q)</code></td>
+    <td width="50%">Image quality for JPEG and TIFF formats.</td>
+  </tr>
+  <tr valign="top"> 
+    <td width="47%"><code>long GetXDPI() / void SetXDPI(long dpi)<br>
+      long GetYDPI() / void SetYDPI(long dpi)</code></td>
+    <td width="50%">Resolution for TIFF, JPEG, PNG and BMP formats.</td>
+  </tr>
+  <tr valign="top"> 
+    <td width="47%"><code>DWORD GetCodecOption()<br>
+      <br>
+      void SetCodecOption(DWORD opt) </code> </td>
+    <td width="50%">Encode option for GIF, TIF and JPG.<br>
+      GIF : 0 = RLE (default), 1 = none, 2 = LZW.<br>
+      TIF : 0 = automatic (default), or a valid compression code as defined in 
+      "tiff.h" (COMPRESSION_NONE = 1, COMPRESSION_CCITTRLE = 2, ...)<br>
+      JPG : valid values stored in enum CODEC_OPTION<br>
+      ( ENCODE_BASELINE = 0x01, ENCODE_PROGRESSIVE = 0x10, ...)</td>
+  </tr>
+  <tr valign="top"> 
+    <td width="47%"><code>DWORD GetFlags()<br>
+      <br>
+      SetFlags(DWORD flags, bool bLockReservedFlags = true)</code></td>
+    <td width="50%"> 
+      <p>Image flags, for future use<br>
+        0x??00000 = reserved for 16 bit, CMYK, multilayer<br>
+        0x00??0000 = blend modes<br>
+        0x0000???? = layer id or user flags<br>
+        <code>bLockReservedFlags</code> protects the &quot;reserved&quot; and 
+        &quot;blend modes&quot; flags </p>
+    </td>
+  </tr>
+  <tr valign="top">
+    <td width="47%"><code>BYTE GetJpegScale()<br>
+      <br>
+      void SetJpegScale(BYTE q) </code></td>
+    <td width="50%">used for scaling down during JPEG decoding, valid numbers 
+      are 1, 2, 4, 8</td>
+  </tr>
+  <tr valign="top"> 
+    <td width="47%"><code>void GetOffset(long *x,long *y)<br>
+      <br>
+      void SetOffset(long x,long y)</code></td>
+    <td width="50%">Image offset.</td>
+  </tr>
+  </tbody> 
+</table>
+		<p>
+			<h3>Miscellaneous<a name="Miscellaneous"></a></h3>
+		<p></p>
+		<table width="100%" border="1" cellspacing="0">
+			<tbody>
+				<tr valign="top">
+					<td width="47%"><code>HBITMAP MakeBitmap(HDC hdc)</code><br>
+					</td>
+					<td width="50%">Creates a device-dependent bitmap (DDB) from the image (DIB). If <code>hdc</code>
+						is NULL, the function returns a DIB.</td>
+				</tr>
+				<tr valign="top">
+					<td width="47%"><code>long GetProgress()</code></td>
+					<td width="50%">Used to monitor the slow loops. The returned value is from 0 to 
+						100.</td>
+				</tr>
+				<tr valign="top">
+					<td width="47%"><code>long GetEscape()</code></td>
+					<td width="50%">Returns the escape code.</td>
+				</tr>
+				<tr valign="top">
+					<td width="47%"><code>void SetProgress(long p)</code></td>
+					<td width="50%">Forces the value of the internal progress variable.</td>
+				</tr>
+				<tr valign="top">
+					<td width="47%"><code>void SetEscape(long i)</code></td>
+					<td width="50%">Used to quit the slow loops or the codecs.</td>
+				</tr>
+				<tr valign="top">
+					
+    <td width="47%"><code>const TCHAR* GetVersion()</code></td>
+					<td width="50%">&nbsp;</td>
+				</tr>
+				<tbody></tbody>
+		</table>
+	</body>
+</html>
