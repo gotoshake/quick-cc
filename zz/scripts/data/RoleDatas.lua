@@ -8,7 +8,7 @@ _RoleDatas[1] = {
 }
 
 _RoleDatas[2] = {
-	name = "1",
+	name = "10",
 	pos = {x=3, y=0},    
     actionNames = {"movedown", "moveup", "moveleft"},
     actionNums = {2, 2, 2}

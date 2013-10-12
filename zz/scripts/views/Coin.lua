@@ -24,11 +24,11 @@ function Coin:ctor(roleIndex)
 
     for  k, actionName in ipairs(RoleData.actionNames) do        
         local frames = display.newFrames(RoleData.name .. "_" .. RoleData.actionNames[k] .."_%02d.png", 1, RoleData.actionNums[k])
-        display.setAnimationCache(actionName, display.newAnimation(frames, 0.15) )           
+        display.setAnimationCache(roleIndex .. actionName, display.newAnimation(frames, 0.15) )           
     end 
 
     self.batch = display.newBatchNode(GAME_TEXTURE_IMAGE_FILENAME)
-    self:playAnimationOnce(display.getAnimationCache("moveup"))  
+    self:playAnimationOnce(display.getAnimationCache(roleIndex .. "moveup"))  
 end
 
 function Coin:getTilePos()
@@ -53,20 +53,20 @@ function Coin:moveByStep()
         	x = x-spriteSize.width
             local moveleft = CCSequence:createWithTwoActions(
                 CCFlipX:create(false), 
-                CCAnimate:create(display.getAnimationCache("moveleft")))
+                CCAnimate:create(display.getAnimationCache(self.roleIndex .. "moveleft")))
                 self:runAction(moveleft)  
         elseif nextTile == currentTile+ 1 then
         	x = x+spriteSize.width
             local moveright = CCSequence:createWithTwoActions(
                 CCFlipX:create(true), 
-                CCAnimate:create(display.getAnimationCache("moveleft")))
+                CCAnimate:create(display.getAnimationCache(self.roleIndex .. "moveleft")))
             self:runAction(moveright)             
         elseif nextTile == currentTile- layerSize.width then
         	y = y-spriteSize.height
-            self:playAnimationOnce(display.getAnimationCache("movedown")) 
+            self:playAnimationOnce(display.getAnimationCache(self.roleIndex .. "movedown")) 
         elseif nextTile == currentTile+ layerSize.width then
         	y = y+spriteSize.height
-            self:playAnimationOnce(display.getAnimationCache("moveup"))        	
+            self:playAnimationOnce(display.getAnimationCache(self.roleIndex .. "moveup"))        	
         end 
         
         self.currentStep = self.currentStep+1

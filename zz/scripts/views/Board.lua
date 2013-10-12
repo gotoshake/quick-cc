@@ -57,7 +57,7 @@ function Board:onTouchCancelled(x, y)
 end
 
 function Board:onTouch(event, x, y)
-    echoInfo("onTouch %s %d %d", event, x, y)
+    --echoInfo("onTouch %s %d %d", event, x, y)
     if event == "began" then
         self:onTouchBegan(x, y)
     elseif event == "moved" then
@@ -89,7 +89,7 @@ function Board:onEnter()
     --self.batch = display.newBatchNode(GAME_TEXTURE_IMAGE_FILENAME)
     --self.batch:setPosition(display.cx, display.cy)
     --printf("setPosition: %f, %f", display.cx, display.cy)
-    --self:addChild(self.batch)   
+    --self:addChild(self.batch) 
 
     self.coins = {}
     for i=1, RoleDatas.numRoles() do    

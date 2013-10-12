@@ -20,3 +20,8 @@ GAME_SFX = {
 
 GAME_TEXTURE_DATA_FILENAME  = "unit_move.plist"
 GAME_TEXTURE_IMAGE_FILENAME = "unit_move.png"
+
+GAME_TEXTURE = {
+    "unit_move",
+    "unit_attack",
+}
