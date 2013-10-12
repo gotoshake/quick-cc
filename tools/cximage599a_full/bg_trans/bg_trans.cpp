@@ -15,8 +15,30 @@ char* unit_move_pics[] = {
 	"moveup_02",
 	"moveleft_01",
 	"moveleft_02",
+	"standdown_01",	
+	"standup_01",	
+	"standleft_01",
+	"injure_01",
+	"injure_02",
 	NULL,
 };
+
+char* unit_attack_pics[] = {
+		"attackdown_01",
+		"attackdown_02",
+		"attackdown_03",
+		"attackdown_04",
+		"attackup_01",
+		"attackup_02",
+		"attackup_03",
+		"attackup_04",
+		"attackleft_01",
+		"attackleft_02",
+		"attackleft_03",
+		"attackleft_04",
+		NULL,
+};
+
 
 void generate_move_plist()
 {
@@ -218,6 +240,57 @@ int seprate_png()
 	_findclose(file_Handle);
 }
 
+int seprate_attck_png()
+{
+	struct _finddata_t finddata;
+	int file_Handle = _findfirst("./*.png", &finddata);
+	if(file_Handle == -1)
+		return 0;
+
+	mkdir("sep_png");
+	
+	int h = 64;
+	int w = 64;
+
+	do
+	{		
+		if ( (finddata.attrib &_A_ARCH) )
+		{
+			CxImage  ima;
+			ima.Load(finddata.name, CXIMAGE_FORMAT_PNG);
+			if (ima.IsValid()) 
+			{
+				ima.Save("c:/temp.png", CXIMAGE_FORMAT_PNG);
+				ima.Load("c:/temp.png", CXIMAGE_FORMAT_PNG);
+				for (int i=0; unit_attack_pics[i] != NULL; ++i)
+				{
+					int j = atoi(finddata.name);
+					CxImage ima_out;
+					ima_out.Create(w, h, ima.GetBpp(), CXIMAGE_FORMAT_PNG);
+					ima_out.SetPalette(ima.GetPalette());
+					ima_out.SeprateFrom(ima, 0, ima.GetHeight()-(i+1)*w);
+
+					ima_out.SetTransIndex(0);
+					RGBQUAD rgb;
+					rgb.rgbRed =247;
+					rgb.rgbGreen=0;
+					rgb.rgbBlue=255;
+					rgb.rgbReserved=0;
+					ima_out.SetTransColor(rgb);
+
+					char out_name[32] = {0};
+					sprintf(out_name, "sep_png/%d_%s.png",j, unit_attack_pics[i]);
+					ima_out.Save(out_name, CXIMAGE_FORMAT_PNG);
+				}
+				
+			}			
+		}		
+
+	}while(0 == _findnext(file_Handle, &finddata));
+
+	_findclose(file_Handle);
+}
+
 int rename_png()
 {
 	struct _finddata_t finddata;
@@ -275,7 +348,7 @@ void mix_png2()
 int _tmain(int argc, _TCHAR* argv[])
 {
 	rename_png();
-	seprate_png();
+	seprate_attck_png();
 	return 0;
 }
 

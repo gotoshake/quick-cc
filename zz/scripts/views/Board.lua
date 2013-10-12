@@ -86,10 +86,10 @@ function Board:onEnter()
     self:setTouchEnabled(true)
 
     --role
-    self.batch = display.newBatchNode(GAME_TEXTURE_IMAGE_FILENAME)
+    --self.batch = display.newBatchNode(GAME_TEXTURE_IMAGE_FILENAME)
     --self.batch:setPosition(display.cx, display.cy)
-    printf("setPosition: %f, %f", display.cx, display.cy)
-    self:addChild(self.batch)   
+    --printf("setPosition: %f, %f", display.cx, display.cy)
+    --self:addChild(self.batch)   
 
     self.coins = {}
     for i=1, RoleDatas.numRoles() do    

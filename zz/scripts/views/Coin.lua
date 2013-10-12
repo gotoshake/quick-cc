@@ -3,13 +3,12 @@ local RoleDatas = import("..data.RoleDatas")
 
 local Coin = class("Coin", function(roleIndex)   
     --local RoleData = RoleDatas.get(roleIndex)
-    --local sprite = display.newSprite("#" .. RoleData.name .. "_" .. RoleData.actionNames[1] .. "_01.png")     
-    --return sprite
-    return display.newNode()
+    --local sprite = display.newSprite("#" .. RoleData.name .. "_" .. RoleData.actionNames[1] .. "_01.png")  
+    return display.newSprite()
 end)
 
 function Coin:tilePosToRealPos(tilex, tiley)
-    local s = self:getContentSize()
+    local s = game.getMap():getTileSize()
     return ccp(tilex* s.width, tiley* s.height)
 end
 
@@ -18,20 +17,22 @@ function Coin:ctor(roleIndex)
     self.map        = game.getMap()    
     local RoleData  = RoleDatas.get(roleIndex)
 
-
     self:setAnchorPoint(ccp(0, 0))
-    local spriteSize = self:getContentSize()
+    local spriteSize = game.getMap():getTileSize()    
     self:setPosition(ccp(RoleData.pos.x *spriteSize.width, RoleData.pos.y * spriteSize.height))
     self.map:setTileObject(RoleData.pos.x+ RoleData.pos.y*self.map.layerSize.width, self.roleIndex)  
 
     for  k, actionName in ipairs(RoleData.actionNames) do        
         local frames = display.newFrames(RoleData.name .. "_" .. RoleData.actionNames[k] .."_%02d.png", 1, RoleData.actionNums[k])
         display.setAnimationCache(actionName, display.newAnimation(frames, 0.15) )           
-    end    
+    end 
+
+    self.batch = display.newBatchNode(GAME_TEXTURE_IMAGE_FILENAME)
+    self:playAnimationOnce(display.getAnimationCache("moveup"))  
 end
 
 function Coin:getTilePos()
-    local s = self:getContentSize()
+    local s = game.getMap():getTileSize()
     local x, y = self:getPosition()
     return math.floor(x/s.width), math.floor(y/s.height)
 end
@@ -44,7 +45,7 @@ function Coin:moveByStep()
     local nextTile = self.path[self.currentStep+1]
 
     if nextTile then
-        local spriteSize = self:getContentSize()
+        local spriteSize = game.getMap():getTileSize()
         local x, y = self:getPosition()
         local layerSize = self.map.layerSize
 

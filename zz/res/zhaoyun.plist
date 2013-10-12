@@ -46,10 +46,6 @@
 		<dict>
 			<key>height</key>
 			<integer>48</integer>
-			<key>offsetX</key>
-			<real>0.0</real>
-			<key>offsetY</key>
-			<real>0.0</real>
 			<key>originalHeight</key>
 			<integer>48</integer>
 			<key>originalWidth</key>

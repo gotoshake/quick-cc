@@ -51,7 +51,7 @@ function PlayLevelScene:onTapLevelIcon(event)
 end
 
 function PlayLevelScene:onEnter()
-    self.levelsList:setTouchEnabled(true)
+    --self.levelsList:setTouchEnabled(true)
 end
 
 return PlayLevelScene
