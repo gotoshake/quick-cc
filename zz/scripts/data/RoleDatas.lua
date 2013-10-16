@@ -1,23 +1,20 @@
 local _RoleDatas = {}
 
 _RoleDatas[1] = {
-	name = "1",
-	pos = {x=0, y=0},    
-    actionNames = {"movedown", "moveup", "moveleft"},
-    actionNums = {2, 2, 2}
+	resId = "1",
+	pos = {x=0, y=0},
 }
 
 _RoleDatas[2] = {
-	name = "10",
-	pos = {x=3, y=0},    
-    actionNames = {"movedown", "moveup", "moveleft"},
-    actionNums = {2, 2, 2}
+	resId = "1",
+	pos = {x=3, y=0},  
+  
 }
 
 local RoleDatas = {}
 
-RoleDatas.walkAction = {"movedown", "moveup", "moveleft"}
-RoleDatas.walkActionNums = {2, 2, 2}
+RoleDatas.animations = {"movedown", "moveup", "moveleft", "injure", "attackdown", "attackup", "attackleft"}
+RoleDatas.animationNums = {2, 2, 2, 2, 4, 4, 4}
 
 function RoleDatas.numRoles()
     return #_RoleDatas

@@ -14,7 +14,8 @@ function ActionMenu:ctor()
         x = 0,
         y = 0,       
         align = ui.TEXT_ALIGN_CENTER,
-        listener = function()             
+        listener = function()
+            game.getCoin(1):attack()             
         end,
     })
 
