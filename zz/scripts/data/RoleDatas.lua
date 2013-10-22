@@ -2,14 +2,14 @@ local _RoleDatas = {}
 
 _RoleDatas[1] = {
 	resId = "1",
-	pos = {x=0, y=0},
+	pos = {x=1, y=1},
 }
 
-_RoleDatas[2] = {
-	resId = "1",
-	pos = {x=3, y=0},  
-  
-}
+--_RoleDatas[2] = {
+--	resId = "1",
+--	pos = {x=3, y=0},  
+--  
+--}
 
 local RoleDatas = {}
 

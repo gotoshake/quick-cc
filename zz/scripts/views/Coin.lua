@@ -22,11 +22,12 @@ function Coin:ctor(roleIndex)
     if display.getAnimationCache(self.data.resId .. RoleDatas.animations[1]) == nil then
         for  k, actionName in ipairs(RoleDatas.animations) do        
             local frames = display.newFrames(self.data.resId .. "_" .. RoleDatas.animations[k] .."_%02d.png", 1, RoleDatas.animationNums[k])
-            display.setAnimationCache(self.data.resId .. actionName, display.newAnimation(frames, 0.15) )
+            display.setAnimationCache(self.data.resId .. actionName, display.newAnimation(frames, 0.2) )
         end          
     end 
 
    --self:playAnimationForever(display.getAnimationCache(self.data.resId .. RoleDatas.animations[1]))
+   self:startIdleAnimation()
 end
 
 function Coin:getTilePos()
@@ -49,15 +50,14 @@ function Coin:moveByStep()
 
         if nextTile == currentTile- 1 then 
         	x = x-spriteSize.width
-            local moveleft = CCSequence:createWithTwoActions(
-                CCFlipX:create(false), 
-                CCAnimate:create(display.getAnimationCache(self.data.resId .. "moveleft")))
-                self:runAction(moveleft)  
+            self:playAnimationOnce(display.getAnimationCache(self.data.resId .. "moveleft"))   
         elseif nextTile == currentTile+ 1 then
         	x = x+spriteSize.width
-            local moveright = CCSequence:createWithTwoActions(
-                CCFlipX:create(true), 
-                CCAnimate:create(display.getAnimationCache(self.data.resId .. "moveleft")))
+            local arr = CCArray:create()
+            arr:addObject(CCFlipX:create(true))            
+            arr:addObject(CCAnimate:create(display.getAnimationCache(self.data.resId .. "moveleft")))
+            arr:addObject(CCFlipX:create(false))
+            local moveright = CCSequence:create(arr)
             self:runAction(moveright)             
         elseif nextTile == currentTile- layerSize.width then
         	y = y-spriteSize.height
@@ -70,7 +70,7 @@ function Coin:moveByStep()
         self.currentStep = self.currentStep+1
 
         local action = CCSequence:createWithTwoActions(
-                CCMoveTo:create(0.3, ccp(x, y)),
+                CCMoveTo:create(0.4, ccp(x, y)),
                 CCCallFuncN:create(Coin.moveByStep))
         self:runAction(action)
 
@@ -90,22 +90,26 @@ function Coin:stopIdleAnimation()
     self:stopActionByTag(1)
 end 
 
+function Coin:attackOver()
+   self:startIdleAnimation()     
+end
+
 function Coin:attack() 
-    if self.direction == "left" then           
-            local moveleft = CCSequence:createWithTwoActions(
-                CCFlipX:create(false), 
-                CCAnimate:create(display.getAnimationCache(self.data.resId .. "attackleft")))
-            self:runAction(moveleft)  
-    elseif self.direction == "right" then            
-            local moveright = CCSequence:createWithTwoActions(
-                CCFlipX:create(true), 
-                CCAnimate:create(display.getAnimationCache(self.data.resId .. "attackleft")))
-            self:runAction(moveright)             
+    self:stopIdleAnimation()
+    local arr = CCArray:create()
+    if self.direction == "left" then 
+            arr:addObject(CCAnimate:create(display.getAnimationCache(self.data.resId .. "attackleft")))            
+    elseif self.direction == "right" then
+            arr:addObject(CCFlipX:create(true))  
+            arr:addObject(CCAnimate:create(display.getAnimationCache(self.data.resId .. "attackleft"))) 
+            arr:addObject(CCFlipX:create(false)) 
     elseif self.direction == "down" then
-            self:playAnimationOnce(display.getAnimationCache(self.data.resId .. "attackdown")) 
+            arr:addObject(CCAnimate:create(display.getAnimationCache(self.data.resId .. "attackdown")))   
     elseif self.direction == "up" then
-            self:playAnimationOnce(display.getAnimationCache(self.data.resId .. "attackup"))          
-    end 
+            arr:addObject(CCAnimate:create(display.getAnimationCache(self.data.resId .. "attackup")))        
+    end
+    arr:addObject(CCCallFuncN:create(Coin.attackOver))
+    self:runAction(CCSequence:create(arr)) 
 end
 
 function Coin:moveTo(path) 
