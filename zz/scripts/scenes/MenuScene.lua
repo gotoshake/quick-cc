@@ -6,7 +6,7 @@ end)
 function MenuScene:ctor()
     -- create menu
     self.startButton = ui.newTTFLabelMenuItem({
-        text = "start",
+        text = "ST",
         size = 32,
         x = display.width/2,
         y = display.bottom + 200,
@@ -22,7 +22,7 @@ function MenuScene:ctor()
     }) 
 
     self.endButton = ui.newTTFLabelMenuItem({
-        text = "end",
+        text = "ED",
         size = 32,
         x = display.width/2,
         y = display.bottom + 150,

@@ -86,7 +86,6 @@ function Map:onTileTouched(tilex, tiley)
           local y = (i-x)/s1.width
           self:setTileColor(x, y, ccc3(111, 111, 111))
         end
-
         return
     end
 

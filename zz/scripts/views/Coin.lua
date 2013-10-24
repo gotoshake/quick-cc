@@ -13,6 +13,7 @@ function Coin:ctor(roleIndex)
     self.data       = RoleDatas.get(roleIndex)
 
     self.direction  = "down"
+    self.animeId    = 0
 
     self:setAnchorPoint(ccp(0, 0))
     local spriteSize = game.getMap():getTileSize()    
@@ -20,14 +21,15 @@ function Coin:ctor(roleIndex)
     self.map:setTileObject(self.data.pos.x+ self.data.pos.y*self.map.layerSize.width, self.roleIndex)  
 
     if display.getAnimationCache(self.data.resId .. RoleDatas.animations[1]) == nil then
-        for  k, actionName in ipairs(RoleDatas.animations) do        
-            local frames = display.newFrames(self.data.resId .. "_" .. RoleDatas.animations[k] .."_%02d.png", 1, RoleDatas.animationNums[k])
-            display.setAnimationCache(self.data.resId .. actionName, display.newAnimation(frames, 0.2) )
+        for  k, actionName in ipairs(RoleDatas.animations) do
+            if (string.find(actionName, "right") == nil) then
+                local frames = display.newFrames(self.data.resId .. "_" .. RoleDatas.animations[k] .."_%02d.png", 1, RoleDatas.animationNums[k])
+                display.setAnimationCache(self.data.resId .. actionName, display.newAnimation(frames, 0.3) )
+            end
         end          
     end 
 
-   --self:playAnimationForever(display.getAnimationCache(self.data.resId .. RoleDatas.animations[1]))
-   self:startIdleAnimation()
+    self:startAnimation(RoleDatas.MOVE_DOWN)
 end
 
 function Coin:getTilePos()
@@ -50,52 +52,68 @@ function Coin:moveByStep()
 
         if nextTile == currentTile- 1 then 
         	x = x-spriteSize.width
-            self:playAnimationOnce(display.getAnimationCache(self.data.resId .. "moveleft"))   
+            self:startAnimation(RoleDatas.MOVE_LEFT, 1)
         elseif nextTile == currentTile+ 1 then
         	x = x+spriteSize.width
-            local arr = CCArray:create()
-            arr:addObject(CCFlipX:create(true))            
-            arr:addObject(CCAnimate:create(display.getAnimationCache(self.data.resId .. "moveleft")))
-            arr:addObject(CCFlipX:create(false))
-            local moveright = CCSequence:create(arr)
-            self:runAction(moveright)             
+            self:startAnimation(RoleDatas.MOVE_RIGHT, 1)            
         elseif nextTile == currentTile- layerSize.width then
         	y = y-spriteSize.height
-            self:playAnimationOnce(display.getAnimationCache(self.data.resId .. "movedown")) 
+            self:startAnimation(RoleDatas.MOVE_DOWN, 1)  
         elseif nextTile == currentTile+ layerSize.width then
         	y = y+spriteSize.height
-            self:playAnimationOnce(display.getAnimationCache(self.data.resId .. "moveup"))        	
+            self:startAnimation(RoleDatas.MOVE_UP, 1)          	
         end 
         
         self.currentStep = self.currentStep+1
 
         local action = CCSequence:createWithTwoActions(
-                CCMoveTo:create(0.4, ccp(x, y)),
+                CCMoveTo:create(0.2, ccp(x, y)),
                 CCCallFuncN:create(Coin.moveByStep))
         self:runAction(action)
 
     else
-        self:moveOver()
-        self:startIdleAnimation()
+        self:moveOver()        
     end
 end
 
-function Coin:startIdleAnimation() 
-    local action = CCRepeatForever:create(CCAnimate:create(display.getAnimationCache(self.data.resId .. "movedown")))
-    action:setTag(1)
-    self:runAction(action)  
+function Coin:startAnimation(animeId, bForever)     
+    if self.animeId == 0 or self.animeId ~= animeId then 
+
+        if self.animeId ~= 0 then
+            self:stopActionByTag(self.animeId)
+        end
+
+        local arr = CCArray:create()
+
+        if string.find(RoleDatas.animations[animeId], "right") == nil then
+            arr:addObject(CCFlipX:create(false)) 
+            arr:addObject(CCAnimate:create(display.getAnimationCache(self.data.resId .. RoleDatas.animations[animeId])))
+        else
+            arr:addObject(CCFlipX:create(true)) 
+            arr:addObject(CCAnimate:create(display.getAnimationCache(self.data.resId .. RoleDatas.animations[animeId-1])))
+        end
+
+        local action
+        if bForever == 1 then
+            action = CCRepeatForever:create(CCSequence:create(arr))
+        else
+            action = CCSequence:create(arr) 
+        end
+        action:setTag(animeId)
+        self.animeId = animeId
+        self:runAction(action) 
+    end 
 end 
 
-function Coin:stopIdleAnimation()  
-    self:stopActionByTag(1)
+function Coin:stopAnimation()  
+    self:stopActionByTag(self.animeId)
 end 
 
 function Coin:attackOver()
    self:startIdleAnimation()     
 end
 
-function Coin:attack() 
-    self:stopIdleAnimation()
+function Coin:attack()     
     local arr = CCArray:create()
     if self.direction == "left" then 
             arr:addObject(CCAnimate:create(display.getAnimationCache(self.data.resId .. "attackleft")))            
@@ -112,8 +130,7 @@ function Coin:attack()
     self:runAction(CCSequence:create(arr)) 
 end
 
-function Coin:moveTo(path) 
-    self:stopIdleAnimation()   
+function Coin:moveTo(path)    
     print(table.concat(path, ' -> '))
     self.path = path
     self.currentStep = 1    

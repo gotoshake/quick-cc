@@ -96,5 +96,5 @@ end
 
 paths,previous = dijkstra(G, mapWidth, mapHeight, 2, 2, 2)
 for i,j in pairs(paths) do
-	--print(i, j, table.concat(path(previous, i), ' -> '))
+	print(i, j, table.concat(path(previous, i), ' -> '))
 end
