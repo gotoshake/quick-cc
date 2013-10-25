@@ -2,9 +2,10 @@
 local Levels = require("data.Levels")
 local Coin   = require("views.Coin")
 local Map    = require("views.Map")
-local RoleDatas = import("..data.RoleDatas")
 local ActionMenu    = require("views.ActionMenu")
-import("..path.dijkstra")
+
+require("path.dijkstra")
+require("data.RoleDatas")
 
 local EventProtocol = require("framework.api.EventProtocol")
 
@@ -23,8 +24,6 @@ function Board:screenToTilePos(x, y)
     local ts = self.map:getTileSize()
     return math.floor((x-mapx)/ts.width), math.floor((y-mapy)/ts.height)
 end
-
-
 
 function Board:checkLevelCompleted()
     local count = 0

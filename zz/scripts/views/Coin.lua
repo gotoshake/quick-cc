@@ -1,5 +1,4 @@
-local Levels = import("..data.Levels")
-local RoleDatas = import("..data.RoleDatas")
+--require("data.RoleDatas")
 
 local Coin = class("Coin", function(roleIndex)   
     --local RoleData = RoleDatas.get(roleIndex)
@@ -15,6 +14,8 @@ function Coin:ctor(roleIndex)
     self.direction  = RoleDatas.DIRECTION_DOWN
     self.animeId    = 0
 
+    self.health     = 100
+
     self:setAnchorPoint(ccp(0, 0))
     local spriteSize = game.getMap():getTileSize()    
     self:setPosition(ccp(self.data.pos.x *spriteSize.width, self.data.pos.y * spriteSize.height))
@@ -29,7 +30,7 @@ function Coin:ctor(roleIndex)
         end          
     end 
 
-    self:startAnimation(RoleDatas.MOVE_DOWN, 1)
+    self:usualAction()
 end
 
 function Coin:getTilePos()
@@ -65,8 +66,7 @@ function Coin:moveByStep()
             self.direction = RoleDatas.DIRECTION_UP          	
         end
                 
-        self:startAnimation(RoleDatas.MOVE_DOWN +self.direction -1, 1) 
-        
+        self:usualAction(self.direction)        
         self.currentStep = self.currentStep+1
 
         local action = CCSequence:createWithTwoActions(
@@ -109,18 +109,15 @@ function Coin:startAnimation(animeId, bForever, callBack)
         self.animeId = animeId
         self:runAction(action) 
     end 
-end 
-
-function Coin:stopAnimation()  
-    self:stopActionByTag(self.animeId)
-end 
-
-function Coin:attack(direction)    
-        self:startAnimation(RoleDatas.ATTACK_DOWN +direction -1, 0, Coin.attackOver)
 end
 
-function Coin:attackOver()
-    echoInfo("attackOver")
+function Coin:usualAction()
+    self:startAnimation(RoleDatas.MOVE_DOWN +self.direction -1, 1) 
+end
+
+function Coin:attackAction(direction)
+    self.direction = direction    
+    self:startAnimation(RoleDatas.ATTACK_DOWN +self.direction -1, 0, Coin.usualAction)
 end
 
 function Coin:moveTo(path)    

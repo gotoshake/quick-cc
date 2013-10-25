@@ -11,7 +11,7 @@ _RoleDatas[1] = {
 --  
 --}
 
-local RoleDatas = {}
+RoleDatas = {}
 
 RoleDatas.animations = {"movedown", "moveup", "moveleft", "moveright", "injure", "attackdown", "attackup", "attackleft",  "attackright"}
 RoleDatas.animationNums = {2, 2, 2, 2, 2, 4, 4, 4, 4}
@@ -42,4 +42,4 @@ function RoleDatas.get(roleIndex)
     return clone(_RoleDatas[roleIndex])
 end
 
-return RoleDatas
+--return RoleDatas

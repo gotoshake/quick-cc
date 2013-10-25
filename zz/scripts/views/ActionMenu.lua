@@ -15,7 +15,7 @@ function ActionMenu:ctor()
         y = 0,       
         align = ui.TEXT_ALIGN_CENTER,
         listener = function()
-            game.getCoin(1):attack(1)             
+            game.getCoin(1):attackAction(RoleDatas.DIRECTION_DOWN)             
         end,
     })
 
