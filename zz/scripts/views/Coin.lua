@@ -12,7 +12,7 @@ function Coin:ctor(roleIndex)
     self.map        = game.getMap()    
     self.data       = RoleDatas.get(roleIndex)
 
-    self.direction  = "down"
+    self.direction  = RoleDatas.DIRECTION_DOWN
     self.animeId    = 0
 
     self:setAnchorPoint(ccp(0, 0))
@@ -29,16 +29,13 @@ function Coin:ctor(roleIndex)
         end          
     end 
 
-    self:startAnimation(RoleDatas.MOVE_DOWN)
+    self:startAnimation(RoleDatas.MOVE_DOWN, 1)
 end
 
 function Coin:getTilePos()
     local s = game.getMap():getTileSize()
     local x, y = self:getPosition()
     return math.floor(x/s.width), math.floor(y/s.height)
-end
-
-function Coin:moveOver()    
 end
 
 function Coin:moveByStep()
@@ -52,17 +49,23 @@ function Coin:moveByStep()
 
         if nextTile == currentTile- 1 then 
         	x = x-spriteSize.width
-            self:startAnimation(RoleDatas.MOVE_LEFT, 1)
+            --self:startAnimation(RoleDatas.MOVE_LEFT, 1)
+            self.direction = RoleDatas.DIRECTION_LEFT
         elseif nextTile == currentTile+ 1 then
         	x = x+spriteSize.width
-            self:startAnimation(RoleDatas.MOVE_RIGHT, 1)            
+            --self:startAnimation(RoleDatas.MOVE_RIGHT, 1)
+            self.direction = RoleDatas.DIRECTION_RIGHT           
         elseif nextTile == currentTile- layerSize.width then
         	y = y-spriteSize.height
-            self:startAnimation(RoleDatas.MOVE_DOWN, 1)  
+            --self:startAnimation(RoleDatas.MOVE_DOWN, 1)
+            self.direction = RoleDatas.DIRECTION_DOWN  
         elseif nextTile == currentTile+ layerSize.width then
         	y = y+spriteSize.height
-            self:startAnimation(RoleDatas.MOVE_UP, 1)          	
-        end 
+            --self:startAnimation(RoleDatas.MOVE_UP, 1)
+            self.direction = RoleDatas.DIRECTION_UP          	
+        end
+                
+        self:startAnimation(RoleDatas.MOVE_DOWN +self.direction -1, 1) 
         
         self.currentStep = self.currentStep+1
 
@@ -72,11 +75,11 @@ function Coin:moveByStep()
         self:runAction(action)
 
     else
-        self:moveOver()        
+        --echoInfo("moveOver")      
     end
 end
 
-function Coin:startAnimation(animeId, bForever)     
+function Coin:startAnimation(animeId, bForever, callBack)        
     if self.animeId == 0 or self.animeId ~= animeId then 
 
         if self.animeId ~= 0 then
@@ -84,13 +87,16 @@ function Coin:startAnimation(animeId, bForever)
         end
 
         local arr = CCArray:create()
-
         if string.find(RoleDatas.animations[animeId], "right") == nil then
             arr:addObject(CCFlipX:create(false)) 
             arr:addObject(CCAnimate:create(display.getAnimationCache(self.data.resId .. RoleDatas.animations[animeId])))
         else
             arr:addObject(CCFlipX:create(true)) 
             arr:addObject(CCAnimate:create(display.getAnimationCache(self.data.resId .. RoleDatas.animations[animeId-1])))
+        end
+
+        if callBack then
+            arr:addObject(CCCallFuncN:create(callBack))
         end
 
         local action
@@ -109,25 +115,12 @@ function Coin:stopAnimation()
     self:stopActionByTag(self.animeId)
 end 
 
-function Coin:attackOver()
-   self:startIdleAnimation()     
+function Coin:attack(direction)    
+        self:startAnimation(RoleDatas.ATTACK_DOWN +direction -1, 0, Coin.attackOver)
 end
 
-function Coin:attack()     
-    local arr = CCArray:create()
-    if self.direction == "left" then 
-            arr:addObject(CCAnimate:create(display.getAnimationCache(self.data.resId .. "attackleft")))            
-    elseif self.direction == "right" then
-            arr:addObject(CCFlipX:create(true))  
-            arr:addObject(CCAnimate:create(display.getAnimationCache(self.data.resId .. "attackleft"))) 
-            arr:addObject(CCFlipX:create(false)) 
-    elseif self.direction == "down" then
-            arr:addObject(CCAnimate:create(display.getAnimationCache(self.data.resId .. "attackdown")))   
-    elseif self.direction == "up" then
-            arr:addObject(CCAnimate:create(display.getAnimationCache(self.data.resId .. "attackup")))        
-    end
-    arr:addObject(CCCallFuncN:create(Coin.attackOver))
-    self:runAction(CCSequence:create(arr)) 
+function Coin:attackOver()
+    echoInfo("attackOver")
 end
 
 function Coin:moveTo(path)    
