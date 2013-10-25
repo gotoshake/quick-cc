@@ -14,7 +14,8 @@ function Coin:ctor(roleIndex)
     self.direction  = RoleDatas.DIRECTION_DOWN
     self.animeId    = 0
 
-    self.health     = 100
+    self.health     = RoleDatas.get(roleIndex).health
+    self.maxHealth  = RoleDatas.get(roleIndex).maxHealth
 
     self:setAnchorPoint(ccp(0, 0))
     local spriteSize = game.getMap():getTileSize()    
@@ -65,8 +66,9 @@ function Coin:moveByStep()
             --self:startAnimation(RoleDatas.MOVE_UP, 1)
             self.direction = RoleDatas.DIRECTION_UP          	
         end
+
+        self:moveAction(self.direction)                
                 
-        self:usualAction(self.direction)        
         self.currentStep = self.currentStep+1
 
         local action = CCSequence:createWithTwoActions(
@@ -75,7 +77,8 @@ function Coin:moveByStep()
         self:runAction(action)
 
     else
-        --echoInfo("moveOver")      
+        --echoInfo("moveOver")
+        self:usualAction()     
     end
 end
 
@@ -112,7 +115,16 @@ function Coin:startAnimation(animeId, bForever, callBack)
 end
 
 function Coin:usualAction()
-    self:startAnimation(RoleDatas.MOVE_DOWN +self.direction -1, 1) 
+    if self.health/self.maxHealth >0.2 then
+        self:startAnimation(RoleDatas.MOVE_DOWN +self.direction -1, 1)
+    else
+        self:startAnimation(RoleDatas.INJURE, 1)
+    end
+end
+
+function Coin:moveAction(direction)
+    self.direction = direction
+    self:startAnimation(RoleDatas.MOVE_DOWN +self.direction -1, 1)    
 end
 
 function Coin:attackAction(direction)
