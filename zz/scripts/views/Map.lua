@@ -24,9 +24,7 @@ function Map:ctor(mapIndex)
 
     self.layerFloor         = self:layerNamed("floor")
     self.layerSize          = self.layerFloor:getLayerSize()
-
-    self.tileSize           = self:getTileSize()
-    
+    self.tileSize           = self:getTileSize()    
     self.layerTree          = self:layerNamed("tree")
     
     self.graph = {}    

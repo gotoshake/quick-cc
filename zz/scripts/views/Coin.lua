@@ -17,9 +17,10 @@ function Coin:ctor(roleIndex)
     self.health     = RoleDatas.get(roleIndex).health
     self.maxHealth  = RoleDatas.get(roleIndex).maxHealth
 
-    self:setAnchorPoint(ccp(0, 0))
+    --echoInfo(self:getAnchorPoint().x)
+    --self:setAnchorPoint(ccp(0, 0))
     local spriteSize = game.getMap():getTileSize()    
-    self:setPosition(ccp(self.data.pos.x *spriteSize.width, self.data.pos.y * spriteSize.height))
+    self:setPosition(ccp((self.data.pos.x+0.5) *spriteSize.width, (self.data.pos.y+0.5) * spriteSize.height))
     self.map:setTileObject(self.data.pos.x+ self.data.pos.y*self.map.layerSize.width, self.roleIndex)  
 
     if display.getAnimationCache(self.data.resId .. RoleDatas.animations[1]) == nil then
@@ -110,6 +111,9 @@ function Coin:startAnimation(animeId, bForever, callBack)
         end
         action:setTag(animeId)
         self.animeId = animeId
+        if animeId>5 then
+            --self:setAnchorPoint(ccp(6, 6))
+        end
         self:runAction(action) 
     end 
 end

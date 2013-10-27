@@ -3,14 +3,14 @@ local _RoleDatas = {}
 _RoleDatas[1] = {
 	resId 		= "9",
 	pos 		= {x=0, y=0},
-	health 		= 50,
+	health 		= 10,
 	maxHealth 	= 100,
 }
 
 _RoleDatas[2] = {
 	resId = "8",
 	pos = {x=3, y=0}, 
-	health 		= 10,
+	health 		= 50,
 	maxHealth 	= 100,  
 }
 
