@@ -291,6 +291,53 @@ int seprate_attck_png()
 	_findclose(file_Handle);
 }
 
+int seprate_map_bmp()
+{
+	struct _finddata_t finddata;
+	int file_Handle = _findfirst("./*.bmp", &finddata);
+	if(file_Handle == -1)
+		return 0;
+
+	mkdir("sep_map_bmp");
+	
+	int h = 48;
+	int w = 48;
+
+	do
+	{		
+		if ( (finddata.attrib &_A_ARCH) )
+		{
+			CxImage  ima;
+			ima.Load(finddata.name, CXIMAGE_FORMAT_BMP);
+			if (ima.IsValid()) 
+			{
+				ima.Save("c:/temp.png", CXIMAGE_FORMAT_BMP);				
+				ima.Load("c:/temp.png", CXIMAGE_FORMAT_BMP);
+				
+				for (int iw=0; iw<ima.GetWidth()/w; ++iw)
+				{
+					for (int ih=0; ih<ima.GetHeight()/h; ++ih)
+					{
+						int j = atoi(finddata.name);
+						CxImage ima_out;
+						ima_out.Create(w, h, ima.GetBpp(), CXIMAGE_FORMAT_BMP);
+						ima_out.SetPalette(ima.GetPalette());
+						ima_out.SeprateFrom(ima, iw*48, ih*48);					
+
+						char out_name[32] = {0};
+						sprintf(out_name, "sep_map_bmp/%s_%d_%d.png", finddata.name, iw, ih);
+						ima_out.Save(out_name, CXIMAGE_FORMAT_PNG);
+					}					
+				}
+				
+			}			
+		}		
+
+	}while(0 == _findnext(file_Handle, &finddata));
+
+	_findclose(file_Handle);
+}
+
 int rename_png()
 {
 	struct _finddata_t finddata;
@@ -347,8 +394,9 @@ void mix_png2()
 
 int _tmain(int argc, _TCHAR* argv[])
 {
-	rename_png();
-	seprate_attck_png();
+	/*rename_png();
+	seprate_attck_png();*/
+	seprate_map_bmp();
 	return 0;
 }
 
