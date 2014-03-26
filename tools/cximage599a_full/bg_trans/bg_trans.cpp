@@ -294,7 +294,7 @@ int seprate_attck_png()
 int seprate_map_bmp()
 {
 	struct _finddata_t finddata;
-	int file_Handle = _findfirst("./*.bmp", &finddata);
+	int file_Handle = _findfirst("./*.png", &finddata);
 	if(file_Handle == -1)
 		return 0;
 

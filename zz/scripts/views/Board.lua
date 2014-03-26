@@ -6,6 +6,7 @@ local ActionMenu    = require("views.ActionMenu")
 
 require("path.dijkstra")
 require("data.RoleDatas")
+local tvTestLayer  =require("ui.ExtensionTest")
 
 local EventProtocol = require("framework.api.EventProtocol")
 
@@ -58,7 +59,7 @@ end
 function Board:onTouch(event, x, y)
     --echoInfo("onTouch %s %d %d", event, x, y)
     if event == "began" then
-        self:onTouchBegan(x, y)
+        --self:onTouchBegan(x, y)
     elseif event == "moved" then
         self:onTouchMoved(x, y)
     elseif event == "ended" then
@@ -73,15 +74,15 @@ function Board:onEnter()
         x     = display.left + 100,
         y     = display.top - 30,
     })
-    self:addChild(self.label)
+    --self:addChild(self.label)
 
     --ui
     self.actionMenu = ActionMenu.new()
-    self:addChild(self.actionMenu, 1)
+    --self:addChild(self.actionMenu, 1)
     
     --tmxMap
     self.map = Map.new(1) 
-    self:addChild(self.map, 0)
+    --self:addChild(self.map, 0)
     self:setTouchEnabled(true)
 
     --role
@@ -93,13 +94,17 @@ function Board:onEnter()
     self.coins = {}
     for i=1, RoleDatas.numRoles() do    
         local coin = Coin.new(i) 
-        self:addChild(coin, 1000)  
+        --self:addChild(coin, 1000)  
         self.coins[i] =  coin
     end
 
     --mask    
     self.maskLayer = display.newSprite()
     self:addChild(self.maskLayer, 10)
+
+    --table view
+    self.tableView = tvTestLayer.new(0)
+    self:addChild(self.tableView, 11)
 end
 
 function Board:onExit()

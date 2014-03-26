@@ -56,6 +56,8 @@ function MenuScene:onEnter()
     self:performWithDelay(function()
         self.layer:setKeypadEnabled(true)
     end, 0.5)
+
+    game.playLevel(1)
 end
 
 return MenuScene
