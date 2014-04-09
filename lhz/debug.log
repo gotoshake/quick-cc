@@ -17,6 +17,37 @@
 lua_loadChunksFromZIP() - load zip file: E:\project\quick-cocos2d-x\lib\framework_precompiled\framework_precompiled.zip
 lua_loadChunksFromZIP() - loaded chunks count: 54
 ------------------------------------------------
-LOAD LUA FILE: E:/project/quick-cc/lhz/scripts/main_debug.lua
+LOAD LUA FILE: E:/project/quick-cc/lhz/scripts/main.lua
 ------------------------------------------------
-Get data from file(E:/project/quick-cc/lhz/scripts/main_debug.lua) failed!
+[0.1049] [INFO] 
+[0.1051] [INFO] # DEBUG                        = 1
+[0.1053] [INFO] #
+[0.1055] [INFO] # device.platform              = windows
+[0.1056] [INFO] # device.model                 = unknown
+[0.1058] [INFO] # device.language              = cn
+[0.1059] [INFO] # device.writablePath          = E:\project\quick-cc\lhz\
+[0.1061] [INFO] # device.cachePath             = E:\project\quick-cc\lhz\
+[0.1063] [INFO] # device.directorySeparator    = \
+[0.1064] [INFO] # device.pathSeparator         = ;
+[0.1066] [INFO] #
+[0.1086] [INFO] # CONFIG_SCREEN_AUTOSCALE      = FIXED_WIDTH
+[0.1087] [INFO] # CONFIG_SCREEN_WIDTH          = 640.00
+[0.1089] [INFO] # CONFIG_SCREEN_HEIGHT         = 480.00
+[0.1091] [INFO] # display.widthInPixels        = 640.00
+[0.1092] [INFO] # display.heightInPixels       = 480.00
+[0.1094] [INFO] # display.contentScaleFactor   = 1.00
+[0.1096] [INFO] # display.width                = 640.00
+[0.1097] [INFO] # display.height               = 480.00
+[0.1099] [INFO] # display.cx                   = 320.00
+[0.1101] [INFO] # display.cy                   = 240.00
+[0.1102] [INFO] # display.left                 = 0.00
+[0.1104] [INFO] # display.right                = 640.00
+[0.1105] [INFO] # display.top                  = 480.00
+[0.1107] [INFO] # display.bottom               = 0.00
+[0.1109] [INFO] # display.c_left               = -320.00
+[0.1110] [INFO] # display.c_right              = 320.00
+[0.1112] [INFO] # display.c_top                = 240.00
+[0.1113] [INFO] # display.c_bottom             = -240.00
+[0.1115] [INFO] #
+[1.1055] [INFO] Scene "PlayLevelScene:onEnter()"
+[258.7961] [INFO] Scene "PlayLevelScene:onExit()"

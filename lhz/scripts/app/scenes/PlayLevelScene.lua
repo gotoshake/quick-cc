@@ -8,6 +8,7 @@ local PlayLevelScene = class("PlayLevelScene", function()
 end)
 
 function PlayLevelScene:ctor(levelIndex)
+    --[[
     local bg = display.newSprite("#PlayLevelSceneBg.png")
     -- make background sprite always align top
     bg:setPosition(display.cx, display.top - bg:getContentSize().height / 2)
@@ -28,11 +29,13 @@ function PlayLevelScene:ctor(levelIndex)
         align = ui.TEXT_ALIGN_LEFT,
     })
     self:addChild(label)
+    ]]--
 
     self.board = Board.new(Levels.get(levelIndex))
     self.board:addEventListener("LEVEL_COMPLETED", handler(self, self.onLevelCompleted))
     self:addChild(self.board)
 
+    --[[
     -- create menu
     local backButton = ui.newImageMenuItem({
         image = "#BackButton.png",
@@ -47,6 +50,7 @@ function PlayLevelScene:ctor(levelIndex)
 
     local menu = ui.newMenu({backButton})
     self:addChild(menu)
+    ]]--
 end
 
 function PlayLevelScene:onLevelCompleted()

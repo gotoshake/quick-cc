@@ -20,7 +20,7 @@ function MyApp:run()
         audio.preloadSound(v)
     end
 
-    self:enterMenuScene()
+    self:playLevel(1)
 end
 
 function MyApp:enterMenuScene()
