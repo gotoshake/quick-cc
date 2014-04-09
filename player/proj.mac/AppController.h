@@ -76,13 +76,13 @@ class AppControllerBridge;
 
 - (IBAction) onPlayerWriteDebugLogToFile:(id)sender;
 - (IBAction) onPlayerOpenDebugLog:(id)sender;
+- (IBAction) onPlayerAutoConnectDebugger:(id)sender;
 - (IBAction) onPlayerRelaunch:(id)sender;
 - (IBAction) onPlayerShowProjectSandbox:(id)sender;
 - (IBAction) onPlayerShowProjectFiles:(id)sender;
 
 - (IBAction) onScreenPortait:(id)sender;
 - (IBAction) onScreenLandscape:(id)sender;
-- (IBAction) onScreenActual:(id)sender;
 - (IBAction) onScreenZoomOut:(id)sender;
 
 - (IBAction) onWindowAlwaysOnTop:(id)sender;

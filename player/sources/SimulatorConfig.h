@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 #include "cocos2d.h"
+#include "CCLuaStack.h"
 
 using namespace std;
 using namespace cocos2d;
@@ -26,29 +27,33 @@ using namespace cocos2d;
 #define kProjectConfigLoadPrecompiledFramework  128
 #define kProjectConfigWriteDebugLogToFile       256
 #define kProjectConfigWindowOffset              1024
+#define kProjectConfigDebugger                  2048
 
 #define kProjectConfigOpenRecent (kProjectConfigProjectDir | kProjectConfigScriptFile | kProjectConfigPackagePath | kProjectConfigWritablePath | kProjectConfigFrameSize | kProjectConfigFrameScale | kProjectConfigShowConsole | kProjectConfigLoadPrecompiledFramework | kProjectConfigWriteDebugLogToFile)
 
-#define kProjectConfigAll (kProjectConfigProjectDir | kProjectConfigScriptFile | kProjectConfigPackagePath | kProjectConfigWritablePath | kProjectConfigFrameSize | kProjectConfigFrameScale | kProjectConfigShowConsole | kProjectConfigLoadPrecompiledFramework | kProjectConfigWriteDebugLogToFile | kProjectConfigWindowOffset)
+#define kProjectConfigAll (kProjectConfigProjectDir | kProjectConfigScriptFile | kProjectConfigPackagePath | kProjectConfigWritablePath | kProjectConfigFrameSize | kProjectConfigFrameScale | kProjectConfigShowConsole | kProjectConfigLoadPrecompiledFramework | kProjectConfigWriteDebugLogToFile | kProjectConfigWindowOffset | kProjectConfigDebugger)
 
 
 class ProjectConfig
 {
 public:
     ProjectConfig(void)
-    : m_scriptFile("$PROJDIR/scripts/main.lua")
+    : m_isWelcome(false)
+	, m_scriptFile("$PROJDIR/scripts/main.lua")
     , m_writablePath("")
     , m_packagePath("")
-    , m_frameSize(960, 540)
+    , m_frameSize(960, 640)
     , m_frameScale(1.0f)
     , m_showConsole(true)
     , m_loadPrecompiledFramework(true)
     , m_writeDebugLogToFile(true)
     , m_windowOffset(0, 0)
+    , m_debuggerType(kCCLuaDebuggerNone)
     {
         normalize();
     }
 
+	bool isWelcome(void) { return m_isWelcome; };
     void resetToWelcome(void);
 
     const string getProjectDir(void);
@@ -86,9 +91,13 @@ public:
 
     const bool isWriteDebugLogToFile(void);
     void setWriteDebugLogToFile(bool writeDebugLogToFile);
+    const string getDebugLogFilePath(void);
 
     const CCPoint getWindowOffset(void);
     void setWindowOffset(CCPoint windowOffset);
+
+    int getDebuggerType(void);
+    void setDebuggerType(int debuggerType);
 
     void parseCommandLine(vector<string>& args);
     const string makeCommandLine(unsigned int mask = kProjectConfigAll);
@@ -97,6 +106,7 @@ public:
     void dump(void);
 
 private:
+	bool    m_isWelcome;
     string	m_projectDir;
     string	m_scriptFile;
     string	m_packagePath;
@@ -108,6 +118,7 @@ private:
     bool    m_writeDebugLogToFile;
     bool    m_restartProcess;
     CCPoint	m_windowOffset;
+    int     m_debuggerType;
 
     void normalize(void);
     const string replaceProjectDirToMacro(const string& path);

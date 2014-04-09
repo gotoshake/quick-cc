@@ -8,13 +8,14 @@
 
 void ProjectConfig::resetToWelcome(void)
 {
+	m_isWelcome = true;
     string path = SimulatorConfig::sharedDefaults()->getQuickCocos2dxRootPath();
     path.append("player/welcome");
     SimulatorConfig::makeNormalizePath(&path);
     setProjectDir(path);
     setWritablePath(path);
     setScriptFile("$PROJDIR/scripts/main.lua");
-    setFrameSize(CCSize(960, 540));
+    setFrameSize(CCSize(960, 640));
     setFrameScale(1.0f);
     setLoadPrecompiledFramework(true);
     setPackagePath("");
@@ -75,7 +76,7 @@ const string ProjectConfig::getNormalizedPackagePath(void)
 {
     // replace $PROJDIR
     string path = m_packagePath;
-    int pos = std::string::npos;
+    size_t pos = std::string::npos;
     while ((pos = path.find("$PROJDIR")) != std::string::npos)
     {
         path = path.substr(0, pos) + m_projectDir + path.substr(pos + 8);
@@ -112,8 +113,8 @@ const vector<string> ProjectConfig::getPackagePathArray(void)
 {
     vector<string> arr;
 
-    int pos = std::string::npos;
-    int prev = 0;
+    size_t pos = std::string::npos;
+    size_t prev = 0;
     while ((pos = m_packagePath.find_first_of(";", pos + 1)) != std::string::npos)
     {
         string path = m_packagePath.substr(prev, pos - prev);
@@ -199,6 +200,13 @@ void ProjectConfig::setWriteDebugLogToFile(bool writeDebugLogToFile)
     m_writeDebugLogToFile = writeDebugLogToFile;
 }
 
+const string ProjectConfig::getDebugLogFilePath(void)
+{
+    string path(getProjectDir());
+    path.append("debug.log");
+    return path;
+}
+
 const CCPoint ProjectConfig::getWindowOffset(void)
 {
     return m_windowOffset;
@@ -209,38 +217,54 @@ void ProjectConfig::setWindowOffset(CCPoint windowOffset)
     m_windowOffset = windowOffset;
 }
 
+int ProjectConfig::getDebuggerType(void)
+{
+    return m_debuggerType;
+}
+
+void ProjectConfig::setDebuggerType(int debuggerType)
+{
+    m_debuggerType = debuggerType;
+}
+
 void ProjectConfig::parseCommandLine(vector<string>& args)
 {
-    for (vector<string>::iterator it = args.begin(); it != args.end(); ++it)
+    vector<string>::iterator it = args.begin();
+    while (it != args.end())
     {
         const string& arg = *it;
 
         if (arg.compare("-workdir") == 0)
         {
             ++it;
+            if (it == args.end()) break;
             setProjectDir(*it);
             if (m_writablePath.length() == 0) setWritablePath(*it);
         }
         else if (arg.compare("-writable") == 0)
         {
             ++it;
+            if (it == args.end()) break;
             setWritablePath(*it);
         }
         else if (arg.compare("-file") == 0)
         {
             ++it;
+            if (it == args.end()) break;
             setScriptFile(*it);
         }
         else if (arg.compare("-package.path") == 0)
         {
             ++it;
+            if (it == args.end()) break;
             setPackagePath(*it);
         }
         else if (arg.compare("-size") == 0)
         {
             ++it;
+            if (it == args.end()) break;
             const string& sizeStr(*it);
-            int pos = sizeStr.find('x');
+            size_t pos = sizeStr.find('x');
             int width = 0;
             int height = 0;
             if (pos != sizeStr.npos && pos > 0)
@@ -256,6 +280,7 @@ void ProjectConfig::parseCommandLine(vector<string>& args)
         else if (arg.compare("-scale") == 0)
         {
             ++it;
+            if (it == args.end()) break;
             float scale = atof((*it).c_str());
             setFrameScale(scale);
         }
@@ -266,6 +291,14 @@ void ProjectConfig::parseCommandLine(vector<string>& args)
         else if (arg.compare("-disable-write-debug-log") == 0)
         {
             setWriteDebugLogToFile(false);
+        }
+        else if (arg.compare("-console") == 0)
+        {
+            setShowConsole(true);
+        }
+        else if (arg.compare("-disable-console") == 0)
+        {
+            setShowConsole(false);
         }
         else if (arg.compare("-load-framework") == 0)
         {
@@ -278,9 +311,20 @@ void ProjectConfig::parseCommandLine(vector<string>& args)
         else if (arg.compare("-offset") == 0)
         {
             ++it;
+            if (it == args.end()) break;
             CCPoint pos = CCPointFromString((*it).c_str());
             setWindowOffset(pos);
         }
+        else if (arg.compare("-debugger-ldt") == 0)
+        {
+            setDebuggerType(kCCLuaDebuggerLDT);
+        }
+        else if (arg.compare("-disable-debugger") == 0)
+        {
+            setDebuggerType(kCCLuaDebuggerNone);
+        }
+
+        ++it;
     }
 
     dump();
@@ -292,18 +336,32 @@ const string ProjectConfig::makeCommandLine(unsigned int mask /* = kProjectConfi
 
     if (mask & kProjectConfigProjectDir)
     {
-        buff << "-workdir ";
-        buff << getProjectDir();
+		string path = getProjectDir();
+		if (path.length())
+		{
+			buff << "-workdir ";
+			buff << path;
+		}
     }
+
     if (mask & kProjectConfigScriptFile)
     {
-        buff << " -file ";
-        buff << getScriptFileRealPath();
+		string path = getScriptFileRealPath();
+		if (path.length())
+		{
+			buff << " -file ";
+			buff << path;
+		}
     }
+
     if (mask & kProjectConfigWritablePath)
     {
-        buff << " -writable ";
-        buff << getWritableRealPath();
+		string path = getWritableRealPath();
+		if (path.length())
+		{
+			buff << " -writable ";
+			buff << path;
+		}
     }
 
     if (mask & kProjectConfigPackagePath)
@@ -346,6 +404,18 @@ const string ProjectConfig::makeCommandLine(unsigned int mask /* = kProjectConfi
         }
     }
 
+    if (mask & kProjectConfigShowConsole)
+    {
+        if (isShowConsole())
+        {
+            buff << " -console";
+        }
+        else
+        {
+            buff << " -disable-console";
+        }
+    }
+
     if (mask & kProjectConfigLoadPrecompiledFramework)
     {
         if (isLoadPrecompiledFramework())
@@ -367,6 +437,19 @@ const string ProjectConfig::makeCommandLine(unsigned int mask /* = kProjectConfi
             buff << ",";
             buff << (int)m_windowOffset.y;
             buff << "}";
+        }
+    }
+
+    if (mask & kProjectConfigDebugger)
+    {
+        switch (getDebuggerType())
+        {
+            case kCCLuaDebuggerLDT:
+                buff << " -debugger-ldt";
+                break;
+            case kCCLuaDebuggerNone:
+            default:
+                buff << " -disable-debugger";
         }
     }
 
@@ -394,6 +477,7 @@ void ProjectConfig::dump(void)
     CCLOG("  frame scale: %0.2f", m_frameScale);
     CCLOG("  show console: %s", m_showConsole ? "YES" : "NO");
     CCLOG("  write debug log: %s", m_writeDebugLogToFile ? "YES" : "NO");
+    CCLOG("  debugger: %s", m_debuggerType == kCCLuaDebuggerLDT ? "Eclipse LDT" : "NONE");
     CCLOG("----------------------------------------");
 }
 
@@ -405,7 +489,7 @@ void ProjectConfig::normalize(void)
     SimulatorConfig::makeNormalizePath(&m_packagePath);
 
     // projectDir
-    int len = m_projectDir.length();
+    size_t len = m_projectDir.length();
     if (len > 0 && m_projectDir[len - 1] != DIRECTORY_SEPARATOR_CHAR)
     {
         m_projectDir.append(DIRECTORY_SEPARATOR);
@@ -454,7 +538,7 @@ const string ProjectConfig::replaceProjectDirToMacro(const string& path)
     }
 
     string result = path;
-    int len = m_projectDir.length();
+    size_t len = m_projectDir.length();
     if (len > 0 && result.compare(0, len, m_projectDir) == 0)
     {
         result = "$PROJDIR";
@@ -467,6 +551,8 @@ const string ProjectConfig::replaceProjectDirToMacro(const string& path)
 const string ProjectConfig::replaceProjectDirToFullPath(const string& path)
 {
     if (isAbsolutePath(path)) return path;
+
+	if (path.length() == 0) return m_projectDir;
 
     string result = path;
     if (path.compare(0, 8, "$PROJDIR") == 0)
@@ -523,7 +609,7 @@ SimulatorConfig::SimulatorConfig(void)
 
 int SimulatorConfig::getScreenSizeCount(void)
 {
-    return m_screenSizeArray.size();
+    return (int)m_screenSizeArray.size();
 }
 
 const SimulatorScreenSize SimulatorConfig::getScreenSize(int index)
@@ -593,7 +679,7 @@ const string SimulatorConfig::getPrecompiledFrameworkPath(void)
 void SimulatorConfig::makeNormalizePath(string *path, const char *directorySeparator/* = NULL*/)
 {
     if (!directorySeparator) directorySeparator = DIRECTORY_SEPARATOR;
-    int pos = std::string::npos;
+    size_t pos = std::string::npos;
     while ((pos = path->find_first_of("/\\", pos + 1)) != std::string::npos)
     {
         path->replace(pos, 1, directorySeparator);
