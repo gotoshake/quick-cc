@@ -9,6 +9,14 @@ _CharData[1] = {
 	ml = 10,
 }
 
+_CharData[2] = {
+	wl = 11,
+	ts = 11,
+	zl = 11,
+	zz = 11,
+	ml = 11,
+}
+
 CharData = {}
 function CharData.numChars()
     return #_CharData
