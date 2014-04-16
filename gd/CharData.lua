@@ -7,6 +7,8 @@ _CharData[1] = {
 	zl = 10,
 	zz = 10,
 	ml = 10,
+	hp = 10,
+	name = "liaohua"
 }
 
 _CharData[2] = {
@@ -15,9 +17,12 @@ _CharData[2] = {
 	zl = 11,
 	zz = 11,
 	ml = 11,
+	hp = 10,
+	name = "gongdu"
 }
 
 CharData = {}
+
 function CharData.numChars()
     return #_CharData
 end

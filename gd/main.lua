@@ -1,10 +1,6 @@
-require("framework.functions")
-
-local char = require ("char")
-
+require ("Board")
 
 local function main()
-	char1 = char.new(2)
-	print(char1.data.wl)
+	Board.init()
 end
 main()

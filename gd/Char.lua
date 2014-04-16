@@ -1,8 +1,7 @@
-require ("CharData")
 local Char = class("Char")
 
-function Char:ctor(index)
-	self.data = CharData.get(index)
+function Char:ctor(data)
+	self.data = data
 end
 
 return Char
